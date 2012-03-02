@@ -48,7 +48,7 @@ public class ComponentStrongholdStairs extends ComponentStronghold
     public static ComponentStrongholdStairs getStrongholdStairsComponent(List list, Random random, int i, int j, int k, int l, int i1)
     {
         StructureBoundingBox structureboundingbox = StructureBoundingBox.getComponentToAddBoundingBox(i, j, k, -1, -7, 0, 5, 11, 5, l);
-        if (!canStrongholdGoDeeper(structureboundingbox) || StructureComponent.findIntersecting(list, structureboundingbox) != null)
+        if (!canStrongholdGoDeeper(structureboundingbox) || StructureComponent.getIntersectingStructureComponent(list, structureboundingbox) != null)
         {
             return null;
         }

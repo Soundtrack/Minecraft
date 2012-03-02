@@ -7,7 +7,7 @@ public class Packet1Login extends Packet
     public int protocolVersion;
     public String username;
     public long mapSeed;
-    public EnumWorldType terrainType;
+    public EnumWorldType field_46032_d;
     public int serverMode;
     public byte worldType;
     public byte difficultySetting;
@@ -31,10 +31,10 @@ public class Packet1Login extends Packet
         username = readString(datainputstream, 16);
         mapSeed = datainputstream.readLong();
         String s = readString(datainputstream, 16);
-        terrainType = EnumWorldType.parseWorldType(s);
-        if (terrainType == null)
+        field_46032_d = EnumWorldType.func_46135_a(s);
+        if (field_46032_d == null)
         {
-            terrainType = EnumWorldType.DEFAULT;
+            field_46032_d = EnumWorldType.DEFAULT;
         }
         serverMode = datainputstream.readInt();
         worldType = datainputstream.readByte();
@@ -49,13 +49,13 @@ public class Packet1Login extends Packet
         dataoutputstream.writeInt(protocolVersion);
         writeString(username, dataoutputstream);
         dataoutputstream.writeLong(mapSeed);
-        if (terrainType == null)
+        if (field_46032_d == null)
         {
             writeString("", dataoutputstream);
         }
         else
         {
-            writeString(terrainType.name(), dataoutputstream);
+            writeString(field_46032_d.name(), dataoutputstream);
         }
         dataoutputstream.writeInt(serverMode);
         dataoutputstream.writeByte(worldType);
@@ -72,9 +72,9 @@ public class Packet1Login extends Packet
     public int getPacketSize()
     {
         int i = 0;
-        if (terrainType != null)
+        if (field_46032_d != null)
         {
-            i = terrainType.name().length();
+            i = field_46032_d.name().length();
         }
         return 4 + username.length() + 4 + 7 + 4 + i;
     }

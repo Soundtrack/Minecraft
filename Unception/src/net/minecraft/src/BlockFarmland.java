@@ -64,7 +64,7 @@ public class BlockFarmland extends Block
         }
     }
 
-    public void onFallenUpon(World world, int i, int j, int k, Entity entity, float f)
+    public void func_43001_a(World world, int i, int j, int k, Entity entity, float f)
     {
         if (world.rand.nextFloat() < f - 0.5F)
         {

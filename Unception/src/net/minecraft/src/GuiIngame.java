@@ -1,92 +1,84 @@
 package net.minecraft.src;
 
 import java.awt.Color;
-import org.lwjgl.input.Keyboard;
 import java.util.ArrayList;
 import java.util.Random;
 import net.minecraft.client.Minecraft;
 import org.lwjgl.opengl.GL11;
+import org.lwjgl.input.Keyboard;
 
 public class GuiIngame extends Gui
 {
+	//toggles
+	public static boolean gui = true;
+	public static boolean fly = false;
+	public static boolean bright = false;
+	public static boolean vision = false;
+	public static boolean chesthax = false;
+	public static boolean killaura = false;
+	public static boolean tracer = false;
+	public static boolean esp = false;
+	public static boolean bignames = false;
+	public static boolean nuker = false;
+	public static boolean sneak = false;
+	public static boolean climb = false;
+	public static boolean sprint = false;
+	public static boolean freecam = false;
+	public static boolean aimbot = false;
+	//xray
+	public static boolean xray = false;
+	public static boolean diamond = false;
+	public static boolean manmade = false;
+	public static boolean noiron = false;
+	//console/toggle hax
+	public static float jumpHeight = 1F;
+	public static float stepHeight = 1F;
+	public static float timerSpeed = 1F;
+	public static float instantSpeed = 1F;
+	public static boolean jump = false;
+	public static boolean step = false;
+	public static boolean timer = false;
+	public static boolean instant = false;
+	
     private static RenderItem itemRenderer = new RenderItem();
-    private java.util.List chatMessageList;
+    static java.util.List chatMessageList;
     private Random rand;
     private Minecraft mc;
-    public static boolean compass = false;
-    public static boolean updateAvailable;
-    public static double version = 1.5;
-    public static boolean noClip = false;
-    private boolean keyStates[];
-    public static float bi = 1; //This is the first block
-    public static float bi2 = 16; //Second One
-    public static float bi3 = 16; //Third One 
     public String field_933_a;
-    public static boolean chestfinder = false;
-    public static boolean Bright = false;
-    public static boolean Nofall = false;
-    static boolean diamond;
-    public static boolean sneak = false;
-    public static boolean radar = false;
-    public static boolean NoSwing = false;
-    static boolean iron;
-    public static boolean reach = false;
-    public static boolean Tracer = false;
-    public static boolean Fly = false;
-    static boolean fuel;
-    public static boolean Weather = false;
-    static boolean gold;
-    public static boolean Insant = false;
-    static boolean chest;
-    static boolean redstone;
-    public static boolean timeSinceLastRead = false;
-    static boolean circuit;
-    static float diamondID;
-    static float ironID;
-    public static boolean NotchFly = false;
-    public static boolean xray = false;
-    static float fuelID;
-    static float goldID;
-    private static boolean SuperSprint = false;
-    static float redstoneID;
-    static float redstoneID2;
-    static float circuitID;
-    public static boolean nofall = false;
-    static float circuitID2;
-    static float circuitID3;
-    static float circuitID4;
-    private ArrayList guiArray = new ArrayList();
     private int updateCounter;
     private String recordPlaying;
     private int recordPlayingUpFor;
     private boolean recordIsPlaying;
     public float damageGuiPartialTime;
     float prevVignetteBrightness;
+    private boolean keyStates[];
+    
     public GuiIngame(Minecraft minecraft)
     {
+    	keyStates = new boolean[256];
         chatMessageList = new ArrayList();
         rand = new Random();
         field_933_a = null;
         updateCounter = 0;
-        keyStates = new boolean[256];
         recordPlaying = "";
         recordPlayingUpFor = 0;
         recordIsPlaying = false;
         prevVignetteBrightness = 1.0F;
         mc = minecraft;
     }
-    private boolean checkKey(int i)
+    public boolean checkKey(int i)
     {
-        if (mc.currentScreen!=null){    //probobly if its in the game or the game is runing
-            return false;
-        }
-        if (Keyboard.isKeyDown(i) !=keyStates[i])    //toggles the keystate boolean for the selected key
-        {
-            return keyStates[i] = !keyStates[i];    //returns the keystate
-        }else
-        {
-            return false;    
-        }
+    	if(mc.currentScreen != null)
+    	{
+    		return false;
+    	}
+    	if(Keyboard.isKeyDown(i) != keyStates[i])
+    	{
+    		return keyStates[i] = !keyStates[i];
+    	}else
+    	{
+    		return false;
+    	}
     }
     public void renderGameOverlay(float f, boolean flag, int i, int j)
     {
@@ -151,7 +143,7 @@ public class GuiIngame extends Gui
                 if (l7 > 0)
                 {
                     char c = '\266';
-                    int i9 = (int)(mc.thePlayer.experience * (float)(c + 1));
+                    int i9 = (int)(mc.thePlayer.currentXP * (float)(c + 1));
                     int l9 = (l - 32) + 3;
                     drawTexturedModalRect(k6, l9, 0, 64, c, 5);
                     if (i9 > 0)
@@ -242,7 +234,7 @@ public class GuiIngame extends Gui
                         l12 += 36;
                         byte4 = 13;
                     }
-                    if (mc.thePlayer.getFoodStats().getSaturationLevel() <= 0.0F && updateCounter % (i5 * 3 + 1) == 0)
+                    if (mc.thePlayer.getFoodStats().getFoodSaturationLevel() <= 0.0F && updateCounter % (i5 * 3 + 1) == 0)
                     {
                         i12 += rand.nextInt(3) - 1;
                     }
@@ -318,11 +310,11 @@ public class GuiIngame extends Gui
             GL11.glEnable(3008 /*GL_ALPHA_TEST*/);
             GL11.glEnable(2929 /*GL_DEPTH_TEST*/);
         }
-        if (mc.playerController.func_35642_f() && mc.thePlayer.experienceLevel > 0)
+        if (mc.playerController.func_35642_f() && mc.thePlayer.playerLevel > 0)
         {
             boolean flag1 = false;
             int j1 = flag1 ? 0xffffff : 0x80ff20;
-            String s = (new StringBuilder()).append("").append(mc.thePlayer.experienceLevel).toString();
+            String s = (new StringBuilder()).append("").append(mc.thePlayer.playerLevel).toString();
             int k3 = (k - fontrenderer.getStringWidth(s)) / 2;
             int l3 = l - 31 - 4;
             fontrenderer.drawString(s, k3 + 1, l3, 0);
@@ -355,162 +347,127 @@ public class GuiIngame extends Gui
             drawString(fontrenderer, (new StringBuilder()).append("y: ").append(mc.thePlayer.posY).toString(), 2, 72, 0xe0e0e0);
             drawString(fontrenderer, (new StringBuilder()).append("z: ").append(mc.thePlayer.posZ).toString(), 2, 80, 0xe0e0e0);
             drawString(fontrenderer, (new StringBuilder()).append("f: ").append(MathHelper.floor_double((double)((mc.thePlayer.rotationYaw * 4F) / 360F) + 0.5D) & 3).toString(), 2, 88, 0xe0e0e0);
-            drawString(fontrenderer, (new StringBuilder()).append("Seed: ").append(mc.theWorld.getSeed()).toString(), 2, 104, 0xe0e0e0);
+            drawString(fontrenderer, (new StringBuilder()).append("Seed: ").append(mc.theWorld.getWorldSeed()).toString(), 2, 104, 0xe0e0e0);
             GL11.glPopMatrix();
-        	} else
-        	{
-        		if(GuiIngame.compass)
-        		{
-        		int compass = (MathHelper.floor_double((double)((mc.thePlayer.rotationYaw * 4F) / 360F) + 0.5D) & 3);
-        		if(compass == 1){fontrenderer.drawStringWithShadow("\2477North", 102, 15, 0xFF);}
-        		if(compass == 3){fontrenderer.drawStringWithShadow("\2477South", 102, 15, 0xFF);}
-        		if(compass == 2){fontrenderer.drawStringWithShadow("\2477East", 102, 15, 0xFF);}
-        		if(compass == 0){fontrenderer.drawStringWithShadow("\2477West", 102, 15, 0xFF);}
-        		}else
-        		{
-        			
-        		}
-        		fontrenderer.drawStringWithShadow("\2475Plus+ -Version 1.4", 2, 15, 0x0000000);
-            		if(checkKey(Keyboard.KEY_BACK))
-            		{
-            	    mc.displayGuiScreen(new GuiConsole());
-            		}
-            		    if(checkKey(Keyboard.KEY_I))
-            	          {
-            		    	Insant = !Insant;
-            	              if(Insant)
-            	              {
-            	                  guiArray.add("\2477Instant");
-            	              }
-            	              else
-            	                {
-            	                        if(guiArray.contains("\2477Instant")) 
-            	  guiArray.remove(guiArray.indexOf("\2477Instant"));    
-            	                }
-            	              }
-            	              if(checkKey(Keyboard.KEY_C))
-            	              {
-            	                Bright = !Bright;
-            	                mc.renderGlobal.loadRenderers();
-            	                  if(Bright)// run it
-            	                  {
-            	                      guiArray.add("\2477FullBright");
-            	                  }
-            	                  else
-            	                    {
-            	                            if(guiArray.contains("\2477FullBright")) 
-            	    guiArray.remove(guiArray.indexOf("\2477FullBright"));    
-            	                    }
-            	              }
-            	              if(checkKey(Keyboard.KEY_X))
-            	              {
-            	                xray = !xray;
-            	                mc.renderGlobal.loadRenderers();
-            	                  if(xray)// run it
-            	                  {
-            	                      guiArray.add("\2477Xray");
-            	                  }
-            	                  else
-            	                    {
-            	                            if(guiArray.contains("\2477Xray")) 
-            	    guiArray.remove(guiArray.indexOf("\2477Xray"));    
-            	                    }
-            	              }
-            	              if(GuiIngame.NoSwing){
-            	            	  if(!guiArray.contains("\2475No-Swing")){
-            	            	  guiArray.add("\2475No-Swing");
-            	            	  }
-            	            	  } else {
-            	            	  if(guiArray.contains("\2475No-Swing")){
-            	            	  guiArray.remove(guiArray.indexOf("\2475no-Swing"));
-            	            	  }        
-            	              }
-            	              if(GuiIngame.Weather){
-            	            	  if(!guiArray.contains("\2477No-Weather")){
-            	            	  guiArray.add("\2477No-Weather");
-            	            	  }
-            	            	  } else {
-            	            	  if(guiArray.contains("\2477No-Weather")){
-            	            	  guiArray.remove(guiArray.indexOf("\2477No-Weather"));
-            	            	  }        
-            	              }
-                  		    if(checkKey(Keyboard.KEY_R))
-              	          {
-              		    	Fly = !Fly;
-              	              if(Fly)
-              	              {
-              	                  guiArray.add("\2477Fly");
-              	              }
-              	              else
-              	                {
-              	                        if(guiArray.contains("\2477Fly")) 
-              	  guiArray.remove(guiArray.indexOf("\2477Fly"));    
-              	                }
-              	          }
-          	              if(GuiIngame.chestfinder){
-        	            	  if(!guiArray.contains("\2477ChestFinder")){
-        	            	  guiArray.add("\2477ChestFinder");
-        	            	  }
-        	            	  } else {
-        	            	  if(guiArray.contains("\2477ChestFinder")){
-        	            	  guiArray.remove(guiArray.indexOf("\2477ChestFinder"));
-        	            	  }        
-        	              }
-          	              if(GuiIngame.Tracer){
-        	            	  if(!guiArray.contains("\2477Tracer's")){
-        	            	  guiArray.add("\2477Tracer's");
-        	            	  }
-        	            	  } else {
-        	            	  if(guiArray.contains("\2477Tracer's")){
-        	            	  guiArray.remove(guiArray.indexOf("\2477Tracer's"));
-        	            	  }        
-        	              }
-                		    if(checkKey(Keyboard.KEY_Z))
-                	          {
-                		    	sneak = !sneak;
-                	              if(sneak)
-                	              {
-                	                  guiArray.add("\2477Sneak");
-                	              } 
-                	              else
-                	                {
-                	                        if(guiArray.contains("\2477Sneak")) 
-                	  guiArray.remove(guiArray.indexOf("\2477Sneak"));    
-                	                }
-                	          }
-                		    if(checkKey(Keyboard.KEY_L))
-              	          {
-              		    	reach = !reach;
-              	              if(reach)
-              	              {
-              	                  guiArray.add("\2477Reach");
-              	              }
-              	              else
-              	                {
-              	                        if(guiArray.contains("\2477Reach")) 
-              	  guiArray.remove(guiArray.indexOf("\2477Reach"));    
-              	                }
-              	          }
-                		    if(checkKey(Keyboard.KEY_N))
-                	          {
-                		    	Nofall = !Nofall;
-                	              if(Nofall)
-                	              {
-                	                  guiArray.add("\2477No-Fall");
-                	              }
-                	              else
-                	                {
-                	                        if(guiArray.contains("\2477No-Fall")) 
-                	  guiArray.remove(guiArray.indexOf("\2477No-Fall"));    
-                	                }
-                	          }
-            	}
-            		int lcd = 23;
-                    for(int guiInt = 0; guiInt < guiArray.size(); guiInt++)
-                  {
-                        fontrenderer.drawStringWithShadow("" + guiArray.get(guiInt), 2, lcd, 0xFBB917);
-                        lcd += 8;
-                    }
+        }
+        
+        if(gui){
+        if(checkKey(Keyboard.KEY_X)){
+        	mc.renderGlobal.loadRenderers();
+        	xray = !xray;
+        }
+        if(checkKey(Keyboard.KEY_C)){
+        	timer = !timer;
+        }
+        if(checkKey(Keyboard.KEY_N)){
+        	fly = !fly;
+        }
+        if(checkKey(Keyboard.KEY_I)){
+        	instant = !instant;
+        }
+        if(checkKey(Keyboard.KEY_Z)){
+        	mc.renderGlobal.loadRenderers();
+        	bright = !bright;
+        }
+        if(checkKey(Keyboard.KEY_J)){
+        	freecam = !freecam;
+        }
+        if(checkKey(Keyboard.KEY_B)){
+        	climb = !climb;
+        }
+        if(checkKey(Keyboard.KEY_P)){
+        	nuker = !nuker;
+        }
+        if(checkKey(Keyboard.KEY_U)){
+        	killaura = !killaura;
+        }
+        if(checkKey(Keyboard.KEY_Y)){
+        	sneak = !sneak;
+        }
+        GL11.glScalef(0.5F, 0.5F, 0.5F);
+        drawRect(1, 1, 100, 140, 0x950000ff);
+        fontrenderer.drawStringWithShadow("CommunityCraft", 2, 2, 0x000000);
+        if(sneak){
+        	fontrenderer.drawString("Sneak", 2, 110, 0x00ff00);
+        }else{
+        	fontrenderer.drawString("Sneak", 2, 110, 0xff0000);
+        }
+        if(xray){
+        	fontrenderer.drawString("Xray", 2, 14, 0x00ff00);
+        }else{
+        	fontrenderer.drawString("Xray", 2, 14, 0xff0000);
+        }
+        if(timer){
+        	fontrenderer.drawString("Speed", 2, 26, 0x00ff00);
+        }else{
+        	fontrenderer.drawString("Speed", 2, 26, 0xff0000);
+        }
+        if(fly){
+        	fontrenderer.drawString("Fly", 2, 38, 0x00ff00);
+        }else{
+        	fontrenderer.drawString("Fly", 2, 38, 0xff0000);
+        }
+        if(instant){
+        	fontrenderer.drawString("Instant", 2, 50, 0x00ff00);
+        }else{
+        	fontrenderer.drawString("Instant", 2, 50, 0xff0000);
+        }
+        if(bright){
+        	fontrenderer.drawString("Fullbright", 2, 62, 0x00ff00);
+        }else{
+        	fontrenderer.drawString("Fullbright", 2, 62, 0xff0000);
+        }
+        if(climb){
+        	fontrenderer.drawString("Wallclimb", 2, 74, 0x00ff00);
+        }else{
+        	fontrenderer.drawString("Wallclimb", 2, 74, 0xff0000);
+        }
+        if(nuker){
+        	fontrenderer.drawString("Nuker", 2, 86, 0x00ff00);
+        }else{
+        	fontrenderer.drawString("Nuker", 2, 86, 0xff0000);
+        }
+        if(killaura){
+        	fontrenderer.drawString("ForceField", 2, 98, 0x00ff00);
+        }else{
+        	fontrenderer.drawString("ForceField", 2, 98, 0xff0000);
+        }
+        if(sneak){
+        	fontrenderer.drawString("Sneak", 2, 110, 0x00ff00);
+        }else{
+        	fontrenderer.drawString("Sneak", 2, 110, 0xff0000);
+        }
+        GL11.glScalef(2F, 2F, 2F);
+        if(checkKey(Keyboard.KEY_PERIOD)){
+        	jump = !jump;
+        }
+        
+        }
+        if(killaura){
+ 		   for(int i2 = 0; i2 < mc.theWorld.playerEntities.size(); i2++) {
+ 	             Entity e = (EntityPlayer) mc.theWorld.playerEntities.get(i2);
+ 	                if(e != mc.thePlayer && !((ArrayList) EntityClientPlayerMP.NameListfriend).contains(((EntityPlayer)e).username) && mc.thePlayer.canEntityBeSeen(e) && mc.thePlayer.getDistanceSqToEntity(e) < 36D  && e instanceof EntityPlayer){
+ 	                 mc.thePlayer.faceEntity(e, 100F, 100F);
+ 	                 mc.playerController.attackEntity(mc.thePlayer, e);
+ 	                 mc.thePlayer.swingItem();
+ 	                }
+ 	            }
+  		
+  	}
+        if(checkKey(Keyboard.KEY_UP)){
+        	gui = !gui;
+        }
+  		if(aimbot) {
+  		    for(int i3 = 0; i3 < mc.theWorld.loadedEntityList.size(); i3++) {
+  		    Entity e = (Entity) mc.theWorld.loadedEntityList.get(i3);
+  		    if(e != mc.thePlayer && mc.thePlayer.canEntityBeSeen(e) && mc.thePlayer.getDistanceSqToEntity(e) < 36D)
+  		    mc.thePlayer.faceEntity(e, 100F, 100F);
+  		    }
+  		   }
+        if(checkKey(Keyboard.KEY_R)){
+        	mc.displayGuiScreen(new Click(mc));
+        }
+        
         if (recordPlayingUpFor > 0)
         {
             float f2 = (float)recordPlayingUpFor - f;
@@ -652,7 +609,7 @@ public class GuiIngame extends Gui
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         GL11.glDisable(2896 /*GL_LIGHTING*/);
         GL11.glEnable(3008 /*GL_ALPHA_TEST*/);
-        }
+    }
 
     private void renderBossHealth()
     {
@@ -817,7 +774,10 @@ public class GuiIngame extends Gui
         chatMessageList.add(0, new ChatLine(s));
         for (; chatMessageList.size() > 50; chatMessageList.remove(chatMessageList.size() - 1)) { }
     }
-
+    public void drawBorderedRect(int x, int y, int x1, int y1, int size, int borderC, int insideC) {
+        drawRect(x, y, x1, y1, borderC);
+        drawRect(x + size, y + size, x1 - size, y1 - size, insideC);
+    }
     public void setRecordPlayingMessage(String s)
     {
         recordPlaying = (new StringBuilder()).append("Now playing: ").append(s).toString();

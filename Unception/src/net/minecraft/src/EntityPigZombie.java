@@ -20,7 +20,7 @@ public class EntityPigZombie extends EntityZombie
         isImmuneToFire = true;
     }
 
-    protected boolean isAIEnabled()
+    protected boolean func_46006_aR()
     {
         return false;
     }

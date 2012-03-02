@@ -4,37 +4,37 @@ import java.awt.image.BufferedImage;
 
 public class IsoImageBuffer
 {
-    public BufferedImage image;
-    public World level;
-    public int x;
-    public int y;
-    public boolean rendered;
-    public boolean noContent;
-    public int lastVisible;
-    public boolean addedToRenderQueue;
+    public BufferedImage field_1348_a;
+    public World field_1347_b;
+    public int field_1354_c;
+    public int field_1353_d;
+    public boolean field_1352_e;
+    public boolean field_1351_f;
+    public int field_1350_g;
+    public boolean field_1349_h;
 
     public IsoImageBuffer(World world, int i, int j)
     {
-        rendered = false;
-        noContent = false;
-        lastVisible = 0;
-        addedToRenderQueue = false;
-        level = world;
-        init(i, j);
+        field_1352_e = false;
+        field_1351_f = false;
+        field_1350_g = 0;
+        field_1349_h = false;
+        field_1347_b = world;
+        func_889_a(i, j);
     }
 
-    public void init(int i, int j)
+    public void func_889_a(int i, int j)
     {
-        rendered = false;
-        x = i;
-        y = j;
-        lastVisible = 0;
-        addedToRenderQueue = false;
+        field_1352_e = false;
+        field_1354_c = i;
+        field_1353_d = j;
+        field_1350_g = 0;
+        field_1349_h = false;
     }
 
-    public void init(World world, int i, int j)
+    public void func_888_a(World world, int i, int j)
     {
-        level = world;
-        init(i, j);
+        field_1347_b = world;
+        func_889_a(i, j);
     }
 }

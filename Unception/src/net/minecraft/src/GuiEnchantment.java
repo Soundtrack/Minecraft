@@ -138,7 +138,7 @@ public class GuiEnchantment extends GuiContainer
             String s1 = (new StringBuilder()).append("").append(k1).toString();
             FontRenderer fontrenderer = mc.standardGalacticFontRenderer;
             int l1 = 0x685e4a;
-            if (mc.thePlayer.experienceLevel < k1)
+            if (mc.thePlayer.playerLevel < k1)
             {
                 drawTexturedModalRect(l + 60, i1 + 14 + 19 * j1, 0, 185, 108, 19);
                 fontrenderer.drawSplitString(s, l + 62, i1 + 16 + 19 * j1, 104, (l1 & 0xfefefe) >> 1);

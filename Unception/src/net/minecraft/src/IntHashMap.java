@@ -44,7 +44,7 @@ public class IntHashMap
         return null;
     }
 
-    public boolean containsItem(int i)
+    public boolean containsKey(int i)
     {
         return lookupEntry(i) != null;
     }

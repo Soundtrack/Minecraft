@@ -13,10 +13,7 @@ public class Packet12PlayerLook extends Packet10Flying
     {
         yaw = f;
         pitch = f1;
-        if(GuiIngame.nofall)
-        {
-        onGround = true;
-        }
+        onGround = flag;
         rotating = true;
     }
 

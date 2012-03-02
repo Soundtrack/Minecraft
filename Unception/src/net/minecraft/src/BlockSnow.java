@@ -56,10 +56,10 @@ public class BlockSnow extends Block
 
     public void onNeighborBlockChange(World world, int i, int j, int k, int l)
     {
-        canSnowStay(world, i, j, k);
+        func_314_h(world, i, j, k);
     }
 
-    private boolean canSnowStay(World world, int i, int j, int k)
+    private boolean func_314_h(World world, int i, int j, int k)
     {
         if (!canPlaceBlockAt(world, i, j, k))
         {

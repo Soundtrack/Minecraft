@@ -34,7 +34,7 @@ public class GuiInventory extends GuiContainer
         else
         {
             super.initGui();
-            if (!mc.thePlayer.getActivePotionEffects().isEmpty())
+            if (!mc.thePlayer.func_40118_aO().isEmpty())
             {
                 guiLeft = 160 + (width - xSize - 200) / 2;
             }
@@ -109,7 +109,7 @@ public class GuiInventory extends GuiContainer
         int i = guiLeft - 124;
         int j = guiTop;
         int k = mc.renderEngine.getTexture("/gui/inventory.png");
-        Collection collection = mc.thePlayer.getActivePotionEffects();
+        Collection collection = mc.thePlayer.func_40118_aO();
         if (collection.isEmpty())
         {
             return;
@@ -119,7 +119,7 @@ public class GuiInventory extends GuiContainer
         {
             l = 132 / (collection.size() - 1);
         }
-        for (Iterator iterator = mc.thePlayer.getActivePotionEffects().iterator(); iterator.hasNext();)
+        for (Iterator iterator = mc.thePlayer.func_40118_aO().iterator(); iterator.hasNext();)
         {
             PotionEffect potioneffect = (PotionEffect)iterator.next();
             Potion potion = Potion.potionTypes[potioneffect.getPotionID()];

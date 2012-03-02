@@ -70,7 +70,7 @@ public class WorldGenForest extends WorldGenerator
                     int j4 = i4 - k;
                     if ((Math.abs(l3) != i3 || Math.abs(j4) != i3 || random.nextInt(2) != 0 && j2 != 0) && !Block.opaqueCubeLookup[world.getBlockId(k3, k1, i4)])
                     {
-                        setBlockAndMetadata(world, k3, k1, i4, Block.leaves.blockID, 2);
+                        func_41060_a(world, k3, k1, i4, Block.leaves.blockID, 2);
                     }
                 }
             }
@@ -81,7 +81,7 @@ public class WorldGenForest extends WorldGenerator
             int k2 = world.getBlockId(i, j + l1, k);
             if (k2 == 0 || k2 == Block.leaves.blockID)
             {
-                setBlockAndMetadata(world, i, j + l1, k, Block.wood.blockID, 2);
+                func_41060_a(world, i, j + l1, k, Block.wood.blockID, 2);
             }
         }
 

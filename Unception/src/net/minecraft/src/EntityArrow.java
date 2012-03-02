@@ -16,7 +16,7 @@ public class EntityArrow extends Entity
     public Entity shootingEntity;
     private int ticksInGround;
     private int ticksInAir;
-    private double damage;
+    private double field_46026_at;
     private int field_46027_au;
     public boolean arrowCritical;
 
@@ -32,7 +32,7 @@ public class EntityArrow extends Entity
         doesArrowBelongToPlayer = false;
         arrowShake = 0;
         ticksInAir = 0;
-        damage = 2D;
+        field_46026_at = 2D;
         arrowCritical = false;
         setSize(0.5F, 0.5F);
     }
@@ -49,7 +49,7 @@ public class EntityArrow extends Entity
         doesArrowBelongToPlayer = false;
         arrowShake = 0;
         ticksInAir = 0;
-        damage = 2D;
+        field_46026_at = 2D;
         arrowCritical = false;
         setSize(0.5F, 0.5F);
         setPosition(d, d1, d2);
@@ -68,7 +68,7 @@ public class EntityArrow extends Entity
         doesArrowBelongToPlayer = false;
         arrowShake = 0;
         ticksInAir = 0;
-        damage = 2D;
+        field_46026_at = 2D;
         arrowCritical = false;
         shootingEntity = entityliving;
         doesArrowBelongToPlayer = entityliving instanceof EntityPlayer;
@@ -216,7 +216,7 @@ public class EntityArrow extends Entity
             if (movingobjectposition.entityHit != null)
             {
                 float f1 = MathHelper.sqrt_double(motionX * motionX + motionY * motionY + motionZ * motionZ);
-                int j1 = (int)Math.ceil((double)f1 * damage);
+                int j1 = (int)Math.ceil((double)f1 * field_46026_at);
                 if (arrowCritical)
                 {
                     j1 += rand.nextInt(j1 / 2 + 2);
@@ -328,7 +328,7 @@ public class EntityArrow extends Entity
         nbttagcompound.setByte("shake", (byte)arrowShake);
         nbttagcompound.setByte("inGround", (byte)(inGround ? 1 : 0));
         nbttagcompound.setBoolean("player", doesArrowBelongToPlayer);
-        nbttagcompound.setDouble("damage", damage);
+        nbttagcompound.setDouble("damage", field_46026_at);
     }
 
     public void readEntityFromNBT(NBTTagCompound nbttagcompound)
@@ -343,13 +343,13 @@ public class EntityArrow extends Entity
         doesArrowBelongToPlayer = nbttagcompound.getBoolean("player");
         if (nbttagcompound.hasKey("damage"))
         {
-            damage = nbttagcompound.getDouble("damage");
+            field_46026_at = nbttagcompound.getDouble("damage");
         }
     }
 
     public void onCollideWithPlayer(EntityPlayer entityplayer)
     {
-        if (worldObj.isRemote)
+        if (worldObj.multiplayerWorld)
         {
             return;
         }
@@ -366,14 +366,14 @@ public class EntityArrow extends Entity
         return 0.0F;
     }
 
-    public void setDamage(double d)
+    public void func_46024_b(double d)
     {
-        damage = d;
+        field_46026_at = d;
     }
 
-    public double getDamage()
+    public double func_46025_l()
     {
-        return damage;
+        return field_46026_at;
     }
 
     public void func_46023_b(int i)

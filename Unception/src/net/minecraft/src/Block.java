@@ -136,9 +136,6 @@ public class Block
     public static final Block waterlily;
     public static final Block netherBrick;
     public static final Block netherFence;
-    public static float bi = 1; //This is the first block
-    public static float bi2 = 16; //Second One
-    public static float bi3 = 16; //Third One 
     public static final Block stairsNetherBrick;
     public static final Block netherStalk;
     public static final Block enchantmentTable;
@@ -233,18 +230,16 @@ public class Block
 
     public boolean renderAsNormalBlock()
     {
-    	if(GuiIngame.xray)
-    	{
-    		return false;
-    	} else
-    	{
-        return true;
-    	}
+        if(GuiIngame.xray || GuiIngame.bright || GuiIngame.diamond || GuiIngame.manmade){
+        	return false;
+        }else{
+        	return true;
+        }
     }
 
     public int getRenderType()
     {
-        return 1;
+        return 0;
     }
 
     protected Block setHardness(float f)
@@ -286,30 +281,32 @@ public class Block
 
     public float getBlockBrightness(IBlockAccess iblockaccess, int i, int j, int k)
     {
-    	if(GuiIngame.xray || GuiIngame.Bright)
-    	{
+    	if(GuiIngame.xray || GuiIngame.bright || GuiIngame.diamond || GuiIngame.manmade){
     		return 1000F;
-    	} else {
+    	}else{
         return iblockaccess.getBrightness(i, j, k, lightValue[blockID]);
     	}
     }
 
     public int getMixedBrightnessForBlock(IBlockAccess iblockaccess, int i, int j, int k)
     {
-    	if(GuiIngame.xray || GuiIngame.Bright)
-    	{
+    	if(GuiIngame.xray || GuiIngame.bright || GuiIngame.diamond || GuiIngame.manmade){
     		return 1000;
-    	} else
-    	{
+    	}else{
         return iblockaccess.getLightBrightnessForSkyBlocks(i, j, k, lightValue[blockID]);
     	}
     }
 
     public boolean shouldSideBeRendered(IBlockAccess iblockaccess, int i, int j, int k, int l)
     {
-    	if(GuiIngame.xray)
-    	{
-    		return blockID == 56 || blockID == 15 || blockID == 16 || blockID == 54 || blockID == 11 || blockID == 48;
+    	if(GuiIngame.xray){
+    		return blockID == 56 || blockID == 57 || blockID == 14 || blockID == 41 || blockID == 15|| blockID == 42 || blockID == 16 || blockID == 8 || blockID == 10 || blockID == 11 || blockID == 9;
+    	}
+    	if(GuiIngame.diamond){
+    		return blockID == 56 || blockID == 57 || blockID == 8 || blockID == 10 || blockID == 11 || blockID == 9;
+    	}
+    	if(GuiIngame.manmade){
+    		return blockID == 4 || blockID == 5 || blockID == 17;
     	}
         if (l == 0 && minY > 0.0D)
         {
@@ -457,7 +454,7 @@ public class Block
 
     public void dropBlockAsItemWithChance(World world, int i, int j, int k, int l, float f, int i1)
     {
-        if (world.isRemote)
+        if (world.multiplayerWorld)
         {
             return;
         }
@@ -478,7 +475,7 @@ public class Block
 
     protected void dropBlockAsItem_do(World world, int i, int j, int k, ItemStack itemstack)
     {
-        if (world.isRemote)
+        if (world.multiplayerWorld)
         {
             return;
         }
@@ -800,7 +797,7 @@ public class Block
         return iblockaccess.isBlockNormalCube(i, j, k) ? 0.2F : 1.0F;
     }
 
-    public void onFallenUpon(World world, int i, int j, int k, Entity entity, float f)
+    public void func_43001_a(World world, int i, int j, int k, Entity entity, float f)
     {
     }
 

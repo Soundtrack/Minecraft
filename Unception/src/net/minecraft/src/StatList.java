@@ -50,7 +50,7 @@ public class StatList
     public static void initBreakableStats()
     {
         objectUseStats = initUsableStats(objectUseStats, "stat.useItem", 0x1020000, 0, Block.blocksList.length);
-        objectBreakStats = initBreakStats(objectBreakStats, "stat.breakItem", 0x1030000, 0, Block.blocksList.length);
+        objectBreakStats = func_25149_b(objectBreakStats, "stat.breakItem", 0x1030000, 0, Block.blocksList.length);
         blockStatsInitialized = true;
         initCraftableStats();
     }
@@ -58,7 +58,7 @@ public class StatList
     public static void initStats()
     {
         objectUseStats = initUsableStats(objectUseStats, "stat.useItem", 0x1020000, Block.blocksList.length, 32000);
-        objectBreakStats = initBreakStats(objectBreakStats, "stat.breakItem", 0x1030000, Block.blocksList.length, 32000);
+        objectBreakStats = func_25149_b(objectBreakStats, "stat.breakItem", 0x1030000, Block.blocksList.length, 32000);
         itemStatsInitialized = true;
         initCraftableStats();
     }
@@ -151,7 +151,7 @@ public class StatList
         return astatbase;
     }
 
-    private static StatBase[] initBreakStats(StatBase astatbase[], String s, int i, int j, int k)
+    private static StatBase[] func_25149_b(StatBase astatbase[], String s, int i, int j, int k)
     {
         if (astatbase == null)
         {
@@ -222,6 +222,6 @@ public class StatList
         distanceByMinecartStat = (new StatBasic(2006, "stat.minecartOneCm", StatBase.distanceStatType)).initIndependentStat().registerStat();
         distanceByBoatStat = (new StatBasic(2007, "stat.boatOneCm", StatBase.distanceStatType)).initIndependentStat().registerStat();
         distanceByPigStat = (new StatBasic(2008, "stat.pigOneCm", StatBase.distanceStatType)).initIndependentStat().registerStat();
-        AchievementList.init();
+        AchievementList.func_27374_a();
     }
 }

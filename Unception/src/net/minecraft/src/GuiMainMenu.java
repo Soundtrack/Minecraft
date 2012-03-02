@@ -92,19 +92,19 @@ public class GuiMainMenu extends GuiScreen
         }
         StringTranslate stringtranslate = StringTranslate.getInstance();
         int i = height / 4 + 48;
-        controlList.add(new GuiButton(1, width / 2 - 255, 145, stringtranslate.translateKey("menu.singleplayer")));
-        controlList.add(multiplayerButton = new GuiButton(2, width / 2 - 255, i + 39, stringtranslate.translateKey("menu.multiplayer")));
-        controlList.add(new GuiButton(3, width / 2 - 255, i + 63, stringtranslate.translateKey("menu.mods")));
+        controlList.add(new GuiButton(1, width / 2 - 100, i, stringtranslate.translateKey("menu.singleplayer")));
+        controlList.add(multiplayerButton = new GuiButton(2, width / 2 - 100, i + 24, stringtranslate.translateKey("menu.multiplayer")));
+        controlList.add(new GuiButton(3, width / 2 - 100, i + 48, stringtranslate.translateKey("menu.mods")));
         if (mc.hideQuitButton)
         {
-            controlList.add(new GuiButton(0, width / 2 - 255, i + 87, stringtranslate.translateKey("menu.options")));
+            controlList.add(new GuiButton(0, width / 2 - 100, i + 72, stringtranslate.translateKey("menu.options")));
         }
         else
         {
             controlList.add(new GuiButton(0, width / 2 - 100, i + 72 + 12, 98, 20, stringtranslate.translateKey("menu.options")));
             controlList.add(new GuiButton(4, width / 2 + 2, i + 72 + 12, 98, 20, stringtranslate.translateKey("menu.quit")));
         }
-        controlList.add(new GuiButtonLanguage(5, width / 2 - 1400, i + 72 + 12));
+        controlList.add(new GuiButtonLanguage(5, width / 2 - 124, i + 72 + 12));
         if (mc.session == null)
         {
             multiplayerButton.enabled = false;
@@ -308,8 +308,8 @@ public class GuiMainMenu extends GuiScreen
         GL11.glScalef(f1, f1, f1);
         drawCenteredString(fontRenderer, splashText, 0, -8, 0xffff00);
         GL11.glPopMatrix();
-        drawString(fontRenderer, "\2477Plus\2475+ \2477 1.4", 2, height - 10, 0xffffff);
-        String s = "\2477Coded By \2475David2075 \2477 And \2475 Shaun1998";
+        drawString(fontRenderer, "ConsoleHax FTW :D 1.1", 2, height - 10, 0xffffff);
+        String s = "Copyright Mojang AB. Do not distribute!";
         drawString(fontRenderer, s, width - fontRenderer.getStringWidth(s) - 2, height - 10, 0xffffff);
         super.drawScreen(i, j, f);
     }

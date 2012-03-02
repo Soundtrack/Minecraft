@@ -66,7 +66,7 @@ public class BlockDragonEgg extends Block
         {
             return;
         }
-        if (world.isRemote)
+        if (world.multiplayerWorld)
         {
             return;
         }

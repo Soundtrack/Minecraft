@@ -162,7 +162,6 @@ public class RenderBlocks
         renderAllFaces = true;
         renderBlockByRenderType(block, i, j, k);
         renderAllFaces = false;
-        renderAllFaces = block.blockID == 17;
     }
 
     public boolean renderLightOnBlock(int i, int j, int k, int l)
@@ -916,7 +915,7 @@ public class RenderBlocks
     private boolean renderPistonExtension(Block block, int i, int j, int k, boolean flag)
     {
         int l = blockAccess.getBlockMetadata(i, j, k);
-        int i1 = BlockPistonExtension.getDirectionMeta(l);
+        int i1 = BlockPistonExtension.func_31050_c(l);
         float f = block.getBlockBrightness(blockAccess, i, j, k);
         float f1 = flag ? 1.0F : 0.5F;
         double d = flag ? 16D : 8D;
@@ -4016,18 +4015,18 @@ public class RenderBlocks
         flag = true;
         boolean flag1 = false;
         boolean flag2 = false;
-        if (blockfence.canConnectFenceTo(blockAccess, i - 1, j, k) || blockfence.canConnectFenceTo(blockAccess, i + 1, j, k))
+        if (blockfence.isFenceAt(blockAccess, i - 1, j, k) || blockfence.isFenceAt(blockAccess, i + 1, j, k))
         {
             flag1 = true;
         }
-        if (blockfence.canConnectFenceTo(blockAccess, i, j, k - 1) || blockfence.canConnectFenceTo(blockAccess, i, j, k + 1))
+        if (blockfence.isFenceAt(blockAccess, i, j, k - 1) || blockfence.isFenceAt(blockAccess, i, j, k + 1))
         {
             flag2 = true;
         }
-        boolean flag3 = blockfence.canConnectFenceTo(blockAccess, i - 1, j, k);
-        boolean flag4 = blockfence.canConnectFenceTo(blockAccess, i + 1, j, k);
-        boolean flag5 = blockfence.canConnectFenceTo(blockAccess, i, j, k - 1);
-        boolean flag6 = blockfence.canConnectFenceTo(blockAccess, i, j, k + 1);
+        boolean flag3 = blockfence.isFenceAt(blockAccess, i - 1, j, k);
+        boolean flag4 = blockfence.isFenceAt(blockAccess, i + 1, j, k);
+        boolean flag5 = blockfence.isFenceAt(blockAccess, i, j, k - 1);
+        boolean flag6 = blockfence.isFenceAt(blockAccess, i, j, k + 1);
         if (!flag1 && !flag2)
         {
             flag1 = true;
@@ -4132,7 +4131,7 @@ public class RenderBlocks
         boolean flag = true;
         int l = blockAccess.getBlockMetadata(i, j, k);
         boolean flag1 = BlockFenceGate.isFenceGateOpen(l);
-        int i1 = BlockFenceGate.getOrentation(l);
+        int i1 = BlockFenceGate.func_35290_f(l);
         if (i1 == 3 || i1 == 1)
         {
             float f = 0.4375F;

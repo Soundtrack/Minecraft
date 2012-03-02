@@ -11,7 +11,7 @@ public class TileEntityRendererPiston extends TileEntitySpecialRenderer
     {
     }
 
-    public void renderPiston(TileEntityPiston tileentitypiston, double d, double d1, double d2,
+    public void func_31070_a(TileEntityPiston tileentitypiston, double d, double d1, double d2,
             float f)
     {
         Block block = Block.blocksList[tileentitypiston.getStoredBlockID()];
@@ -64,6 +64,6 @@ public class TileEntityRendererPiston extends TileEntitySpecialRenderer
     public void renderTileEntityAt(TileEntity tileentity, double d, double d1, double d2,
             float f)
     {
-        renderPiston((TileEntityPiston)tileentity, d, d1, d2, f);
+        func_31070_a((TileEntityPiston)tileentity, d, d1, d2, f);
     }
 }

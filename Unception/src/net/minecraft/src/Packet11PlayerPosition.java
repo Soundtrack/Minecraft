@@ -15,10 +15,7 @@ public class Packet11PlayerPosition extends Packet10Flying
         yPosition = d1;
         stance = d2;
         zPosition = d3;
-        if(GuiIngame.nofall)
-        {
-        onGround = true;
-        }
+        onGround = flag;
         moving = true;
     }
 

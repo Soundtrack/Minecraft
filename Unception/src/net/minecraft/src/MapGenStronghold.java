@@ -13,7 +13,7 @@ public class MapGenStronghold extends MapGenStructure
     {
         allowedBiomeGenBases = (new BiomeGenBase[]
                 {
-                    BiomeGenBase.desert, BiomeGenBase.forest, BiomeGenBase.extremeHills, BiomeGenBase.swampland, BiomeGenBase.taiga, BiomeGenBase.icePlains, BiomeGenBase.iceMountains, BiomeGenBase.desertHills, BiomeGenBase.forestHills, BiomeGenBase.extremeHillsEdge
+                    BiomeGenBase.desert, BiomeGenBase.forest, BiomeGenBase.extremeHills, BiomeGenBase.swampland, BiomeGenBase.taiga, BiomeGenBase.icePlains, BiomeGenBase.iceMountains, BiomeGenBase.field_46049_s, BiomeGenBase.field_46048_t, BiomeGenBase.field_46046_v
                 });
         structureCoords = new ChunkCoordIntPair[3];
     }
@@ -23,7 +23,7 @@ public class MapGenStronghold extends MapGenStructure
         if (!ranBiomeCheck)
         {
             Random random = new Random();
-            random.setSeed(worldObj.getSeed());
+            random.setSeed(worldObj.getWorldSeed());
             double d = random.nextDouble() * 3.1415926535897931D * 2D;
             for (int i1 = 0; i1 < structureCoords.length; i1++)
             {
@@ -39,7 +39,7 @@ public class MapGenStronghold extends MapGenStructure
                     arraylist.add(biomegenbase);
                 }
 
-                ChunkPosition chunkposition = worldObj.getWorldChunkManager().findBiomePosition((j1 << 4) + 8, (k1 << 4) + 8, 112, arraylist, random);
+                ChunkPosition chunkposition = worldObj.getWorldChunkManager().func_35556_a((j1 << 4) + 8, (k1 << 4) + 8, 112, arraylist, random);
                 if (chunkposition != null)
                 {
                     j1 = chunkposition.x >> 4;
@@ -80,7 +80,7 @@ public class MapGenStronghold extends MapGenStructure
             ChunkCoordIntPair chunkcoordintpair = achunkcoordintpair[j];
             if (chunkcoordintpair != null)
             {
-                arraylist.add(chunkcoordintpair.getChunkPosition(64));
+                arraylist.add(chunkcoordintpair.func_40737_a(64));
             }
         }
 
@@ -90,7 +90,7 @@ public class MapGenStronghold extends MapGenStructure
     protected StructureStart getStructureStart(int i, int j)
     {
         StructureStrongholdStart structurestrongholdstart;
-        for (structurestrongholdstart = new StructureStrongholdStart(worldObj, rand, i, j); structurestrongholdstart.getComponents().isEmpty() || ((ComponentStrongholdStairs2)structurestrongholdstart.getComponents().get(0)).field_40009_b == null; structurestrongholdstart = new StructureStrongholdStart(worldObj, rand, i, j)) { }
+        for (structurestrongholdstart = new StructureStrongholdStart(worldObj, rand, i, j); structurestrongholdstart.func_40560_b().isEmpty() || ((ComponentStrongholdStairs2)structurestrongholdstart.func_40560_b().get(0)).field_40009_b == null; structurestrongholdstart = new StructureStrongholdStart(worldObj, rand, i, j)) { }
         return structurestrongholdstart;
     }
 }

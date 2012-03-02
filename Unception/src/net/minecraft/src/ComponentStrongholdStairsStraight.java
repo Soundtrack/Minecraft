@@ -23,7 +23,7 @@ public class ComponentStrongholdStairsStraight extends ComponentStronghold
     public static ComponentStrongholdStairsStraight func_35053_a(List list, Random random, int i, int j, int k, int l, int i1)
     {
         StructureBoundingBox structureboundingbox = StructureBoundingBox.getComponentToAddBoundingBox(i, j, k, -1, -7, 0, 5, 11, 8, l);
-        if (!canStrongholdGoDeeper(structureboundingbox) || StructureComponent.findIntersecting(list, structureboundingbox) != null)
+        if (!canStrongholdGoDeeper(structureboundingbox) || StructureComponent.getIntersectingStructureComponent(list, structureboundingbox) != null)
         {
             return null;
         }

@@ -60,7 +60,7 @@ public class ComponentMineshaftCorridor extends StructureComponent
                     structureboundingbox.maxZ = k + 2;
                     break;
             }
-            if (StructureComponent.findIntersecting(list, structureboundingbox) == null)
+            if (StructureComponent.getIntersectingStructureComponent(list, structureboundingbox) == null)
             {
                 break;
             }

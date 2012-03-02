@@ -25,7 +25,7 @@ public class EntitySnowman extends EntitySnowmanBase
             List list = worldObj.getEntitiesWithinAABB(net.minecraft.src.EntityMob.class, AxisAlignedBB.getBoundingBoxFromPool(posX, posY, posZ, posX + 1.0D, posY + 1.0D, posZ + 1.0D).expand(16D, 4D, 16D));
             if (!list.isEmpty())
             {
-                setTarget((Entity)list.get(worldObj.rand.nextInt(list.size())));
+                setEntityToAttack((Entity)list.get(worldObj.rand.nextInt(list.size())));
             }
         }
         int i = MathHelper.floor_double(posX);

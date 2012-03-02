@@ -58,7 +58,7 @@ public class ItemRenderer
             GL11.glRotatef(335F, 0.0F, 0.0F, 1.0F);
             GL11.glTranslatef(-0.9375F, -0.0625F, 0.0F);
             func_40686_a(tessellator, f1, f2, f, f3);
-            if (itemstack != null && itemstack.hasEffect() && i == 0)
+            if (itemstack != null && itemstack.func_40713_r() && i == 0)
             {
                 GL11.glDepthFunc(514);
                 GL11.glDisable(2896 /*GL_LIGHTING*/);

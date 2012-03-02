@@ -48,7 +48,7 @@ public class GenLayerSmoothZoom extends GenLayer
         return ai2;
     }
 
-    public static GenLayer createZoom(long l, GenLayer genlayer, int i)
+    public static GenLayer func_35517_a(long l, GenLayer genlayer, int i)
     {
         Object obj = genlayer;
         for (int j = 0; j < i; j++)

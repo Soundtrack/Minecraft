@@ -43,7 +43,7 @@ public class AchievementList
     {
     }
 
-    public static void init()
+    public static void func_27374_a()
     {
     }
 

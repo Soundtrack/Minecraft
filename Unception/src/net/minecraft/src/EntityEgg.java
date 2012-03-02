@@ -19,13 +19,13 @@ public class EntityEgg extends EntityThrowable
         super(world, d, d1, d2);
     }
 
-    protected void onImpact(MovingObjectPosition movingobjectposition)
+    protected void onThrowableCollision(MovingObjectPosition movingobjectposition)
     {
         if (movingobjectposition.entityHit != null)
         {
-            if (!movingobjectposition.entityHit.attackEntityFrom(DamageSource.causeThrownDamage(this, thrower), 0));
+            if (!movingobjectposition.entityHit.attackEntityFrom(DamageSource.causeThrownDamage(this, throwingEntity), 0));
         }
-        if (!worldObj.isRemote && rand.nextInt(8) == 0)
+        if (!worldObj.multiplayerWorld && rand.nextInt(8) == 0)
         {
             byte byte0 = 1;
             if (rand.nextInt(32) == 0)
@@ -45,7 +45,7 @@ public class EntityEgg extends EntityThrowable
             worldObj.spawnParticle("snowballpoof", posX, posY, posZ, 0.0D, 0.0D, 0.0D);
         }
 
-        if (!worldObj.isRemote)
+        if (!worldObj.multiplayerWorld)
         {
             setEntityDead();
         }

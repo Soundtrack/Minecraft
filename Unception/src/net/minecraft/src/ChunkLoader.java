@@ -263,7 +263,7 @@ public class ChunkLoader
         return chunk;
     }
 
-    public void chunkTick()
+    public void func_814_a()
     {
     }
 

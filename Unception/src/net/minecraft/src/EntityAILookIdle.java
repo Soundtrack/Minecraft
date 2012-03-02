@@ -18,7 +18,7 @@ public class EntityAILookIdle extends EntityAIBase
 
     public boolean func_46082_a()
     {
-        return field_46089_a.getRNG().nextFloat() < 0.02F;
+        return field_46089_a.func_46004_aK().nextFloat() < 0.02F;
     }
 
     public boolean func_46084_g()
@@ -28,16 +28,16 @@ public class EntityAILookIdle extends EntityAIBase
 
     public void func_46080_e()
     {
-        double d = 6.2831853071795862D * field_46089_a.getRNG().nextDouble();
+        double d = 6.2831853071795862D * field_46089_a.func_46004_aK().nextDouble();
         field_46087_b = Math.cos(d);
         field_46088_c = Math.sin(d);
-        field_46086_d = 20 + field_46089_a.getRNG().nextInt(20);
+        field_46086_d = 20 + field_46089_a.func_46004_aK().nextInt(20);
     }
 
     public void func_46081_b()
     {
         field_46086_d--;
-        field_46089_a.getLookHelper().func_46143_a(field_46089_a.posX + field_46087_b, field_46089_a.posY + (double)field_46089_a.getEyeHeight(), field_46089_a.posZ + field_46088_c, 10F, field_46089_a.getVerticalFaceSpeed());
+        field_46089_a.func_46008_aG().func_46143_a(field_46089_a.posX + field_46087_b, field_46089_a.posY + (double)field_46089_a.getEyeHeight(), field_46089_a.posZ + field_46088_c, 10F, field_46089_a.getVerticalFaceSpeed());
     }
 
     public int func_46083_c()

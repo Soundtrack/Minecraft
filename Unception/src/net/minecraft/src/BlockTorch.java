@@ -32,7 +32,7 @@ public class BlockTorch extends Block
 
     private boolean canPlaceTorchOn(World world, int i, int j, int k)
     {
-        if (world.isBlockNormalCubeDefault(i, j, k, true))
+        if (world.func_41082_b(i, j, k, true))
         {
             return true;
         }
@@ -45,19 +45,19 @@ public class BlockTorch extends Block
 
     public boolean canPlaceBlockAt(World world, int i, int j, int k)
     {
-        if (world.isBlockNormalCubeDefault(i - 1, j, k, true))
+        if (world.func_41082_b(i - 1, j, k, true))
         {
             return true;
         }
-        if (world.isBlockNormalCubeDefault(i + 1, j, k, true))
+        if (world.func_41082_b(i + 1, j, k, true))
         {
             return true;
         }
-        if (world.isBlockNormalCubeDefault(i, j, k - 1, true))
+        if (world.func_41082_b(i, j, k - 1, true))
         {
             return true;
         }
-        if (world.isBlockNormalCubeDefault(i, j, k + 1, true))
+        if (world.func_41082_b(i, j, k + 1, true))
         {
             return true;
         }
@@ -71,19 +71,19 @@ public class BlockTorch extends Block
         {
             i1 = 5;
         }
-        if (l == 2 && world.isBlockNormalCubeDefault(i, j, k + 1, true))
+        if (l == 2 && world.func_41082_b(i, j, k + 1, true))
         {
             i1 = 4;
         }
-        if (l == 3 && world.isBlockNormalCubeDefault(i, j, k - 1, true))
+        if (l == 3 && world.func_41082_b(i, j, k - 1, true))
         {
             i1 = 3;
         }
-        if (l == 4 && world.isBlockNormalCubeDefault(i + 1, j, k, true))
+        if (l == 4 && world.func_41082_b(i + 1, j, k, true))
         {
             i1 = 2;
         }
-        if (l == 5 && world.isBlockNormalCubeDefault(i - 1, j, k, true))
+        if (l == 5 && world.func_41082_b(i - 1, j, k, true))
         {
             i1 = 1;
         }
@@ -101,19 +101,19 @@ public class BlockTorch extends Block
 
     public void onBlockAdded(World world, int i, int j, int k)
     {
-        if (world.isBlockNormalCubeDefault(i - 1, j, k, true))
+        if (world.func_41082_b(i - 1, j, k, true))
         {
             world.setBlockMetadataWithNotify(i, j, k, 1);
         }
-        else if (world.isBlockNormalCubeDefault(i + 1, j, k, true))
+        else if (world.func_41082_b(i + 1, j, k, true))
         {
             world.setBlockMetadataWithNotify(i, j, k, 2);
         }
-        else if (world.isBlockNormalCubeDefault(i, j, k - 1, true))
+        else if (world.func_41082_b(i, j, k - 1, true))
         {
             world.setBlockMetadataWithNotify(i, j, k, 3);
         }
-        else if (world.isBlockNormalCubeDefault(i, j, k + 1, true))
+        else if (world.func_41082_b(i, j, k + 1, true))
         {
             world.setBlockMetadataWithNotify(i, j, k, 4);
         }
@@ -130,19 +130,19 @@ public class BlockTorch extends Block
         {
             int i1 = world.getBlockMetadata(i, j, k);
             boolean flag = false;
-            if (!world.isBlockNormalCubeDefault(i - 1, j, k, true) && i1 == 1)
+            if (!world.func_41082_b(i - 1, j, k, true) && i1 == 1)
             {
                 flag = true;
             }
-            if (!world.isBlockNormalCubeDefault(i + 1, j, k, true) && i1 == 2)
+            if (!world.func_41082_b(i + 1, j, k, true) && i1 == 2)
             {
                 flag = true;
             }
-            if (!world.isBlockNormalCubeDefault(i, j, k - 1, true) && i1 == 3)
+            if (!world.func_41082_b(i, j, k - 1, true) && i1 == 3)
             {
                 flag = true;
             }
-            if (!world.isBlockNormalCubeDefault(i, j, k + 1, true) && i1 == 4)
+            if (!world.func_41082_b(i, j, k + 1, true) && i1 == 4)
             {
                 flag = true;
             }

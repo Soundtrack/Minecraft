@@ -135,7 +135,7 @@ public class SaveHandler
 
     public void saveWorldInfoAndPlayer(WorldInfo worldinfo, List list)
     {
-        NBTTagCompound nbttagcompound = worldinfo.getNBTTagCompoundWithPlayers(list);
+        NBTTagCompound nbttagcompound = worldinfo.getNBTTagCompoundWithPlayer(list);
         NBTTagCompound nbttagcompound1 = new NBTTagCompound();
         nbttagcompound1.setTag("Data", nbttagcompound);
         try

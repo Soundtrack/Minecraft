@@ -22,7 +22,7 @@ public class ComponentStrongholdCorridor extends ComponentStronghold
     public static StructureBoundingBox func_35051_a(List list, Random random, int i, int j, int k, int l)
     {
         StructureBoundingBox structureboundingbox = StructureBoundingBox.getComponentToAddBoundingBox(i, j, k, -1, -1, 0, 5, 5, 4, l);
-        StructureComponent structurecomponent = StructureComponent.findIntersecting(list, structureboundingbox);
+        StructureComponent structurecomponent = StructureComponent.getIntersectingStructureComponent(list, structureboundingbox);
         if (structurecomponent == null)
         {
             return null;

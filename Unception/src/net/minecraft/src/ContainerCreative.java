@@ -67,7 +67,7 @@ class ContainerCreative extends Container
 
         for (int i2 = 256; i2 < Item.itemsList.length; i2++)
         {
-            if (Item.itemsList[i2] != null && Item.itemsList[i2].shiftedIndex != Item.potion.shiftedIndex && Item.itemsList[i2].shiftedIndex != Item.monsterPlacer.shiftedIndex)
+            if (Item.itemsList[i2] != null && Item.itemsList[i2].shiftedIndex != Item.potion.shiftedIndex && Item.itemsList[i2].shiftedIndex != Item.field_44019_bC.shiftedIndex)
             {
                 itemList.add(new ItemStack(Item.itemsList[i2]));
             }
@@ -79,7 +79,7 @@ class ContainerCreative extends Container
         }
 
         Integer integer;
-        for (Iterator iterator = EntityList.entityEggs.keySet().iterator(); iterator.hasNext(); itemList.add(new ItemStack(Item.monsterPlacer.shiftedIndex, 1, integer.intValue())))
+        for (Iterator iterator = EntityList.field_44041_a.keySet().iterator(); iterator.hasNext(); itemList.add(new ItemStack(Item.field_44019_bC.shiftedIndex, 1, integer.intValue())))
         {
             integer = (Integer)iterator.next();
         }

@@ -225,7 +225,7 @@ public class ItemMap extends ItemMapBase
 
     public void onUpdate(ItemStack itemstack, World world, Entity entity, int i, boolean flag)
     {
-        if (world.isRemote)
+        if (world.multiplayerWorld)
         {
             return;
         }

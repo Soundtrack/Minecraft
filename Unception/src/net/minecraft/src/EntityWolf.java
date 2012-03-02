@@ -142,7 +142,7 @@ public class EntityWolf extends EntityAnimal
                 float f = entityplayer.getDistanceToEntity(this);
                 if (f > 5F)
                 {
-                    setPathEntity(entityplayer, f);
+                    getPathOrWalkableBlock(entityplayer, f);
                 }
             }
             else if (!isInWater())
@@ -155,14 +155,14 @@ public class EntityWolf extends EntityAnimal
             List list = worldObj.getEntitiesWithinAABB(net.minecraft.src.EntitySheep.class, AxisAlignedBB.getBoundingBoxFromPool(posX, posY, posZ, posX + 1.0D, posY + 1.0D, posZ + 1.0D).expand(16D, 4D, 16D));
             if (!list.isEmpty())
             {
-                setTarget((Entity)list.get(worldObj.rand.nextInt(list.size())));
+                setEntityToAttack((Entity)list.get(worldObj.rand.nextInt(list.size())));
             }
         }
         if (isInWater())
         {
             setIsSitting(false);
         }
-        if (!worldObj.isRemote)
+        if (!worldObj.multiplayerWorld)
         {
             dataWatcher.updateObject(18, Integer.valueOf(getEntityHealth()));
         }
@@ -192,7 +192,7 @@ public class EntityWolf extends EntityAnimal
                 }
             }
         }
-        if (!worldObj.isRemote && isShaking && !field_25052_g && !hasPath() && onGround)
+        if (!worldObj.multiplayerWorld && isShaking && !field_25052_g && !hasPath() && onGround)
         {
             field_25052_g = true;
             timeWolfIsShaking = 0.0F;
@@ -299,7 +299,7 @@ public class EntityWolf extends EntityAnimal
         }
     }
 
-    private void setPathEntity(Entity entity, float f)
+    private void getPathOrWalkableBlock(Entity entity, float f)
     {
         PathEntity pathentity = worldObj.getPathToEntity(this, entity, 16F);
         if (pathentity == null && f > 12F)
@@ -441,7 +441,7 @@ public class EntityWolf extends EntityAnimal
                 {
                     entityplayer.inventory.setInventorySlotContents(entityplayer.inventory.currentItem, null);
                 }
-                if (!worldObj.isRemote)
+                if (!worldObj.multiplayerWorld)
                 {
                     if (rand.nextInt(3) == 0)
                     {
@@ -480,7 +480,7 @@ public class EntityWolf extends EntityAnimal
             }
             if (entityplayer.username.equalsIgnoreCase(getOwner()))
             {
-                if (!worldObj.isRemote)
+                if (!worldObj.multiplayerWorld)
                 {
                     setIsSitting(!isSitting());
                     isJumping = false;

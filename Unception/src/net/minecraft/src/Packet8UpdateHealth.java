@@ -30,7 +30,7 @@ public class Packet8UpdateHealth extends Packet
 
     public void processPacket(NetHandler nethandler)
     {
-        nethandler.handleUpdateHealth(this);
+        nethandler.handleHealth(this);
     }
 
     public int getPacketSize()

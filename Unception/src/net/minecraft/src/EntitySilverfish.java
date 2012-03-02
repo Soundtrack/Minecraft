@@ -4,7 +4,7 @@ import java.util.Random;
 
 public class EntitySilverfish extends EntityMob
 {
-    private int allySummonCooldown;
+    private int field_35189_a;
 
     public EntitySilverfish(World world)
     {
@@ -48,9 +48,9 @@ public class EntitySilverfish extends EntityMob
 
     public boolean attackEntityFrom(DamageSource damagesource, int i)
     {
-        if (allySummonCooldown <= 0 && (damagesource instanceof EntityDamageSource))
+        if (field_35189_a <= 0 && (damagesource instanceof EntityDamageSource))
         {
-            allySummonCooldown = 20;
+            field_35189_a = 20;
         }
         return super.attackEntityFrom(damagesource, i);
     }
@@ -93,14 +93,14 @@ public class EntitySilverfish extends EntityMob
     protected void updateEntityActionState()
     {
         super.updateEntityActionState();
-        if (worldObj.isRemote)
+        if (worldObj.multiplayerWorld)
         {
             return;
         }
-        if (allySummonCooldown > 0)
+        if (field_35189_a > 0)
         {
-            allySummonCooldown--;
-            if (allySummonCooldown == 0)
+            field_35189_a--;
+            if (field_35189_a == 0)
             {
                 int i = MathHelper.floor_double(posX);
                 int k = MathHelper.floor_double(posY);
@@ -140,7 +140,7 @@ public class EntitySilverfish extends EntityMob
             int i2 = worldObj.getBlockId(j + Facing.offsetsXForSide[k1], l + Facing.offsetsYForSide[k1], j1 + Facing.offsetsZForSide[k1]);
             if (BlockSilverfish.getPosingIdByMetadata(i2))
             {
-                worldObj.setBlockAndMetadataWithNotify(j + Facing.offsetsXForSide[k1], l + Facing.offsetsYForSide[k1], j1 + Facing.offsetsZForSide[k1], Block.silverfish.blockID, BlockSilverfish.getMetadataForBlockType(i2));
+                worldObj.setBlockAndMetadataWithNotify(j + Facing.offsetsXForSide[k1], l + Facing.offsetsYForSide[k1], j1 + Facing.offsetsZForSide[k1], Block.silverfish.blockID, BlockSilverfish.func_35304_f(i2));
                 spawnExplosionParticle();
                 setEntityDead();
             }
@@ -167,7 +167,7 @@ public class EntitySilverfish extends EntityMob
         }
     }
 
-    protected boolean isValidLightLevel()
+    protected boolean func_40147_Y()
     {
         return true;
     }

@@ -26,7 +26,7 @@ public class PathNavigate
         field_46073_d = f;
     }
 
-    public void onUpdateNavigation()
+    public void func_46069_a()
     {
         if (field_46075_c == null)
         {
@@ -54,8 +54,8 @@ public class PathNavigate
         }
         else
         {
-            field_46076_a.getMoveHelper().setMoveSpeed(field_46073_d);
-            field_46076_a.getMoveHelper().func_46035_a(vec3d.xCoord, vec3d.yCoord, vec3d.zCoord);
+            field_46076_a.func_46009_aH().func_46033_a(field_46073_d);
+            field_46076_a.func_46009_aH().func_46035_a(vec3d.xCoord, vec3d.yCoord, vec3d.zCoord);
             return;
         }
     }

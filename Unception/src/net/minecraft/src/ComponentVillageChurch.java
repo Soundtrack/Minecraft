@@ -19,10 +19,10 @@ public class ComponentVillageChurch extends ComponentVillage
     {
     }
 
-    public static ComponentVillageChurch findValidPlacement(List list, Random random, int i, int j, int k, int l, int i1)
+    public static ComponentVillageChurch func_35097_a(List list, Random random, int i, int j, int k, int l, int i1)
     {
         StructureBoundingBox structureboundingbox = StructureBoundingBox.getComponentToAddBoundingBox(i, j, k, 0, 0, 0, 5, 12, 9, l);
-        if (!canVillageGoDeeper(structureboundingbox) || StructureComponent.findIntersecting(list, structureboundingbox) != null)
+        if (!canVillageGoDeeper(structureboundingbox) || StructureComponent.getIntersectingStructureComponent(list, structureboundingbox) != null)
         {
             return null;
         }

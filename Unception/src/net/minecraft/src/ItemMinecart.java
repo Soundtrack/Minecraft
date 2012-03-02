@@ -16,7 +16,7 @@ public class ItemMinecart extends Item
         int i1 = world.getBlockId(i, j, k);
         if (BlockRail.isRailBlock(i1))
         {
-            if (!world.isRemote)
+            if (!world.multiplayerWorld)
             {
                 world.spawnEntityInWorld(new EntityMinecart(world, (float)i + 0.5F, (float)j + 0.5F, (float)k + 0.5F, minecartType));
             }

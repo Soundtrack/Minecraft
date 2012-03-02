@@ -101,7 +101,7 @@ public class BlockCrops extends BlockFlower
     public void dropBlockAsItemWithChance(World world, int i, int j, int k, int l, float f, int i1)
     {
         super.dropBlockAsItemWithChance(world, i, j, k, l, f, 0);
-        if (world.isRemote)
+        if (world.multiplayerWorld)
         {
             return;
         }

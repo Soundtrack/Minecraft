@@ -19,10 +19,10 @@ public class BlockFence extends Block
 
     public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int i, int j, int k)
     {
-        boolean flag = canConnectFenceTo(world, i, j, k - 1);
-        boolean flag1 = canConnectFenceTo(world, i, j, k + 1);
-        boolean flag2 = canConnectFenceTo(world, i - 1, j, k);
-        boolean flag3 = canConnectFenceTo(world, i + 1, j, k);
+        boolean flag = isFenceAt(world, i, j, k - 1);
+        boolean flag1 = isFenceAt(world, i, j, k + 1);
+        boolean flag2 = isFenceAt(world, i - 1, j, k);
+        boolean flag3 = isFenceAt(world, i + 1, j, k);
         float f = 0.375F;
         float f1 = 0.625F;
         float f2 = 0.375F;
@@ -48,10 +48,10 @@ public class BlockFence extends Block
 
     public void setBlockBoundsBasedOnState(IBlockAccess iblockaccess, int i, int j, int k)
     {
-        boolean flag = canConnectFenceTo(iblockaccess, i, j, k - 1);
-        boolean flag1 = canConnectFenceTo(iblockaccess, i, j, k + 1);
-        boolean flag2 = canConnectFenceTo(iblockaccess, i - 1, j, k);
-        boolean flag3 = canConnectFenceTo(iblockaccess, i + 1, j, k);
+        boolean flag = isFenceAt(iblockaccess, i, j, k - 1);
+        boolean flag1 = isFenceAt(iblockaccess, i, j, k + 1);
+        boolean flag2 = isFenceAt(iblockaccess, i - 1, j, k);
+        boolean flag3 = isFenceAt(iblockaccess, i + 1, j, k);
         float f = 0.375F;
         float f1 = 0.625F;
         float f2 = 0.375F;
@@ -90,7 +90,7 @@ public class BlockFence extends Block
         return 11;
     }
 
-    public boolean canConnectFenceTo(IBlockAccess iblockaccess, int i, int j, int k)
+    public boolean isFenceAt(IBlockAccess iblockaccess, int i, int j, int k)
     {
         int l = iblockaccess.getBlockId(i, j, k);
         if (l == blockID || l == Block.fenceGate.blockID)

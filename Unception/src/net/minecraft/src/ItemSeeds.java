@@ -3,13 +3,13 @@ package net.minecraft.src;
 public class ItemSeeds extends Item
 {
     private int blockType;
-    private int soilBlockID;
+    private int plantableBlock;
 
     public ItemSeeds(int i, int j, int k)
     {
         super(i);
         blockType = j;
-        soilBlockID = k;
+        plantableBlock = k;
     }
 
     public boolean onItemUse(ItemStack itemstack, EntityPlayer entityplayer, World world, int i, int j, int k, int l)
@@ -23,7 +23,7 @@ public class ItemSeeds extends Item
             return false;
         }
         int i1 = world.getBlockId(i, j, k);
-        if (i1 == soilBlockID && world.isAirBlock(i, j + 1, k))
+        if (i1 == plantableBlock && world.isAirBlock(i, j + 1, k))
         {
             world.setBlockWithNotify(i, j + 1, k, blockType);
             itemstack.stackSize--;

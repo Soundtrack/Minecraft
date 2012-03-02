@@ -17,7 +17,7 @@ public class ItemRecord extends Item
     {
         if (world.getBlockId(i, j, k) == Block.jukebox.blockID && world.getBlockMetadata(i, j, k) == 0)
         {
-            if (world.isRemote)
+            if (world.multiplayerWorld)
             {
                 return true;
             }

@@ -63,7 +63,7 @@ public class EntityGhast extends EntityFlying
 
     protected void updateEntityActionState()
     {
-        if (!worldObj.isRemote && worldObj.difficultySetting == 0)
+        if (!worldObj.multiplayerWorld && worldObj.difficultySetting == 0)
         {
             setEntityDead();
         }
@@ -147,7 +147,7 @@ public class EntityGhast extends EntityFlying
                 attackCounter--;
             }
         }
-        if (!worldObj.isRemote)
+        if (!worldObj.multiplayerWorld)
         {
             byte byte0 = dataWatcher.getWatchableObjectByte(16);
             byte byte1 = (byte)(attackCounter <= 10 ? 0 : 1);

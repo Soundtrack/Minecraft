@@ -2,6 +2,7 @@ package net.minecraft.src;
 
 import java.nio.IntBuffer;
 import java.util.*;
+
 import net.minecraft.client.Minecraft;
 import org.lwjgl.opengl.ARBOcclusionQuery;
 import org.lwjgl.opengl.GL11;
@@ -282,23 +283,46 @@ public class RenderGlobal
 
     public void renderEntities(Vec3D vec3d, ICamera icamera, float f)
     {
-    	if(GuiIngame.Tracer)
-        {
-         for(int x = 0; x < mc.theWorld.playerEntities.size(); x++){
-          Entity entity = (Entity) mc.theWorld.playerEntities.get(x);
-          double X = entity.boundingBox.minX - mc.thePlayer.boundingBox.minX;
-          double Y = entity.boundingBox.maxY - mc.thePlayer.boundingBox.maxY;
-          double Z = entity.boundingBox.minZ - mc.thePlayer.boundingBox.minZ;
-
-          
-          GL11.glBegin(GL11.GL_LINES);
-          GL11.glColor4f(194.0F, 0.0F, 204.0F, 1.0F);
-          GL11.glLineWidth(8.0F);
-          GL11.glVertex2d(0D, 0D);
-          GL11.glVertex3d(X, Y, Z);
-          GL11.glEnd();
-         }
-      
+    	if(GuiIngame.tracer){
+    		mc.gameSettings.viewBobbing = false;
+        	GL11.glPushMatrix();
+           	GL11.glDisable(GL11.GL_LIGHTING);
+    	        GL11.glDisable(GL11.GL_DEPTH_TEST );
+            for (int j = 0; j < mc.theWorld.playerEntities.size(); j++) 
+            {
+            	EntityPlayer e = (EntityPlayer) mc.theWorld.playerEntities.get(j);
+            	List list2 = mc.theWorld.playerEntities;
+            	if(e != mc.thePlayer && e != null)
+                {
+                    double f1 = 0;
+					double x = e.lastTickPosX + (e.posX - e.lastTickPosX) * (double)f1 - RenderManager.instance.renderPosX;
+    	                double y = e.lastTickPosY + (e.posY - e.lastTickPosY) * (double)f1 - RenderManager.instance.renderPosY;
+    	                double z = e.lastTickPosZ + (e.posZ - e.lastTickPosZ) * (double)f1 - RenderManager.instance.renderPosZ;
+    	                ScaledResolution s = new ScaledResolution(mc.gameSettings, mc.displayWidth, mc.displayHeight);
+    	                double w = s.scaledWidthD; double h = s.scaledHeightD;
+    	                GL11.glBlendFunc(770, 771);
+    	                GL11.glEnable(GL11.GL_BLEND);
+    	                GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+    	                if(e.username == mc.thePlayer.username || e.username == "cheenargupte" || e.username == "JhonDenton" || e.username == "timchen" || e.username == "scriptkiddy" || e.username == "haxor" || e.username == "haxor" || e.username == "doridian" || e.username == "mr_mcsqweezels" || e.username == "manitar") {
+    	                     GL11.glColor4f(0F, 255F, 0F, 56F);
+    	                } else {
+    	                     GL11.glColor4f(0F, 0F, 255F, 1F);
+    	                }
+    	                GL11.glEnable(GL11.GL_LINE_SMOOTH);
+    		            GL11.glLineWidth(2.25F);
+    	                GL11.glDisable(GL11.GL_TEXTURE_2D);
+    	                GL11.glBegin(GL11.GL_LINES);
+    	                GL11.glVertex2d(0.0D, 0.0D);
+    	                GL11.glVertex3d(x, y + 1.6F, z);
+    	                GL11.glEnd();
+    	                GL11.glDisable(GL11.GL_BLEND);
+    	                GL11.glEnable(GL11.GL_TEXTURE_2D);
+    	                GL11.glDisable(GL11.GL_LINE_SMOOTH);
+    		            GL11.glEnable(GL11.GL_LIGHTING);
+    	            }
+            }
+            GL11.glEnable(GL11.GL_DEPTH_TEST );
+            GL11.glPopMatrix();
         }
         if (renderEntitiesStartupCounter > 0)
         {
@@ -337,7 +361,7 @@ public class RenderGlobal
         for (int j = 0; j < list.size(); j++)
         {
             Entity entity1 = (Entity)list.get(j);
-            if (!entity1.isInRangeToRenderVec3D(vec3d) || !entity1.ignoreFrustrumCheck && !icamera.isBoundingBoxInFrustum(entity1.boundingBox) || entity1 == mc.renderViewEntity && mc.gameSettings.thirdPersonView == 0 && !mc.renderViewEntity.isPlayerSleeping())
+            if (!entity1.isInRangeToRenderVec3D(vec3d) || !entity1.ignoreFrustumCheck && !icamera.isBoundingBoxInFrustum(entity1.boundingBox) || entity1 == mc.renderViewEntity && mc.gameSettings.thirdPersonView == 0 && !mc.renderViewEntity.isPlayerSleeping())
             {
                 continue;
             }
@@ -1376,7 +1400,7 @@ public class RenderGlobal
         {
             GL11.glEnable(3042 /*GL_BLEND*/);
             GL11.glBlendFunc(770, 771);
-            GL11.glColor4f(194.0F, 0.0F, 204.0F, 1.0F);
+            GL11.glColor4f(0.0F, 0.0F, 0.0F, 0.4F);
             GL11.glLineWidth(2.0F);
             GL11.glDisable(3553 /*GL_TEXTURE_2D*/);
             GL11.glDepthMask(false);
@@ -1396,7 +1420,7 @@ public class RenderGlobal
         }
     }
 
-    private static void drawOutlinedBoundingBox(AxisAlignedBB axisalignedbb)
+    private void drawOutlinedBoundingBox(AxisAlignedBB axisalignedbb)
     {
         Tessellator tessellator = Tessellator.instance;
         tessellator.startDrawing(3);
@@ -1466,7 +1490,7 @@ public class RenderGlobal
         }
     }
 
-    public void markBlockNeedsUpdate(int i, int j, int k)
+    public void markBlockAndNeighborsNeedsUpdate(int i, int j, int k)
     {
         markBlocksForUpdate(i - 1, j - 1, k - 1, i + 1, j + 1, k + 1);
     }
@@ -1819,7 +1843,7 @@ public class RenderGlobal
                 if (k1 > 0)
                 {
                     Block block = Block.blocksList[k1];
-                    mc.sndManager.playSound(block.stepSound.getBreakSound(), (float)j + 0.5F, (float)k + 0.5F, (float)l + 0.5F, (block.stepSound.getVolume() + 1.0F) / 2.0F, block.stepSound.getPitch() * 0.8F);
+                    mc.sndManager.playSound(block.stepSound.stepSoundDir(), (float)j + 0.5F, (float)k + 0.5F, (float)l + 0.5F, (block.stepSound.getVolume() + 1.0F) / 2.0F, block.stepSound.getPitch() * 0.8F);
                 }
                 mc.effectRenderer.addBlockDestroyEffects(j, k, l, i1 & 0xff, i1 >> 8 & 0xff);
                 break;
@@ -1874,26 +1898,5 @@ public class RenderGlobal
                 worldObj.playSoundEffect((double)j + 0.5D, (double)k + 0.5D, (double)l + 0.5D, "mob.ghast.fireball", 1.0F, (random.nextFloat() - random.nextFloat()) * 0.2F + 1.0F);
                 break;
         }
-
     }
-    public static void chestfinder(double d, double d1, double d2) {
-
-    	  GL11.glBlendFunc(770, 771);
-    	  GL11.glEnable(3042 /*GL_BLEND*/);
-    	  GL11.glLineWidth(1.3F); // Line width, you can change this
-    	  GL11.glColor4f(194.0F, 0.0F, 204.0F, 1.0F);  // Line color, you can change this
-    	  GL11.glDisable(GL11.GL_LIGHTING);  // Disables lighting, so it wont affect lines/outlined bounding box
-    	  GL11.glDisable(GL11.GL_TEXTURE_2D);  //
-    	  GL11.glDisable(2929 /*GL_DEPTH_TEST*/);    //Disables checking if there's something between the player and the box/line
-    	  GL11.glDepthMask(false);
-    	  drawOutlinedBoundingBox(new AxisAlignedBB(d, d1 + 0.1, d2, d + 1.0, d1 + 1.0, d2 + 1.0));  //Draws an outlined bounding box of a chest
-    	  GL11.glVertex2d(0D, 0D);
-    	  GL11.glVertex3d(d + 0.5, d1 + 0.5, d2 + 0.5);
-    	  GL11.glEnd();  //end of line rendering
-    	  GL11.glEnable(GL11.GL_LIGHTING);  //Enables lighting after rendering lines
-    	  GL11.glEnable(GL11.GL_TEXTURE_2D);
-    	  GL11.glEnable(2929 /*GL_DEPTH_TEST*/); //Enables checking
-    	  GL11.glDepthMask(true);
-    	  GL11.glDisable(3042 /*GL_BLEND*/);
-    	    }
 }

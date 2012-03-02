@@ -24,7 +24,7 @@ public class ComponentVillageHouse4_Garden extends ComponentVillage
     public static ComponentVillageHouse4_Garden func_35082_a(List list, Random random, int i, int j, int k, int l, int i1)
     {
         StructureBoundingBox structureboundingbox = StructureBoundingBox.getComponentToAddBoundingBox(i, j, k, 0, 0, 0, 5, 6, 5, l);
-        if (StructureComponent.findIntersecting(list, structureboundingbox) != null)
+        if (StructureComponent.getIntersectingStructureComponent(list, structureboundingbox) != null)
         {
             return null;
         }

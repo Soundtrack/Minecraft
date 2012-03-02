@@ -5,7 +5,7 @@ import java.util.Random;
 
 public class ComponentStrongholdCrossing extends ComponentStronghold
 {
-    protected final EnumDoor doorType;
+    protected final EnumDoor field_35044_a;
     private boolean field_35042_b;
     private boolean field_35043_c;
     private boolean field_35040_d;
@@ -15,7 +15,7 @@ public class ComponentStrongholdCrossing extends ComponentStronghold
     {
         super(i);
         coordBaseMode = j;
-        doorType = getRandomDoor(random);
+        field_35044_a = getRandomDoor(random);
         boundingBox = structureboundingbox;
         field_35042_b = random.nextBoolean();
         field_35043_c = random.nextBoolean();
@@ -54,7 +54,7 @@ public class ComponentStrongholdCrossing extends ComponentStronghold
     public static ComponentStrongholdCrossing func_35039_a(List list, Random random, int i, int j, int k, int l, int i1)
     {
         StructureBoundingBox structureboundingbox = StructureBoundingBox.getComponentToAddBoundingBox(i, j, k, -4, -3, 0, 10, 9, 11, l);
-        if (!canStrongholdGoDeeper(structureboundingbox) || StructureComponent.findIntersecting(list, structureboundingbox) != null)
+        if (!canStrongholdGoDeeper(structureboundingbox) || StructureComponent.getIntersectingStructureComponent(list, structureboundingbox) != null)
         {
             return null;
         }
@@ -71,7 +71,7 @@ public class ComponentStrongholdCrossing extends ComponentStronghold
             return false;
         }
         fillWithRandomizedBlocks(world, structureboundingbox, 0, 0, 0, 9, 8, 10, true, random, StructureStrongholdPieces.getStrongholdStones());
-        placeDoor(world, random, structureboundingbox, doorType, 4, 3, 0);
+        placeDoor(world, random, structureboundingbox, field_35044_a, 4, 3, 0);
         if (field_35042_b)
         {
             fillWithBlocks(world, structureboundingbox, 0, 3, 1, 0, 5, 3, 0, 0, false);

@@ -16,10 +16,6 @@ public class TileEntityChestRenderer extends TileEntitySpecialRenderer
     public void func_35376_a(TileEntityChest tileentitychest, double d, double d1, double d2,
             float f)
     {
-    	if(GuiIngame.chestfinder) {
-            RenderGlobal.chestfinder(d, d1, d2);
-    }
-
         int i;
         if (tileentitychest.worldObj == null)
         {

@@ -133,5 +133,4 @@ public class MinecraftApplet extends Applet
         }
         catch (Exception exception) { }
     }
-    
 }

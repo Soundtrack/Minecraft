@@ -59,7 +59,7 @@ public class BlockNetherStalk extends BlockFlower
 
     public void dropBlockAsItemWithChance(World world, int i, int j, int k, int l, float f, int i1)
     {
-        if (world.isRemote)
+        if (world.multiplayerWorld)
         {
             return;
         }

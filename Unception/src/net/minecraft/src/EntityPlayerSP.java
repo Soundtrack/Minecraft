@@ -1,11 +1,8 @@
 package net.minecraft.src;
 
 import java.util.Random;
-
-import org.lwjgl.input.Keyboard;
-
 import net.minecraft.client.Minecraft;
-
+import org.lwjgl.input.Keyboard;
 public class EntityPlayerSP extends EntityPlayer
 {
     public MovementInput movementInput;
@@ -90,7 +87,7 @@ public class EntityPlayerSP extends EntityPlayer
         prevTimeInPortal = timeInPortal;
         if (inPortal)
         {
-            if (!worldObj.isRemote && ridingEntity != null)
+            if (!worldObj.multiplayerWorld && ridingEntity != null)
             {
                 mountEntity(null);
             }
@@ -106,7 +103,7 @@ public class EntityPlayerSP extends EntityPlayer
             if (timeInPortal >= 1.0F)
             {
                 timeInPortal = 1.0F;
-                if (!worldObj.isRemote)
+                if (!worldObj.multiplayerWorld)
                 {
                     timeUntilPortal = 10;
                     mc.sndManager.playSoundFX("portal.travel", 1.0F, rand.nextFloat() * 0.4F + 0.8F);
@@ -219,7 +216,7 @@ public class EntityPlayerSP extends EntityPlayer
 
     public void func_40182_b(int i)
     {
-        if (!worldObj.isRemote)
+        if (!worldObj.multiplayerWorld)
         {
             if (dimension == 1 && i == 1)
             {
@@ -455,65 +452,66 @@ public class EntityPlayerSP extends EntityPlayer
                 motionZ = f;
             }
         }
-        if(GuiIngame.Fly)
+        if(GuiIngame.fly)
         {
-                onGround = false;
-                motionX = 0.0D;
-                motionY = 0.0D;
-                motionZ = 0.0D;
-                if (Keyboard.isKeyDown(57) && mc.inGameHasFocus)
-                {
-                    motionY++;
-                }
-                else if (Keyboard.isKeyDown(42) && mc.inGameHasFocus)
-                {
-                    motionY--;
-                }
-                double d5 = rotationPitch + 90F;
-                double d6 = rotationYaw + 90F;
-                boolean flag4 = Keyboard.isKeyDown(17) && mc.inGameHasFocus;
-                boolean flag5 = Keyboard.isKeyDown(31) && mc.inGameHasFocus;
-                boolean flag6 = Keyboard.isKeyDown(30) && mc.inGameHasFocus;
-                boolean flag7 = Keyboard.isKeyDown(32) && mc.inGameHasFocus;
-                if (flag4)
-                {
-                    if (flag6)
-                    {
-                        d6 -= 45D;
-                    }
-                    else if (flag7)
+        	onGround = false;
+        	motionX = 0.0D;
+        	motionY = 0.0D;
+        	motionZ = 0.0D;
+        	if(Keyboard.isKeyDown(57) && mc.inGameHasFocus)
+        	{
+        		motionY++;
+        	}
+        	if(Keyboard.isKeyDown(42) && mc.inGameHasFocus)
+        	{
+        		motionY--;
+        	}
+        	double d5 = rotationPitch + 90F;
+        	double d6 = rotationYaw + 90F;
+        	boolean flag4 = Keyboard.isKeyDown(17) && mc.inGameHasFocus;
+        	boolean flag5 = Keyboard.isKeyDown(31) && mc.inGameHasFocus;
+        	boolean flag6 = Keyboard.isKeyDown(30) && mc.inGameHasFocus;
+        	boolean flag7 = Keyboard.isKeyDown(32) && mc.inGameHasFocus;
+        	if(flag4)
+        	{
+        		if(flag6)
+        		{
+        			d6 -= 45D;
+        		}else
+                    if(flag7)
                     {
                         d6 += 45D;
                     }
-                }
-                else if (flag5)
+        	}else
+                if(flag5)
                 {
                     d6 += 180D;
-                    if (flag6)
+                    if(flag6)
                     {
                         d6 += 45D;
-                    }
-                    else if (flag7)
+                    }else
+                        if(flag7)
+                        {
+                            d6 -= 45D;
+                        }
+                }else
+                    if(flag6)
                     {
-                        d6 -= 45D;
-                    }
-                }
-                else if (flag6)
-                {
-                    d6 -= 90D;
-                }
-                else if (flag7)
-                {
-                    d6 += 90D;
-                }
-                if (flag4 || flag6 || flag5 || flag7)
-                {
-                    motionX = Math.cos(Math.toRadians(d6));
-                    motionZ = Math.sin(Math.toRadians(d6));
-                }
-            }
-            return false;
-}
+                        d6 -= 90D;
+                    }else
+                        if(flag7)
+                        {
+                            d6 += 90D;
+                        }
+        	if(flag4 || flag6 || flag5 || flag7)
+        	{
+        		motionX = Math.cos(Math.toRadians(d6));
+        		motionZ = Math.sin(Math.toRadians(d6));
+        	}
+        }
+        return false;
+    }
+
     public void setSprinting(boolean flag)
     {
         super.setSprinting(flag);
@@ -529,8 +527,8 @@ public class EntityPlayerSP extends EntityPlayer
 
     public void setXPStats(float f, int i, int j)
     {
-        experience = f;
-        experienceTotal = i;
-        experienceLevel = j;
+        currentXP = f;
+        totalXP = i;
+        playerLevel = j;
     }
 }

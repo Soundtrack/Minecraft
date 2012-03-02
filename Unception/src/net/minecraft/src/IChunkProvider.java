@@ -20,7 +20,7 @@ public interface IChunkProvider
 
     public abstract String makeString();
 
-    public abstract List getPossibleCreatures(EnumCreatureType enumcreaturetype, int i, int j, int k);
+    public abstract List func_40377_a(EnumCreatureType enumcreaturetype, int i, int j, int k);
 
-    public abstract ChunkPosition findClosestStructure(World world, String s, int i, int j, int k);
+    public abstract ChunkPosition func_40376_a(World world, String s, int i, int j, int k);
 }

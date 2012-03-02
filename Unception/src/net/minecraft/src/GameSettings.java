@@ -69,7 +69,7 @@ public class GameSettings
     public float gammaSetting;
     public int guiScale;
     public int particles;
-    public String language;
+    public String field_44018_Q;
 
     public GameSettings(Minecraft minecraft, File file)
     {
@@ -118,7 +118,7 @@ public class GameSettings
         gammaSetting = 0.0F;
         guiScale = 0;
         particles = 0;
-        language = "en_US";
+        field_44018_Q = "en_US";
         mc = minecraft;
         optionsFile = new File(file, "options.txt");
         loadOptions();
@@ -171,7 +171,7 @@ public class GameSettings
         gammaSetting = 0.0F;
         guiScale = 0;
         particles = 0;
-        language = "en_US";
+        field_44018_Q = "en_US";
     }
 
     public String getKeyBindingDescription(int i)
@@ -545,7 +545,7 @@ public class GameSettings
                     }
                     if (as[0].equals("lang") && as.length >= 2)
                     {
-                        language = as[1];
+                        field_44018_Q = as[1];
                     }
                     int i = 0;
                     while (i < keyBindings.length)
@@ -613,7 +613,7 @@ public class GameSettings
             printwriter.println((new StringBuilder()).append("clouds:").append(clouds).toString());
             printwriter.println((new StringBuilder()).append("skin:").append(skin).toString());
             printwriter.println((new StringBuilder()).append("lastServer:").append(lastServer).toString());
-            printwriter.println((new StringBuilder()).append("lang:").append(language).toString());
+            printwriter.println((new StringBuilder()).append("lang:").append(field_44018_Q).toString());
             for (int i = 0; i < keyBindings.length; i++)
             {
                 printwriter.println((new StringBuilder()).append("key_").append(keyBindings[i].keyDescription).append(":").append(keyBindings[i].keyCode).toString());

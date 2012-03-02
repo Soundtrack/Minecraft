@@ -59,7 +59,7 @@ public class EntitySlime extends EntityLiving
         setSlimeSize(nbttagcompound.getInteger("Size") + 1);
     }
 
-    protected String getSlimeParticle()
+    protected String func_40135_ac()
     {
         return "slime";
     }
@@ -71,7 +71,7 @@ public class EntitySlime extends EntityLiving
 
     public void onUpdate()
     {
-        if (!worldObj.isRemote && worldObj.difficultySetting == 0 && getSlimeSize() > 0)
+        if (!worldObj.multiplayerWorld && worldObj.difficultySetting == 0 && getSlimeSize() > 0)
         {
             isDead = true;
         }
@@ -88,7 +88,7 @@ public class EntitySlime extends EntityLiving
                 float f1 = rand.nextFloat() * 0.5F + 0.5F;
                 float f2 = MathHelper.sin(f) * (float)i * 0.5F * f1;
                 float f3 = MathHelper.cos(f) * (float)i * 0.5F * f1;
-                worldObj.spawnParticle(getSlimeParticle(), posX + (double)f2, boundingBox.minY, posZ + (double)f3, 0.0D, 0.0D, 0.0D);
+                worldObj.spawnParticle(func_40135_ac(), posX + (double)f2, boundingBox.minY, posZ + (double)f3, 0.0D, 0.0D, 0.0D);
             }
 
             if (func_40134_ak())
@@ -144,7 +144,7 @@ public class EntitySlime extends EntityLiving
         return rand.nextInt(20) + 10;
     }
 
-    protected EntitySlime createInstance()
+    protected EntitySlime func_40132_ae()
     {
         return new EntitySlime(worldObj);
     }
@@ -152,14 +152,14 @@ public class EntitySlime extends EntityLiving
     public void setEntityDead()
     {
         int i = getSlimeSize();
-        if (!worldObj.isRemote && i > 1 && getEntityHealth() <= 0)
+        if (!worldObj.multiplayerWorld && i > 1 && getEntityHealth() <= 0)
         {
             int j = 2 + rand.nextInt(3);
             for (int k = 0; k < j; k++)
             {
                 float f = (((float)(k % 2) - 0.5F) * (float)i) / 4F;
                 float f1 = (((float)(k / 2) - 0.5F) * (float)i) / 4F;
-                EntitySlime entityslime = createInstance();
+                EntitySlime entityslime = func_40132_ae();
                 entityslime.setSlimeSize(i / 2);
                 entityslime.setLocationAndAngles(posX + (double)f, posY + 0.5D, posZ + (double)f1, rand.nextFloat() * 360F, 0.0F);
                 worldObj.spawnEntityInWorld(entityslime);

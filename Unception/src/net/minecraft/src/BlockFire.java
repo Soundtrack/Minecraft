@@ -87,7 +87,7 @@ public class BlockFire extends Block
             world.setBlockMetadata(i, j, k, l + random.nextInt(3) / 2);
         }
         world.scheduleBlockUpdate(i, j, k, blockID, tickRate());
-        if (!flag && !canNeighborBurn(world, i, j, k))
+        if (!flag && !func_263_h(world, i, j, k))
         {
             if (!world.isBlockNormalCube(i, j - 1, k) || l > 3)
             {
@@ -168,7 +168,7 @@ public class BlockFire extends Block
         }
     }
 
-    private boolean canNeighborBurn(World world, int i, int j, int k)
+    private boolean func_263_h(World world, int i, int j, int k)
     {
         if (canBlockCatchFire(world, i + 1, j, k))
         {
@@ -237,12 +237,12 @@ public class BlockFire extends Block
 
     public boolean canPlaceBlockAt(World world, int i, int j, int k)
     {
-        return world.isBlockNormalCube(i, j - 1, k) || canNeighborBurn(world, i, j, k);
+        return world.isBlockNormalCube(i, j - 1, k) || func_263_h(world, i, j, k);
     }
 
     public void onNeighborBlockChange(World world, int i, int j, int k, int l)
     {
-        if (!world.isBlockNormalCube(i, j - 1, k) && !canNeighborBurn(world, i, j, k))
+        if (!world.isBlockNormalCube(i, j - 1, k) && !func_263_h(world, i, j, k))
         {
             world.setBlockWithNotify(i, j, k, 0);
             return;
@@ -259,7 +259,7 @@ public class BlockFire extends Block
         {
             return;
         }
-        if (!world.isBlockNormalCube(i, j - 1, k) && !canNeighborBurn(world, i, j, k))
+        if (!world.isBlockNormalCube(i, j - 1, k) && !func_263_h(world, i, j, k))
         {
             world.setBlockWithNotify(i, j, k, 0);
             return;

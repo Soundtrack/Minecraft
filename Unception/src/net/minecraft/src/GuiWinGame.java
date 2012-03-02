@@ -42,16 +42,16 @@ public class GuiWinGame extends GuiScreen
 
     private void func_41041_e()
     {
-        if (mc.theWorld.isRemote)
+        if (mc.theWorld.multiplayerWorld)
         {
             EntityClientPlayerMP entityclientplayermp = (EntityClientPlayerMP)mc.thePlayer;
             entityclientplayermp.sendInventoryChanged();
-            entityclientplayermp.sendQueue.addToSendQueue(new Packet9Respawn((byte)entityclientplayermp.dimension, (byte)mc.theWorld.difficultySetting, mc.theWorld.getSeed(), mc.theWorld.getWorldInfo().getTerrainType(), mc.theWorld.worldHeight, 0));
+            entityclientplayermp.sendQueue.addToSendQueue(new Packet9Respawn((byte)entityclientplayermp.dimension, (byte)mc.theWorld.difficultySetting, mc.theWorld.getWorldSeed(), mc.theWorld.getWorldInfo().func_46133_t(), mc.theWorld.worldHeight, 0));
         }
         else
         {
             mc.displayGuiScreen(null);
-            mc.respawn(mc.theWorld.isRemote, 0, true);
+            mc.respawn(mc.theWorld.multiplayerWorld, 0, true);
         }
     }
 
@@ -194,10 +194,10 @@ public class GuiWinGame extends GuiScreen
                 }
                 else
                 {
-                    fontRenderer.fontRandom.setSeed((long)j1 * 0xfca99533L + (long)(updateCounter / 4));
-                    fontRenderer.drawSplitString(s, k + 1, i1 + 1, c, 0xffffff, true);
-                    fontRenderer.fontRandom.setSeed((long)j1 * 0xfca99533L + (long)(updateCounter / 4));
-                    fontRenderer.drawSplitString(s, k, i1, c, 0xffffff, false);
+                    fontRenderer.field_41064_c.setSeed((long)j1 * 0xfca99533L + (long)(updateCounter / 4));
+                    fontRenderer.func_40609_a(s, k + 1, i1 + 1, c, 0xffffff, true);
+                    fontRenderer.field_41064_c.setSeed((long)j1 * 0xfca99533L + (long)(updateCounter / 4));
+                    fontRenderer.func_40609_a(s, k, i1, c, 0xffffff, false);
                 }
             }
             i1 += l1;

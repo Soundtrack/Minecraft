@@ -135,7 +135,7 @@ public class Item
     public static Item cauldron;
     public static Item eyeOfEnder = (new ItemEnderEye(125)).setIconCoord(11, 9).setItemName("eyeOfEnder");
     public static Item speckledMelon;
-    public static Item monsterPlacer = (new ItemMonsterPlacer(127)).setIconCoord(9, 9).setItemName("monsterPlacer");
+    public static Item field_44019_bC = (new ItemMonsterPlacer(127)).setIconCoord(9, 9).setItemName("monsterPlacer");
     public static Item record13 = (new ItemRecord(2000, "13")).setIconCoord(0, 15).setItemName("record");
     public static Item recordCat = (new ItemRecord(2001, "cat")).setIconCoord(1, 15).setItemName("record");
     public static Item recordBlocks = (new ItemRecord(2002, "blocks")).setIconCoord(2, 15).setItemName("record");
@@ -154,7 +154,7 @@ public class Item
     protected boolean bFull3D;
     protected boolean hasSubtypes;
     private Item containerItem;
-    private String potionEffect;
+    private String potionModifier;
     private String itemName;
 
     protected Item(int i)
@@ -164,7 +164,7 @@ public class Item
         bFull3D = false;
         hasSubtypes = false;
         containerItem = null;
-        potionEffect = null;
+        potionModifier = null;
         shiftedIndex = 256 + i;
         if (itemsList[256 + i] != null)
         {
@@ -385,20 +385,20 @@ public class Item
     {
     }
 
-    protected Item setPotionEffect(String s)
+    protected Item setPotionModifier(String s)
     {
-        potionEffect = s;
+        potionModifier = s;
         return this;
     }
 
-    public String getPotionEffect()
+    public String getPotionModifier()
     {
-        return potionEffect;
+        return potionModifier;
     }
 
-    public boolean isPotionIngredient()
+    public boolean isValidBrewingIngredient()
     {
-        return potionEffect != null;
+        return potionModifier != null;
     }
 
     public void addInformation(ItemStack itemstack, List list)
@@ -492,7 +492,7 @@ public class Item
         shovelGold = (new ItemSpade(28, EnumToolMaterial.GOLD)).setIconCoord(4, 5).setItemName("shovelGold");
         pickaxeGold = (new ItemPickaxe(29, EnumToolMaterial.GOLD)).setIconCoord(4, 6).setItemName("pickaxeGold");
         axeGold = (new ItemAxe(30, EnumToolMaterial.GOLD)).setIconCoord(4, 7).setItemName("hatchetGold");
-        gunpowder = (new Item(33)).setIconCoord(8, 2).setItemName("sulphur").setPotionEffect(PotionHelper.gunpowderEffect);
+        gunpowder = (new Item(33)).setIconCoord(8, 2).setItemName("sulphur").setPotionModifier(PotionHelper.gunpowderEffect);
         hoeWood = (new ItemHoe(34, EnumToolMaterial.WOOD)).setIconCoord(0, 8).setItemName("hoeWood");
         hoeStone = (new ItemHoe(35, EnumToolMaterial.STONE)).setIconCoord(1, 8).setItemName("hoeStone");
         hoeSteel = (new ItemHoe(36, EnumToolMaterial.IRON)).setIconCoord(2, 8).setItemName("hoeIron");
@@ -525,26 +525,26 @@ public class Item
         bucketWater = (new ItemBucket(70, Block.waterMoving.blockID)).setIconCoord(11, 4).setItemName("bucketWater").setContainerItem(bucketEmpty);
         bucketLava = (new ItemBucket(71, Block.lavaMoving.blockID)).setIconCoord(12, 4).setItemName("bucketLava").setContainerItem(bucketEmpty);
         doorSteel = (new ItemDoor(74, Material.iron)).setIconCoord(12, 2).setItemName("doorIron");
-        redstone = (new ItemRedstone(75)).setIconCoord(8, 3).setItemName("redstone").setPotionEffect(PotionHelper.redstoneEffect);
+        redstone = (new ItemRedstone(75)).setIconCoord(8, 3).setItemName("redstone").setPotionModifier(PotionHelper.redstoneEffect);
         bucketMilk = (new ItemBucketMilk(79)).setIconCoord(13, 4).setItemName("milk").setContainerItem(bucketEmpty);
         reed = (new ItemReed(82, Block.reed)).setIconCoord(11, 1).setItemName("reeds");
-        lightStoneDust = (new Item(92)).setIconCoord(9, 4).setItemName("yellowDust").setPotionEffect(PotionHelper.glowstoneEffect);
-        sugar = (new Item(97)).setIconCoord(13, 0).setItemName("sugar").setPotionEffect(PotionHelper.sugarEffect);
+        lightStoneDust = (new Item(92)).setIconCoord(9, 4).setItemName("yellowDust").setPotionModifier(PotionHelper.glowstoneEffect);
+        sugar = (new Item(97)).setIconCoord(13, 0).setItemName("sugar").setPotionModifier(PotionHelper.sugarEffect);
         cake = (new ItemReed(98, Block.cake)).setMaxStackSize(1).setIconCoord(13, 1).setItemName("cake");
         redstoneRepeater = (new ItemReed(100, Block.redstoneRepeaterIdle)).setIconCoord(6, 5).setItemName("diode");
         pumpkinSeeds = (new ItemSeeds(105, Block.pumpkinStem.blockID, Block.tilledField.blockID)).setIconCoord(13, 3).setItemName("seeds_pumpkin");
         melonSeeds = (new ItemSeeds(106, Block.melonStem.blockID, Block.tilledField.blockID)).setIconCoord(14, 3).setItemName("seeds_melon");
         chickenRaw = (new ItemFood(109, 2, 0.3F, true)).setPotionEffect(Potion.hunger.id, 30, 0, 0.3F).setIconCoord(9, 7).setItemName("chickenRaw");
         rottenFlesh = (new ItemFood(111, 4, 0.1F, true)).setPotionEffect(Potion.hunger.id, 30, 0, 0.8F).setIconCoord(11, 5).setItemName("rottenFlesh");
-        ghastTear = (new Item(114)).setIconCoord(11, 7).setItemName("ghastTear").setPotionEffect(PotionHelper.ghastTearEffect);
-        netherStalkSeeds = (new ItemSeeds(116, Block.netherStalk.blockID, Block.slowSand.blockID)).setIconCoord(13, 7).setItemName("netherStalkSeeds").setPotionEffect("+4");
-        spiderEye = (new ItemFood(119, 2, 0.8F, false)).setPotionEffect(Potion.poison.id, 5, 0, 1.0F).setIconCoord(11, 8).setItemName("spiderEye").setPotionEffect(PotionHelper.spiderEyeEffect);
-        fermentedSpiderEye = (new Item(120)).setIconCoord(10, 8).setItemName("fermentedSpiderEye").setPotionEffect(PotionHelper.fermentedSpiderEyeEffect);
-        blazePowder = (new Item(121)).setIconCoord(13, 9).setItemName("blazePowder").setPotionEffect(PotionHelper.blazePowderEffect);
-        magmaCream = (new Item(122)).setIconCoord(13, 10).setItemName("magmaCream").setPotionEffect(PotionHelper.magmaCreamEffect);
+        ghastTear = (new Item(114)).setIconCoord(11, 7).setItemName("ghastTear").setPotionModifier(PotionHelper.ghastTearEffect);
+        netherStalkSeeds = (new ItemSeeds(116, Block.netherStalk.blockID, Block.slowSand.blockID)).setIconCoord(13, 7).setItemName("netherStalkSeeds").setPotionModifier("+4");
+        spiderEye = (new ItemFood(119, 2, 0.8F, false)).setPotionEffect(Potion.poison.id, 5, 0, 1.0F).setIconCoord(11, 8).setItemName("spiderEye").setPotionModifier(PotionHelper.spiderEyeEffect);
+        fermentedSpiderEye = (new Item(120)).setIconCoord(10, 8).setItemName("fermentedSpiderEye").setPotionModifier(PotionHelper.fermentedSpiderEyeEffect);
+        blazePowder = (new Item(121)).setIconCoord(13, 9).setItemName("blazePowder").setPotionModifier(PotionHelper.blazePowderEffect);
+        magmaCream = (new Item(122)).setIconCoord(13, 10).setItemName("magmaCream").setPotionModifier(PotionHelper.magmaCreamEffect);
         brewingStand = (new ItemReed(123, Block.brewingStand)).setIconCoord(12, 10).setItemName("brewingStand");
         cauldron = (new ItemReed(124, Block.cauldron)).setIconCoord(12, 9).setItemName("cauldron");
-        speckledMelon = (new Item(126)).setIconCoord(9, 8).setItemName("speckledMelon").setPotionEffect(PotionHelper.speckledMelonEffect);
+        speckledMelon = (new Item(126)).setIconCoord(9, 8).setItemName("speckledMelon").setPotionModifier(PotionHelper.speckledMelonEffect);
         StatList.initStats();
     }
 }

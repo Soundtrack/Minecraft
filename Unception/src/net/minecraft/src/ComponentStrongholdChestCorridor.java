@@ -6,14 +6,14 @@ import java.util.Random;
 public class ComponentStrongholdChestCorridor extends ComponentStronghold
 {
     private static final StructurePieceTreasure field_40013_a[];
-    private final EnumDoor doorType;
+    private final EnumDoor field_40011_b;
     private boolean field_40012_c;
 
     public ComponentStrongholdChestCorridor(int i, Random random, StructureBoundingBox structureboundingbox, int j)
     {
         super(i);
         coordBaseMode = j;
-        doorType = getRandomDoor(random);
+        field_40011_b = getRandomDoor(random);
         boundingBox = structureboundingbox;
     }
 
@@ -25,7 +25,7 @@ public class ComponentStrongholdChestCorridor extends ComponentStronghold
     public static ComponentStrongholdChestCorridor func_40010_a(List list, Random random, int i, int j, int k, int l, int i1)
     {
         StructureBoundingBox structureboundingbox = StructureBoundingBox.getComponentToAddBoundingBox(i, j, k, -1, -1, 0, 5, 5, 7, l);
-        if (!canStrongholdGoDeeper(structureboundingbox) || StructureComponent.findIntersecting(list, structureboundingbox) != null)
+        if (!canStrongholdGoDeeper(structureboundingbox) || StructureComponent.getIntersectingStructureComponent(list, structureboundingbox) != null)
         {
             return null;
         }
@@ -42,7 +42,7 @@ public class ComponentStrongholdChestCorridor extends ComponentStronghold
             return false;
         }
         fillWithRandomizedBlocks(world, structureboundingbox, 0, 0, 0, 4, 4, 6, true, random, StructureStrongholdPieces.getStrongholdStones());
-        placeDoor(world, random, structureboundingbox, doorType, 1, 1, 0);
+        placeDoor(world, random, structureboundingbox, field_40011_b, 1, 1, 0);
         placeDoor(world, random, structureboundingbox, EnumDoor.OPENING, 1, 1, 6);
         fillWithBlocks(world, structureboundingbox, 3, 1, 2, 3, 1, 4, Block.stoneBrick.blockID, Block.stoneBrick.blockID, false);
         placeBlockAtCurrentPosition(world, Block.stairSingle.blockID, 5, 3, 1, 1, structureboundingbox);

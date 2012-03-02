@@ -105,7 +105,7 @@ public abstract class NetHandler
         registerPacket(packet23vehiclespawn);
     }
 
-    public void handleAnimation(Packet18Animation packet18animation)
+    public void handleArmAnimation(Packet18Animation packet18animation)
     {
         registerPacket(packet18animation);
     }
@@ -160,7 +160,7 @@ public abstract class NetHandler
         registerPacket(packet38entitystatus);
     }
 
-    public void handleUpdateHealth(Packet8UpdateHealth packet8updatehealth)
+    public void handleHealth(Packet8UpdateHealth packet8updatehealth)
     {
         registerPacket(packet8updatehealth);
     }
@@ -215,7 +215,7 @@ public abstract class NetHandler
         registerPacket(packet5playerinventory);
     }
 
-    public void handleTransaction(Packet106Transaction packet106transaction)
+    public void handleContainerTransaction(Packet106Transaction packet106transaction)
     {
         registerPacket(packet106transaction);
     }
@@ -225,7 +225,7 @@ public abstract class NetHandler
         registerPacket(packet25entitypainting);
     }
 
-    public void handlePlayNoteBlock(Packet54PlayNoteBlock packet54playnoteblock)
+    public void handleNotePlay(Packet54PlayNoteBlock packet54playnoteblock)
     {
         registerPacket(packet54playnoteblock);
     }
@@ -250,7 +250,7 @@ public abstract class NetHandler
         registerPacket(packet71weather);
     }
 
-    public void handleMapData(Packet131MapData packet131mapdata)
+    public void handleItemData(Packet131MapData packet131mapdata)
     {
         registerPacket(packet131mapdata);
     }
@@ -304,7 +304,7 @@ public abstract class NetHandler
     {
     }
 
-    public void handleCustomPayload(Packet250CustomPayload packet250custompayload)
+    public void func_44028_a(Packet250CustomPayload packet250custompayload)
     {
     }
 }

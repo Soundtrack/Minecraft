@@ -6,7 +6,7 @@ public interface INavigate
 
     public abstract void func_46070_a(EntityLiving entityliving, float f);
 
-    public abstract void onUpdateNavigation();
+    public abstract void func_46069_a();
 
     public abstract boolean func_46072_b();
 }

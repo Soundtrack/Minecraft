@@ -13,7 +13,7 @@ public class BlockSapling extends BlockFlower
 
     public void updateTick(World world, int i, int j, int k, Random random)
     {
-        if (world.isRemote)
+        if (world.multiplayerWorld)
         {
             return;
         }

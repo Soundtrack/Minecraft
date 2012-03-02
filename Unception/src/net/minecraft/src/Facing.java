@@ -2,7 +2,7 @@ package net.minecraft.src;
 
 public class Facing
 {
-    public static final int faceToSide[] =
+    public static final int field_31057_a[] =
     {
         1, 0, 3, 2, 5, 4
     };

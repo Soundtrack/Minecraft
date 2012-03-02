@@ -66,7 +66,7 @@ public class EntityBlaze extends EntityMob
 
     public void onLivingUpdate()
     {
-        if (!worldObj.isRemote)
+        if (!worldObj.multiplayerWorld)
         {
             if (isWet())
             {
@@ -201,7 +201,7 @@ public class EntityBlaze extends EntityMob
         dataWatcher.updateObject(16, Byte.valueOf(byte0));
     }
 
-    protected boolean isValidLightLevel()
+    protected boolean func_40147_Y()
     {
         return true;
     }

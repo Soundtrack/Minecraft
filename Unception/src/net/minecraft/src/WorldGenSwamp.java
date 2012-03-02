@@ -110,19 +110,19 @@ public class WorldGenSwamp extends WorldGenerator
                     }
                     if (random.nextInt(4) == 0 && world.getBlockId(k4 - 1, i2, i5) == 0)
                     {
-                        generateVines(world, k4 - 1, i2, i5, 8);
+                        func_35265_a(world, k4 - 1, i2, i5, 8);
                     }
                     if (random.nextInt(4) == 0 && world.getBlockId(k4 + 1, i2, i5) == 0)
                     {
-                        generateVines(world, k4 + 1, i2, i5, 2);
+                        func_35265_a(world, k4 + 1, i2, i5, 2);
                     }
                     if (random.nextInt(4) == 0 && world.getBlockId(k4, i2, i5 - 1) == 0)
                     {
-                        generateVines(world, k4, i2, i5 - 1, 1);
+                        func_35265_a(world, k4, i2, i5 - 1, 1);
                     }
                     if (random.nextInt(4) == 0 && world.getBlockId(k4, i2, i5 + 1) == 0)
                     {
-                        generateVines(world, k4, i2, i5 + 1, 4);
+                        func_35265_a(world, k4, i2, i5 + 1, 4);
                     }
                 }
             }
@@ -131,7 +131,7 @@ public class WorldGenSwamp extends WorldGenerator
         return true;
     }
 
-    private void generateVines(World world, int i, int j, int k, int l)
+    private void func_35265_a(World world, int i, int j, int k, int l)
     {
         world.setBlockAndMetadataWithNotify(i, j, k, Block.vine.blockID, l);
         for (int i1 = 4; world.getBlockId(i, --j, k) == 0 && i1 > 0; i1--)

@@ -30,7 +30,7 @@ public abstract class StructureComponent
         return componentType;
     }
 
-    public static StructureComponent findIntersecting(List list, StructureBoundingBox structureboundingbox)
+    public static StructureComponent getIntersectingStructureComponent(List list, StructureBoundingBox structureboundingbox)
     {
         for (Iterator iterator = list.iterator(); iterator.hasNext();)
         {
@@ -44,9 +44,9 @@ public abstract class StructureComponent
         return null;
     }
 
-    public ChunkPosition getCenter()
+    public ChunkPosition func_40008_a_()
     {
-        return new ChunkPosition(boundingBox.getCenterX(), boundingBox.getCenterY(), boundingBox.getCenterZ());
+        return new ChunkPosition(boundingBox.func_40597_e(), boundingBox.func_40596_f(), boundingBox.func_40598_g());
     }
 
     protected boolean isLiquidInStructureBoundingBox(World world, StructureBoundingBox structureboundingbox)
@@ -543,7 +543,7 @@ public abstract class StructureComponent
     {
         for (int j = 0; j < i; j++)
         {
-            StructurePieceTreasure structurepiecetreasure = (StructurePieceTreasure)WeightedRandom.getRandomItem(random, astructurepiecetreasure);
+            StructurePieceTreasure structurepiecetreasure = (StructurePieceTreasure)WeightedRandom.chooseOne(random, astructurepiecetreasure);
             int k = structurepiecetreasure.minItemStack + random.nextInt((structurepiecetreasure.maxItemStack - structurepiecetreasure.minItemStack) + 1);
             if (Item.itemsList[structurepiecetreasure.itemID].getItemStackLimit() >= k)
             {

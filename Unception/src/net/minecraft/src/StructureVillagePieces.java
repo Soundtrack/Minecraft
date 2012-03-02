@@ -63,11 +63,11 @@ public class StructureVillagePieces
         }
         else if (class1 == (net.minecraft.src.ComponentVillageChurch.class))
         {
-            obj = ComponentVillageChurch.findValidPlacement(list, random, i, j, k, l, i1);
+            obj = ComponentVillageChurch.func_35097_a(list, random, i, j, k, l, i1);
         }
         else if (class1 == (net.minecraft.src.ComponentVillageHouse1.class))
         {
-            obj = ComponentVillageHouse1.findValidPlacement(list, random, i, j, k, l, i1);
+            obj = ComponentVillageHouse1.func_35095_a(list, random, i, j, k, l, i1);
         }
         else if (class1 == (net.minecraft.src.ComponentVillageWoodHut.class))
         {
@@ -75,15 +75,15 @@ public class StructureVillagePieces
         }
         else if (class1 == (net.minecraft.src.ComponentVillageHall.class))
         {
-            obj = ComponentVillageHall.findValidPlacement(list, random, i, j, k, l, i1);
+            obj = ComponentVillageHall.func_35078_a(list, random, i, j, k, l, i1);
         }
         else if (class1 == (net.minecraft.src.ComponentVillageField.class))
         {
-            obj = ComponentVillageField.findValidPlacement(list, random, i, j, k, l, i1);
+            obj = ComponentVillageField.func_35080_a(list, random, i, j, k, l, i1);
         }
         else if (class1 == (net.minecraft.src.ComponentVillageField2.class))
         {
-            obj = ComponentVillageField2.findValidPlacement(list, random, i, j, k, l, i1);
+            obj = ComponentVillageField2.func_35089_a(list, random, i, j, k, l, i1);
         }
         else if (class1 == (net.minecraft.src.ComponentVillageHouse2.class))
         {
@@ -91,7 +91,7 @@ public class StructureVillagePieces
         }
         else if (class1 == (net.minecraft.src.ComponentVillageHouse3.class))
         {
-            obj = ComponentVillageHouse3.findValidPlacement(list, random, i, j, k, l, i1);
+            obj = ComponentVillageHouse3.func_35101_a(list, random, i, j, k, l, i1);
         }
         return ((ComponentVillage) (obj));
     }
@@ -140,7 +140,7 @@ public class StructureVillagePieces
                 }
             }
 
-            StructureBoundingBox var14 = ComponentVillageTorch.findValidPlacement(var1, var2, var3, var4, var5, var6);
+            StructureBoundingBox var14 = ComponentVillageTorch.func_35099_a(var1, var2, var3, var4, var5, var6);
             if (var14 != null)
             {
                 return new ComponentVillageTorch(var7, var2, var14, var6);
@@ -182,7 +182,7 @@ public class StructureVillagePieces
 
     private static StructureComponent getNextComponentVillagePath(ComponentVillageStartPiece componentvillagestartpiece, List list, Random random, int i, int j, int k, int l, int i1)
     {
-        if (i1 > 3 + componentvillagestartpiece.terrainType)
+        if (i1 > 3 + componentvillagestartpiece.field_35109_b)
         {
             return null;
         }

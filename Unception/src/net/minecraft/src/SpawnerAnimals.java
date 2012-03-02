@@ -198,7 +198,7 @@ public final class SpawnerAnimals
         }
     }
 
-    public static void performWorldGenSpawning(World world, BiomeGenBase biomegenbase, int i, int j, int k, int l, Random random)
+    public static void func_35957_a(World world, BiomeGenBase biomegenbase, int i, int j, int k, int l, Random random)
     {
         List list = biomegenbase.getSpawnableList(EnumCreatureType.creature);
         if (list.isEmpty())
@@ -207,8 +207,8 @@ public final class SpawnerAnimals
         }
         while (random.nextFloat() < biomegenbase.getSpawningChance())
         {
-            SpawnListEntry spawnlistentry = (SpawnListEntry)WeightedRandom.getRandomItem(world.rand, list);
-            int i1 = spawnlistentry.minGroupCount + random.nextInt((1 + spawnlistentry.maxGroupCount) - spawnlistentry.minGroupCount);
+            SpawnListEntry spawnlistentry = (SpawnListEntry)WeightedRandom.func_35733_a(world.rand, list);
+            int i1 = spawnlistentry.field_35591_b + random.nextInt((1 + spawnlistentry.field_35592_c) - spawnlistentry.field_35591_b);
             int j1 = i + random.nextInt(k);
             int k1 = j + random.nextInt(l);
             int l1 = j1;

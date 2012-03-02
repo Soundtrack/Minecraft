@@ -49,11 +49,11 @@ public class World
     private boolean scanningTileEntities;
     protected boolean spawnHostileMobs;
     protected boolean spawnPeacefulMobs;
-    private Set activeChunkSet;
-    private int ambientTickCountdown;
+    private Set positionsToUpdate;
+    private int soundCounter;
     int lightUpdateBlockList[];
     private List entitiesWithinAABBExcludingEntity;
-    public boolean isRemote;
+    public boolean multiplayerWorld;
 
     public WorldChunkManager getWorldChunkManager()
     {
@@ -91,17 +91,17 @@ public class World
         collidingBoundingBoxes = new ArrayList();
         spawnHostileMobs = true;
         spawnPeacefulMobs = true;
-        activeChunkSet = new HashSet();
-        ambientTickCountdown = rand.nextInt(12000);
+        positionsToUpdate = new HashSet();
+        soundCounter = rand.nextInt(12000);
         lightUpdateBlockList = new int[32768];
         entitiesWithinAABBExcludingEntity = new ArrayList();
-        isRemote = false;
+        multiplayerWorld = false;
         saveHandler = isavehandler;
         worldInfo = new WorldInfo(worldsettings, s);
         worldProvider = worldprovider;
         mapStorage = new MapStorage(isavehandler);
         worldprovider.registerWorld(this);
-        chunkProvider = createChunkProvider();
+        chunkProvider = getChunkProvider();
         calculateInitialSkylight();
         calculateInitialWeather();
     }
@@ -137,18 +137,18 @@ public class World
         collidingBoundingBoxes = new ArrayList();
         spawnHostileMobs = true;
         spawnPeacefulMobs = true;
-        activeChunkSet = new HashSet();
-        ambientTickCountdown = rand.nextInt(12000);
+        positionsToUpdate = new HashSet();
+        soundCounter = rand.nextInt(12000);
         lightUpdateBlockList = new int[32768];
         entitiesWithinAABBExcludingEntity = new ArrayList();
-        isRemote = false;
+        multiplayerWorld = false;
         lockTimestamp = world.lockTimestamp;
         saveHandler = world.saveHandler;
         worldInfo = new WorldInfo(world.worldInfo);
         mapStorage = new MapStorage(saveHandler);
         worldProvider = worldprovider;
         worldprovider.registerWorld(this);
-        chunkProvider = createChunkProvider();
+        chunkProvider = getChunkProvider();
         calculateInitialSkylight();
         calculateInitialWeather();
     }
@@ -189,11 +189,11 @@ public class World
         collidingBoundingBoxes = new ArrayList();
         spawnHostileMobs = true;
         spawnPeacefulMobs = true;
-        activeChunkSet = new HashSet();
-        ambientTickCountdown = rand.nextInt(12000);
+        positionsToUpdate = new HashSet();
+        soundCounter = rand.nextInt(12000);
         lightUpdateBlockList = new int[32768];
         entitiesWithinAABBExcludingEntity = new ArrayList();
-        isRemote = false;
+        multiplayerWorld = false;
         saveHandler = isavehandler;
         mapStorage = new MapStorage(isavehandler);
         worldInfo = isavehandler.loadWorldInfo();
@@ -221,35 +221,35 @@ public class World
             worldInfo.setWorldName(s);
         }
         worldProvider.registerWorld(this);
-        chunkProvider = createChunkProvider();
+        chunkProvider = getChunkProvider();
         if (flag)
         {
-            generateSpawnPoint();
+            getInitialSpawnLocation();
         }
         calculateInitialSkylight();
         calculateInitialWeather();
     }
 
-    protected IChunkProvider createChunkProvider()
+    protected IChunkProvider getChunkProvider()
     {
         IChunkLoader ichunkloader = saveHandler.getChunkLoader(worldProvider);
         return new ChunkProvider(this, ichunkloader, worldProvider.getChunkProvider());
     }
 
-    protected void generateSpawnPoint()
+    protected void getInitialSpawnLocation()
     {
         if (!worldProvider.canRespawnHere())
         {
-            worldInfo.setSpawnPosition(0, worldProvider.getAverageGroundLevel(), 0);
+            worldInfo.setSpawn(0, worldProvider.func_46066_g(), 0);
             return;
         }
         findingSpawnPoint = true;
         WorldChunkManager worldchunkmanager = getWorldChunkManager();
         List list = worldchunkmanager.getBiomesToSpawnIn();
-        Random random = new Random(getSeed());
-        ChunkPosition chunkposition = worldchunkmanager.findBiomePosition(0, 0, 256, list, random);
+        Random random = new Random(getWorldSeed());
+        ChunkPosition chunkposition = worldchunkmanager.func_35556_a(0, 0, 256, list, random);
         int i = 0;
-        int j = worldProvider.getAverageGroundLevel();
+        int j = worldProvider.func_46066_g();
         int k = 0;
         if (chunkposition != null)
         {
@@ -271,7 +271,7 @@ public class World
             k += random.nextInt(64) - random.nextInt(64);
         }
         while (++l != 1000);
-        worldInfo.setSpawnPosition(i, j, k);
+        worldInfo.setSpawn(i, j, k);
         findingSpawnPoint = false;
     }
 
@@ -611,7 +611,7 @@ public class World
     {
         for (int l = 0; l < worldAccesses.size(); l++)
         {
-            ((IWorldAccess)worldAccesses.get(l)).markBlockNeedsUpdate(i, j, k);
+            ((IWorldAccess)worldAccesses.get(l)).markBlockAndNeighborsNeedsUpdate(i, j, k);
         }
     }
 
@@ -667,7 +667,7 @@ public class World
 
     private void notifyBlockOfNeighborChange(int i, int j, int k, int l)
     {
-        if (editingBlocks || isRemote)
+        if (editingBlocks || multiplayerWorld)
         {
             return;
         }
@@ -872,7 +872,7 @@ public class World
         chunk.setLightValue(enumskyblock, i & 0xf, j, k & 0xf, l);
         for (int i1 = 0; i1 < worldAccesses.size(); i1++)
         {
-            ((IWorldAccess)worldAccesses.get(i1)).markBlockNeedsUpdate(i, j, k);
+            ((IWorldAccess)worldAccesses.get(i1)).markBlockAndNeighborsNeedsUpdate(i, j, k);
         }
     }
 
@@ -2082,7 +2082,7 @@ public class World
         }
     }
 
-    public void markTileEntityForDespawn(TileEntity tileentity)
+    public void markEntityForDespawn(TileEntity tileentity)
     {
         entityRemoval.add(tileentity);
     }
@@ -2113,7 +2113,7 @@ public class World
         }
     }
 
-    public boolean isBlockNormalCubeDefault(int i, int j, int k, boolean flag)
+    public boolean func_41082_b(int i, int j, int k, boolean flag)
     {
         if (i < 0xfe363c80 || k < 0xfe363c80 || i >= 0x1c9c380 || k >= 0x1c9c380)
         {
@@ -2157,7 +2157,7 @@ public class World
         }
     }
 
-    public void setAllowedSpawnTypes(boolean flag, boolean flag1)
+    public void setAllowedMobSpawns(boolean flag, boolean flag1)
     {
         spawnHostileMobs = flag;
         spawnPeacefulMobs = flag1;
@@ -2204,7 +2204,7 @@ public class World
         Profiler.endStartSection("tickPending");
         tickUpdates(false);
         Profiler.endStartSection("tickTiles");
-        tickBlocksAndAmbiance();
+        updateBlocksAndPlayCaveSounds();
         Profiler.endSection();
     }
 
@@ -2308,7 +2308,7 @@ public class World
         }
     }
 
-    private void clearWeather()
+    private void stopPrecipitation()
     {
         worldInfo.setRainTime(0);
         worldInfo.setIsRaining(false);
@@ -2316,9 +2316,9 @@ public class World
         worldInfo.setIsThundering(false);
     }
 
-    protected void tickBlocksAndAmbiance()
+    protected void updateBlocksAndPlayCaveSounds()
     {
-        activeChunkSet.clear();
+        positionsToUpdate.clear();
         Profiler.startSection("buildList");
         for (int i = 0; i < playerEntities.size(); i++)
         {
@@ -2330,19 +2330,19 @@ public class World
             {
                 for (int i2 = -byte0; i2 <= byte0; i2++)
                 {
-                    activeChunkSet.add(new ChunkCoordIntPair(k1 + l, i2 + i1));
+                    positionsToUpdate.add(new ChunkCoordIntPair(k1 + l, i2 + i1));
                 }
             }
         }
 
-        if (ambientTickCountdown > 0)
+        if (soundCounter > 0)
         {
-            ambientTickCountdown--;
+            soundCounter--;
         }
         int j = 0;
         int k = 0;
         Profiler.endSection();
-        for (Iterator iterator = activeChunkSet.iterator(); iterator.hasNext(); Profiler.endSection())
+        for (Iterator iterator = positionsToUpdate.iterator(); iterator.hasNext(); Profiler.endSection())
         {
             ChunkCoordIntPair chunkcoordintpair = (ChunkCoordIntPair)iterator.next();
             int j1 = chunkcoordintpair.chunkXPos * 16;
@@ -2352,7 +2352,7 @@ public class World
             Profiler.endStartSection("tickChunk");
             chunk.updateSkylight();
             Profiler.endStartSection("moodSound");
-            if (ambientTickCountdown == 0)
+            if (soundCounter == 0)
             {
                 updateLCG = updateLCG * 3 + 0x3c6ef35f;
                 int j2 = updateLCG >> 2;
@@ -2368,7 +2368,7 @@ public class World
                     if (entityplayer1 != null && entityplayer1.getDistanceSq((double)j3 + 0.5D, (double)j5 + 0.5D, (double)j4 + 0.5D) > 4D)
                     {
                         playSoundEffect((double)j3 + 0.5D, (double)j5 + 0.5D, (double)j4 + 0.5D, "ambient.cave.cave", 0.7F, 0.8F + rand.nextFloat() * 0.2F);
-                        ambientTickCountdown = rand.nextInt(12000) + 6000;
+                        soundCounter = rand.nextInt(12000) + 6000;
                     }
                 }
             }
@@ -2822,7 +2822,7 @@ public class World
             int j1 = (j + rand.nextInt(byte0)) - rand.nextInt(byte0);
             int k1 = (k + rand.nextInt(byte0)) - rand.nextInt(byte0);
             int l1 = getBlockId(i1, j1, k1);
-            if (l1 == 0 && rand.nextInt(8) > j1 && worldProvider.getWorldHasNoSky())
+            if (l1 == 0 && rand.nextInt(8) > j1 && worldProvider.func_46064_i())
             {
                 spawnParticle("depthsuspend", (float)i1 + rand.nextFloat(), (float)j1 + rand.nextFloat(), (float)k1 + rand.nextFloat(), 0.0D, 0.0D, 0.0D);
                 continue;
@@ -3190,9 +3190,9 @@ public class World
         worldInfo.setWorldTime(l);
     }
 
-    public long getSeed()
+    public long getWorldSeed()
     {
-        return worldInfo.getSeed();
+        return worldInfo.getRandomSeed();
     }
 
     public long getWorldTime()
@@ -3207,7 +3207,7 @@ public class World
 
     public void setSpawnPoint(ChunkCoordinates chunkcoordinates)
     {
-        worldInfo.setSpawnPosition(chunkcoordinates.posX, chunkcoordinates.posY, chunkcoordinates.posZ);
+        worldInfo.setSpawn(chunkcoordinates.posX, chunkcoordinates.posY, chunkcoordinates.posZ);
     }
 
     public void joinEntityInSurroundings(Entity entity)
@@ -3285,7 +3285,7 @@ public class World
         }
     }
 
-    public IChunkProvider getChunkProvider()
+    public IChunkProvider getIChunkProvider()
     {
         return chunkProvider;
     }
@@ -3347,12 +3347,12 @@ public class World
             }
         }
         while (true);
-        clearWeather();
+        stopPrecipitation();
     }
 
     public boolean isAllPlayersFullyAsleep()
     {
-        if (allPlayersSleeping && !isRemote)
+        if (allPlayersSleeping && !multiplayerWorld)
         {
             for (Iterator iterator = playerEntities.iterator(); iterator.hasNext();)
             {
@@ -3457,7 +3457,7 @@ public class World
 
     public Random setRandomSeed(int i, int j, int k)
     {
-        long l = (long)i * 0x4f9939f508L + (long)j * 0x1ef1565bd5L + getWorldInfo().getSeed() + (long)k;
+        long l = (long)i * 0x4f9939f508L + (long)j * 0x1ef1565bd5L + getWorldInfo().getRandomSeed() + (long)k;
         rand.setSeed(l);
         return rand;
     }
@@ -3473,24 +3473,24 @@ public class World
 
     public SpawnListEntry func_40474_a(EnumCreatureType enumcreaturetype, int i, int j, int k)
     {
-        List list = getChunkProvider().getPossibleCreatures(enumcreaturetype, i, j, k);
+        List list = getIChunkProvider().func_40377_a(enumcreaturetype, i, j, k);
         if (list == null || list.isEmpty())
         {
             return null;
         }
         else
         {
-            return (SpawnListEntry)WeightedRandom.getRandomItem(rand, list);
+            return (SpawnListEntry)WeightedRandom.func_35733_a(rand, list);
         }
     }
 
     public ChunkPosition func_40477_b(String s, int i, int j, int k)
     {
-        return getChunkProvider().findClosestStructure(this, s, i, j, k);
+        return getIChunkProvider().func_40376_a(this, s, i, j, k);
     }
 
     public double func_46068_G()
     {
-        return worldInfo.getTerrainType() != EnumWorldType.FLAT ? 63D : 0.0D;
+        return worldInfo.func_46133_t() != EnumWorldType.FLAT ? 63D : 0.0D;
     }
 }

@@ -4,27 +4,27 @@ import java.util.Random;
 
 public abstract class WorldGenerator
 {
-    private final boolean doBlockNotify;
+    private final boolean field_41061_a;
 
     public WorldGenerator()
     {
-        doBlockNotify = false;
+        field_41061_a = false;
     }
 
     public WorldGenerator(boolean flag)
     {
-        doBlockNotify = flag;
+        field_41061_a = flag;
     }
 
     public abstract boolean generate(World world, Random random, int i, int j, int k);
 
-    public void setScale(double d, double d1, double d2)
+    public void func_517_a(double d, double d1, double d2)
     {
     }
 
-    protected void setBlockAndMetadata(World world, int i, int j, int k, int l, int i1)
+    protected void func_41060_a(World world, int i, int j, int k, int l, int i1)
     {
-        if (doBlockNotify)
+        if (field_41061_a)
         {
             world.setBlockAndMetadataWithNotify(i, j, k, l, i1);
         }

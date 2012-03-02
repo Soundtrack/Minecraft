@@ -11,9 +11,9 @@ class ThreadRunIsoClient extends Thread
 
     public void run()
     {
-        while (CanvasIsomPreview.isRunning(field_1197_a))
+        while (CanvasIsomPreview.func_1271_a(field_1197_a))
         {
-            field_1197_a.render();
+            field_1197_a.func_1265_d();
             try
             {
                 Thread.sleep(1L);

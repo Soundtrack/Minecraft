@@ -39,7 +39,7 @@ public class BlockPistonBase extends Block
                 return blockIndexInTexture;
             }
         }
-        return i != Facing.faceToSide[k] ? 108 : 109;
+        return i != Facing.field_31057_a[k] ? 108 : 109;
     }
 
     public int getRenderType()
@@ -61,7 +61,7 @@ public class BlockPistonBase extends Block
     {
         int l = determineOrientation(world, i, j, k, (EntityPlayer)entityliving);
         world.setBlockMetadataWithNotify(i, j, k, l);
-        if (!world.isRemote && !ignoreUpdates)
+        if (!world.multiplayerWorld && !ignoreUpdates)
         {
             updatePistonState(world, i, j, k);
         }
@@ -69,7 +69,7 @@ public class BlockPistonBase extends Block
 
     public void onNeighborBlockChange(World world, int i, int j, int k, int l)
     {
-        if (!world.isRemote && !ignoreUpdates)
+        if (!world.multiplayerWorld && !ignoreUpdates)
         {
             updatePistonState(world, i, j, k);
         }
@@ -77,7 +77,7 @@ public class BlockPistonBase extends Block
 
     public void onBlockAdded(World world, int i, int j, int k)
     {
-        if (!world.isRemote && world.getBlockTileEntity(i, j, k) == null && !ignoreUpdates)
+        if (!world.multiplayerWorld && world.getBlockTileEntity(i, j, k) == null && !ignoreUpdates)
         {
             updatePistonState(world, i, j, k);
         }
@@ -180,7 +180,7 @@ public class BlockPistonBase extends Block
                 ((TileEntityPiston)tileentity).clearPistonTileEntity();
             }
             world.setBlockAndMetadata(i, j, k, Block.pistonMoving.blockID, j1);
-            world.setBlockTileEntity(i, j, k, BlockPistonMoving.getTileEntity(blockID, j1, j1, false, true));
+            world.setBlockTileEntity(i, j, k, BlockPistonMoving.getNewTileEntity(blockID, j1, j1, false, true));
             if (isSticky)
             {
                 int k1 = i + Facing.offsetsXForSide[j1] * 2;
@@ -210,7 +210,7 @@ public class BlockPistonBase extends Block
                     j += Facing.offsetsYForSide[j1];
                     k += Facing.offsetsZForSide[j1];
                     world.setBlockAndMetadata(i, j, k, Block.pistonMoving.blockID, k2);
-                    world.setBlockTileEntity(i, j, k, BlockPistonMoving.getTileEntity(j2, k2, j1, false, false));
+                    world.setBlockTileEntity(i, j, k, BlockPistonMoving.getNewTileEntity(j2, k2, j1, false, false));
                     ignoreUpdates = false;
                     world.setBlockWithNotify(k1, l1, i2, 0);
                     ignoreUpdates = true;
@@ -452,12 +452,12 @@ public class BlockPistonBase extends Block
             if (i3 == blockID && i2 == i && k2 == j && l2 == k)
             {
                 world.setBlockAndMetadata(i1, j1, k1, Block.pistonMoving.blockID, l | (isSticky ? 8 : 0));
-                world.setBlockTileEntity(i1, j1, k1, BlockPistonMoving.getTileEntity(Block.pistonExtension.blockID, l | (isSticky ? 8 : 0), l, true, false));
+                world.setBlockTileEntity(i1, j1, k1, BlockPistonMoving.getNewTileEntity(Block.pistonExtension.blockID, l | (isSticky ? 8 : 0), l, true, false));
             }
             else
             {
                 world.setBlockAndMetadata(i1, j1, k1, Block.pistonMoving.blockID, j3);
-                world.setBlockTileEntity(i1, j1, k1, BlockPistonMoving.getTileEntity(i3, j3, l, true, false));
+                world.setBlockTileEntity(i1, j1, k1, BlockPistonMoving.getNewTileEntity(i3, j3, l, true, false));
             }
             i1 = i2;
             j1 = k2;

@@ -62,7 +62,7 @@ public class ItemReed extends Item
                     Block.blocksList[spawnID].onBlockPlaced(world, i, j, k, l);
                     Block.blocksList[spawnID].onBlockPlacedBy(world, i, j, k, entityplayer);
                 }
-                world.playSoundEffect((float)i + 0.5F, (float)j + 0.5F, (float)k + 0.5F, block.stepSound.getStepSound(), (block.stepSound.getVolume() + 1.0F) / 2.0F, block.stepSound.getPitch() * 0.8F);
+                world.playSoundEffect((float)i + 0.5F, (float)j + 0.5F, (float)k + 0.5F, block.stepSound.stepSoundDir2(), (block.stepSound.getVolume() + 1.0F) / 2.0F, block.stepSound.getPitch() * 0.8F);
                 itemstack.stackSize--;
             }
         }

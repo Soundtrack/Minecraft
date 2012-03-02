@@ -19,9 +19,9 @@ public class BiomeCacheBlock
         biomes = new BiomeGenBase[256];
         xPosition = i;
         zPosition = j;
-        BiomeCache.getChunkManager(biomecache).getTemperatures(temperatureValues, i << 4, j << 4, 16, 16);
-        BiomeCache.getChunkManager(biomecache).getRainfall(rainfallValues, i << 4, j << 4, 16, 16);
-        BiomeCache.getChunkManager(biomecache).getBiomeGenAt(biomes, i << 4, j << 4, 16, 16, false);
+        BiomeCache.getWorldChunkManager(biomecache).getTemperatures(temperatureValues, i << 4, j << 4, 16, 16);
+        BiomeCache.getWorldChunkManager(biomecache).getRainfall(rainfallValues, i << 4, j << 4, 16, 16);
+        BiomeCache.getWorldChunkManager(biomecache).getBiomeGenAt(biomes, i << 4, j << 4, 16, 16, false);
     }
 
     public BiomeGenBase getBiomeGenAt(int i, int j)

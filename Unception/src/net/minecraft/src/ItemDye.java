@@ -45,7 +45,7 @@ public class ItemDye extends Item
             int i1 = world.getBlockId(i, j, k);
             if (i1 == Block.sapling.blockID)
             {
-                if (!world.isRemote)
+                if (!world.multiplayerWorld)
                 {
                     ((BlockSapling)Block.sapling).growTree(world, i, j, k, world.rand);
                     itemstack.stackSize--;
@@ -54,7 +54,7 @@ public class ItemDye extends Item
             }
             if (i1 == Block.mushroomBrown.blockID || i1 == Block.mushroomRed.blockID)
             {
-                if (!world.isRemote && ((BlockMushroom)Block.blocksList[i1]).fertilizeMushroom(world, i, j, k, world.rand))
+                if (!world.multiplayerWorld && ((BlockMushroom)Block.blocksList[i1]).fertilizeMushroom(world, i, j, k, world.rand))
                 {
                     itemstack.stackSize--;
                 }
@@ -62,7 +62,7 @@ public class ItemDye extends Item
             }
             if (i1 == Block.melonStem.blockID || i1 == Block.pumpkinStem.blockID)
             {
-                if (!world.isRemote)
+                if (!world.multiplayerWorld)
                 {
                     ((BlockStem)Block.blocksList[i1]).fertilizeStem(world, i, j, k);
                     itemstack.stackSize--;
@@ -71,7 +71,7 @@ public class ItemDye extends Item
             }
             if (i1 == Block.crops.blockID)
             {
-                if (!world.isRemote)
+                if (!world.multiplayerWorld)
                 {
                     ((BlockCrops)Block.crops).fertilize(world, i, j, k);
                     itemstack.stackSize--;
@@ -80,7 +80,7 @@ public class ItemDye extends Item
             }
             if (i1 == Block.grass.blockID)
             {
-                if (!world.isRemote)
+                if (!world.multiplayerWorld)
                 {
                     itemstack.stackSize--;
                     label0:

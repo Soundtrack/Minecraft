@@ -45,7 +45,7 @@ public class ModelChicken extends ModelBase
     public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5)
     {
         setRotationAngles(f, f1, f2, f3, f4, f5);
-        if (isChild)
+        if (field_40301_k)
         {
             float f6 = 2.0F;
             GL11.glPushMatrix();

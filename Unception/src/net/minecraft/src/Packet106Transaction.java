@@ -21,7 +21,7 @@ public class Packet106Transaction extends Packet
 
     public void processPacket(NetHandler nethandler)
     {
-        nethandler.handleTransaction(this);
+        nethandler.handleContainerTransaction(this);
     }
 
     public void readPacketData(DataInputStream datainputstream)

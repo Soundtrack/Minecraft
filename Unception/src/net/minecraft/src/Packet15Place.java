@@ -30,7 +30,7 @@ public class Packet15Place extends Packet
         yPosition = datainputstream.read();
         zPosition = datainputstream.readInt();
         direction = datainputstream.read();
-        itemStack = readItemStack(datainputstream);
+        itemStack = func_40187_b(datainputstream);
     }
 
     public void writePacketData(DataOutputStream dataoutputstream)

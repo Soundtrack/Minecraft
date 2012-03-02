@@ -5,12 +5,12 @@ public class FoodStats
     private int foodLevel;
     private float foodSaturationLevel;
     private float foodExhaustionLevel;
-    private int foodTimer;
+    private int foodTickTimer;
     private int prevFoodLevel;
 
     public FoodStats()
     {
-        foodTimer = 0;
+        foodTickTimer = 0;
         foodLevel = 20;
         prevFoodLevel = 20;
         foodSaturationLevel = 5F;
@@ -22,7 +22,7 @@ public class FoodStats
         foodSaturationLevel = Math.min(foodSaturationLevel + (float)i * f * 2.0F, foodLevel);
     }
 
-    public void addStats(ItemFood itemfood)
+    public void addStatsFrom(ItemFood itemfood)
     {
         addStats(itemfood.getHealAmount(), itemfood.getSaturationModifier());
     }
@@ -45,28 +45,28 @@ public class FoodStats
         }
         if (foodLevel >= 18 && entityplayer.shouldHeal())
         {
-            foodTimer++;
-            if (foodTimer >= 80)
+            foodTickTimer++;
+            if (foodTickTimer >= 80)
             {
                 entityplayer.heal(1);
-                foodTimer = 0;
+                foodTickTimer = 0;
             }
         }
         else if (foodLevel <= 0)
         {
-            foodTimer++;
-            if (foodTimer >= 80)
+            foodTickTimer++;
+            if (foodTickTimer >= 80)
             {
                 if (entityplayer.getEntityHealth() > 10 || i >= 3 || entityplayer.getEntityHealth() > 1 && i >= 2)
                 {
                     entityplayer.attackEntityFrom(DamageSource.starve, 1);
                 }
-                foodTimer = 0;
+                foodTickTimer = 0;
             }
         }
         else
         {
-            foodTimer = 0;
+            foodTickTimer = 0;
         }
     }
 
@@ -75,7 +75,7 @@ public class FoodStats
         if (nbttagcompound.hasKey("foodLevel"))
         {
             foodLevel = nbttagcompound.getInteger("foodLevel");
-            foodTimer = nbttagcompound.getInteger("foodTickTimer");
+            foodTickTimer = nbttagcompound.getInteger("foodTickTimer");
             foodSaturationLevel = nbttagcompound.getFloat("foodSaturationLevel");
             foodExhaustionLevel = nbttagcompound.getFloat("foodExhaustionLevel");
         }
@@ -84,7 +84,7 @@ public class FoodStats
     public void writeStatsToNBT(NBTTagCompound nbttagcompound)
     {
         nbttagcompound.setInteger("foodLevel", foodLevel);
-        nbttagcompound.setInteger("foodTickTimer", foodTimer);
+        nbttagcompound.setInteger("foodTickTimer", foodTickTimer);
         nbttagcompound.setFloat("foodSaturationLevel", foodSaturationLevel);
         nbttagcompound.setFloat("foodExhaustionLevel", foodExhaustionLevel);
     }
@@ -109,7 +109,7 @@ public class FoodStats
         foodExhaustionLevel = Math.min(foodExhaustionLevel + f, 40F);
     }
 
-    public float getSaturationLevel()
+    public float getFoodSaturationLevel()
     {
         return foodSaturationLevel;
     }

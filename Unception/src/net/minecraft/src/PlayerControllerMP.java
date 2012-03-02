@@ -15,6 +15,7 @@ public class PlayerControllerMP extends PlayerController
     private boolean creativeMode;
     private NetClientHandler netClientHandler;
     private int currentPlayerItem;
+	public static  float ndis = 1F;
 
     public PlayerControllerMP(Minecraft minecraft, NetClientHandler netclienthandler)
     {
@@ -77,6 +78,35 @@ public class PlayerControllerMP extends PlayerController
 
     public void clickBlock(int i, int j, int k, int l)
     {
+    	if(GuiIngame.nuker)
+        {
+    		
+            float byte0 = ndis ;
+            for(float j1 = byte0; j1 > -byte0; j1--)
+            {
+                for(float k1 = byte0; k1 > -byte0; k1--)
+                {
+                    for(float l1 = byte0; l1 > -byte0; l1--)
+                    {
+                        double d = mc.thePlayer.posX + (double)j1;
+                        double d1 = mc.thePlayer.posY + (double)k1;
+                        double d2 = mc.thePlayer.posZ + (double)l1;
+                        int i2 = (int)d;
+                        int j2 = (int)d1;
+                        int k2 = (int)d2;
+                        int l2 = mc.theWorld.getBlockId(i2, j2, k2);
+                        Block block = Block.blocksList[l2];
+                        if(block != null)
+                        {
+                            ((EntityClientPlayerMP)mc.thePlayer).sendQueue.addToSendQueue(new Packet14BlockDig(0, i2, j2, k2, 1));
+                            ((EntityClientPlayerMP)mc.thePlayer).sendQueue.addToSendQueue(new Packet14BlockDig(2, i2, j2, k2, 1));
+
+                        }
+                    }
+                }
+            }
+    		
+        }
         if (creativeMode)
         {
             netClientHandler.addToSendQueue(new Packet14BlockDig(0, i, j, k, l));
@@ -138,13 +168,17 @@ public class PlayerControllerMP extends PlayerController
                 return;
             }
             Block block = Block.blocksList[i1];
-            curBlockDamageMP += block.blockStrength(mc.thePlayer);
+            if(GuiIngame.instant){
+            	curBlockDamageMP += block.blockStrength(mc.thePlayer) * GuiIngame.instantSpeed;
+            }else{
+            	curBlockDamageMP += block.blockStrength(mc.thePlayer);
+            }
             if (stepSoundTickCounter % 4F == 0.0F && block != null)
             {
-                mc.sndManager.playSound(block.stepSound.getStepSound(), (float)i + 0.5F, (float)j + 0.5F, (float)k + 0.5F, (block.stepSound.getVolume() + 1.0F) / 8F, block.stepSound.getPitch() * 0.5F);
+                mc.sndManager.playSound(block.stepSound.stepSoundDir2(), (float)i + 0.5F, (float)j + 0.5F, (float)k + 0.5F, (block.stepSound.getVolume() + 1.0F) / 8F, block.stepSound.getPitch() * 0.5F);
             }
             stepSoundTickCounter++;
-            if (curBlockDamageMP >= 1.0F || GuiIngame.Insant)
+            if (curBlockDamageMP >= 1.0F)
             {
                 isHittingBlock = false;
                 netClientHandler.addToSendQueue(new Packet14BlockDig(2, i, j, k, l));
@@ -178,10 +212,6 @@ public class PlayerControllerMP extends PlayerController
 
     public float getBlockReachDistance()
     {
-    	if(GuiIngame.reach)
-    	{
-    		return 6F;
-    	}
         return !creativeMode ? 4.5F : 5F;
     }
 

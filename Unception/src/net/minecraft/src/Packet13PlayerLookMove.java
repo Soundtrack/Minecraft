@@ -18,10 +18,7 @@ public class Packet13PlayerLookMove extends Packet10Flying
         zPosition = d3;
         yaw = f;
         pitch = f1;
-        if(GuiIngame.nofall)
-        {
-        onGround = true;
-        }
+        onGround = flag;
         rotating = true;
         moving = true;
     }

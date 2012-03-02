@@ -39,14 +39,14 @@ public class EntityFishHook extends Entity
         ticksCatchable = 0;
         bobber = null;
         setSize(0.25F, 0.25F);
-        ignoreFrustrumCheck = true;
+        ignoreFrustumCheck = true;
     }
 
     public EntityFishHook(World world, double d, double d1, double d2)
     {
         this(world);
         setPosition(d, d1, d2);
-        ignoreFrustrumCheck = true;
+        ignoreFrustumCheck = true;
     }
 
     public EntityFishHook(World world, EntityPlayer entityplayer)
@@ -61,7 +61,7 @@ public class EntityFishHook extends Entity
         ticksInAir = 0;
         ticksCatchable = 0;
         bobber = null;
-        ignoreFrustrumCheck = true;
+        ignoreFrustumCheck = true;
         angler = entityplayer;
         angler.fishEntity = this;
         setSize(0.25F, 0.25F);
@@ -150,7 +150,7 @@ public class EntityFishHook extends Entity
             setRotation(rotationYaw, rotationPitch);
             return;
         }
-        if (!worldObj.isRemote)
+        if (!worldObj.multiplayerWorld)
         {
             ItemStack itemstack = angler.getCurrentEquippedItem();
             if (angler.isDead || !angler.isEntityAlive() || itemstack == null || itemstack.getItem() != Item.fishingRod || getDistanceSqToEntity(angler) > 1024D)

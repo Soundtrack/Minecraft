@@ -41,7 +41,7 @@ public class AxisAlignedBB
         return ((AxisAlignedBB)boundingBoxes.get(numBoundingBoxesInUse++)).setBounds(d, d1, d2, d3, d4, d5);
     }
 
-    AxisAlignedBB(double d, double d1, double d2, double d3, double d4, double d5)
+    private AxisAlignedBB(double d, double d1, double d2, double d3, double d4, double d5)
     {
         minX = d;
         minY = d1;

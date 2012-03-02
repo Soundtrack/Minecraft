@@ -7,7 +7,7 @@ public abstract class ModelBase
     public float onGround;
     public boolean isRiding;
     public List boxList;
-    public boolean isChild;
+    public boolean field_40301_k;
     private Map modelTextureMap;
     public int textureWidth;
     public int textureHeight;
@@ -16,7 +16,7 @@ public abstract class ModelBase
     {
         isRiding = false;
         boxList = new ArrayList();
-        isChild = true;
+        field_40301_k = true;
         modelTextureMap = new HashMap();
         textureWidth = 64;
         textureHeight = 32;
@@ -39,7 +39,7 @@ public abstract class ModelBase
         modelTextureMap.put(s, new TextureOffset(i, j));
     }
 
-    public TextureOffset getTextureOffset(String s)
+    public TextureOffset func_40297_a(String s)
     {
         return (TextureOffset)modelTextureMap.get(s);
     }

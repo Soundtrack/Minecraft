@@ -35,9 +35,9 @@ public class ThreadedChunkLoader
                     {
                         break;
                     }
-                    if (((ThreadedChunkLoaderPending)pendingChunkList.get(k)).chunkPosition.equals(chunkcoordintpair))
+                    if (((ThreadedChunkLoaderPending)pendingChunkList.get(k)).field_40739_a.equals(chunkcoordintpair))
                     {
-                        nbttagcompound = ((ThreadedChunkLoaderPending)pendingChunkList.get(k)).chunkData;
+                        nbttagcompound = ((ThreadedChunkLoaderPending)pendingChunkList.get(k)).field_40738_b;
                         break;
                     }
                     k++;
@@ -104,7 +104,7 @@ public class ThreadedChunkLoader
             {
                 for (int i = 0; i < pendingChunkList.size(); i++)
                 {
-                    if (((ThreadedChunkLoaderPending)pendingChunkList.get(i)).chunkPosition.equals(chunkcoordintpair))
+                    if (((ThreadedChunkLoaderPending)pendingChunkList.get(i)).field_40739_a.equals(chunkcoordintpair))
                     {
                         pendingChunkList.set(i, new ThreadedChunkLoaderPending(chunkcoordintpair, nbttagcompound));
                         return;
@@ -126,7 +126,7 @@ public class ThreadedChunkLoader
             if (pendingChunkList.size() > 0)
             {
                 threadedchunkloaderpending = (ThreadedChunkLoaderPending)pendingChunkList.remove(0);
-                pendingChunkCoords.remove(threadedchunkloaderpending.chunkPosition);
+                pendingChunkCoords.remove(threadedchunkloaderpending.field_40739_a);
             }
             else
             {
@@ -150,8 +150,8 @@ public class ThreadedChunkLoader
     public void writeChunk(ThreadedChunkLoaderPending threadedchunkloaderpending)
     throws IOException
     {
-        DataOutputStream dataoutputstream = RegionFileCache.getChunkOutputStream(chunkSaveLocation, threadedchunkloaderpending.chunkPosition.chunkXPos, threadedchunkloaderpending.chunkPosition.chunkZPos);
-        CompressedStreamTools.writeTo(threadedchunkloaderpending.chunkData, dataoutputstream);
+        DataOutputStream dataoutputstream = RegionFileCache.getChunkOutputStream(chunkSaveLocation, threadedchunkloaderpending.field_40739_a.chunkXPos, threadedchunkloaderpending.field_40739_a.chunkZPos);
+        CompressedStreamTools.writeTo(threadedchunkloaderpending.field_40738_b, dataoutputstream);
         dataoutputstream.close();
     }
 
@@ -159,7 +159,7 @@ public class ThreadedChunkLoader
     {
     }
 
-    public void chunkTick()
+    public void func_814_a()
     {
     }
 

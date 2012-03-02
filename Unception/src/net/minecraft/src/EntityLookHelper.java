@@ -2,32 +2,32 @@ package net.minecraft.src;
 
 public class EntityLookHelper
 {
-    private EntityLiving entity;
+    private EntityLiving field_46151_a;
     private float field_46149_b;
     private float field_46150_c;
     private boolean field_46147_d;
-    private double posX;
-    private double posY;
-    private double posZ;
+    private double field_46148_e;
+    private double field_46145_f;
+    private double field_46146_g;
 
     public EntityLookHelper(EntityLiving entityliving)
     {
         field_46147_d = false;
-        entity = entityliving;
+        field_46151_a = entityliving;
     }
 
     public void func_46141_a(Entity entity, float f, float f1)
     {
-        posX = entity.posX;
+        field_46148_e = entity.posX;
         if (entity instanceof EntityLiving)
         {
-            posY = entity.posY + (double)((EntityLiving)entity).getEyeHeight();
+            field_46145_f = entity.posY + (double)((EntityLiving)entity).getEyeHeight();
         }
         else
         {
-            posY = (entity.boundingBox.minY + entity.boundingBox.maxY) / 2D;
+            field_46145_f = (entity.boundingBox.minY + entity.boundingBox.maxY) / 2D;
         }
-        posZ = entity.posZ;
+        field_46146_g = entity.posZ;
         field_46149_b = f;
         field_46150_c = f1;
         field_46147_d = true;
@@ -36,9 +36,9 @@ public class EntityLookHelper
     public void func_46143_a(double d, double d1, double d2, float f,
             float f1)
     {
-        posX = d;
-        posY = d1;
-        posZ = d2;
+        field_46148_e = d;
+        field_46145_f = d1;
+        field_46146_g = d2;
         field_46149_b = f;
         field_46150_c = f1;
         field_46147_d = true;
@@ -46,7 +46,7 @@ public class EntityLookHelper
 
     public void func_46142_a()
     {
-        entity.rotationPitch = 0.0F;
+        field_46151_a.rotationPitch = 0.0F;
         if (!field_46147_d)
         {
             return;
@@ -54,14 +54,14 @@ public class EntityLookHelper
         else
         {
             field_46147_d = false;
-            double d = posX - entity.posX;
-            double d1 = posY - (entity.posY + (double)entity.getEyeHeight());
-            double d2 = posZ - entity.posZ;
+            double d = field_46148_e - field_46151_a.posX;
+            double d1 = field_46145_f - (field_46151_a.posY + (double)field_46151_a.getEyeHeight());
+            double d2 = field_46146_g - field_46151_a.posZ;
             double d3 = MathHelper.sqrt_double(d * d + d2 * d2);
             float f = (float)((Math.atan2(d2, d) * 180D) / 3.1415927410125732D) - 90F;
             float f1 = (float)(-((Math.atan2(d1, d3) * 180D) / 3.1415927410125732D));
-            entity.rotationPitch = func_46144_a(entity.rotationPitch, f1, field_46150_c);
-            entity.rotationYaw = func_46144_a(entity.rotationYaw, f, field_46149_b);
+            field_46151_a.rotationPitch = func_46144_a(field_46151_a.rotationPitch, f1, field_46150_c);
+            field_46151_a.rotationYaw = func_46144_a(field_46151_a.rotationYaw, f, field_46149_b);
             return;
         }
     }

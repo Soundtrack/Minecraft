@@ -75,12 +75,12 @@ public class StructureBoundingBox
         return maxX >= structureboundingbox.minX && minX <= structureboundingbox.maxX && maxZ >= structureboundingbox.minZ && minZ <= structureboundingbox.maxZ && maxY >= structureboundingbox.minY && minY <= structureboundingbox.maxY;
     }
 
-    public boolean intersectsWith(int i, int j, int k, int l)
+    public boolean isInsideStructureBB(int i, int j, int k, int l)
     {
         return maxX >= i && minX <= k && maxZ >= j && minZ <= l;
     }
 
-    public void expandTo(StructureBoundingBox structureboundingbox)
+    public void resizeBoundingBoxTo(StructureBoundingBox structureboundingbox)
     {
         minX = Math.min(minX, structureboundingbox.minX);
         minY = Math.min(minY, structureboundingbox.minY);
@@ -120,17 +120,17 @@ public class StructureBoundingBox
         return (maxZ - minZ) + 1;
     }
 
-    public int getCenterX()
+    public int func_40597_e()
     {
         return minX + ((maxX - minX) + 1) / 2;
     }
 
-    public int getCenterY()
+    public int func_40596_f()
     {
         return minY + ((maxY - minY) + 1) / 2;
     }
 
-    public int getCenterZ()
+    public int func_40598_g()
     {
         return minZ + ((maxZ - minZ) + 1) / 2;
     }

@@ -75,7 +75,7 @@ public class WorldGenTaiga2 extends WorldGenerator
                     int l5 = k5 - k;
                     if ((Math.abs(j5) != k2 || Math.abs(l5) != k2 || k2 <= 0) && !Block.opaqueCubeLookup[world.getBlockId(l4, j4, k5)])
                     {
-                        setBlockAndMetadata(world, l4, j4, k5, Block.leaves.blockID, 1);
+                        func_41060_a(world, l4, j4, k5, Block.leaves.blockID, 1);
                     }
                 }
             }
@@ -101,7 +101,7 @@ public class WorldGenTaiga2 extends WorldGenerator
             int i5 = world.getBlockId(i, j + k4, k);
             if (i5 == 0 || i5 == Block.leaves.blockID)
             {
-                setBlockAndMetadata(world, i, j + k4, k, Block.wood.blockID, 1);
+                func_41060_a(world, i, j + k4, k, Block.wood.blockID, 1);
             }
         }
 

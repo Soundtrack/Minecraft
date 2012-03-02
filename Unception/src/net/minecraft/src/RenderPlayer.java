@@ -45,7 +45,91 @@ public class RenderPlayer extends RenderLiving
         }
         return -1;
     }
+    private void renderPlayerBoundingBox(EntityPlayer entityplayer, double d, double d1, double d2, int i) {
+		float f1 = 1.6F;
+		float f2 = 0.018F * f1 * 2.0F;
+		GL11.glPushMatrix();
+		GL11.glTranslatef((float)d + 0.0F, (float)d1 + 2.3F, (float)d2);
+		GL11.glNormal3f(0.0F, 1.0F, 0.0F);
+		GL11.glScalef(-f2, -f2, f2);
+		GL11.glDisable(2896 /*GL_LIGHTING*/);
+		GL11.glDepthMask(false);
+		GL11.glDisable(2929 /*GL_DEPTH_TEST*/);
+		GL11.glEnable(3042 /*GL_BLEND*/);
+		GL11.glBlendFunc(770, 771);
+		byte byte0 = 30;
+		GL11.glDisable(3553 /*GL_TEXTURE_2D*/);
+		GL11.glColor4f(1F, 0F, 0F, 1F);
 
+		GL11.glBegin(2);
+		GL11.glVertex3d(-10D, 5D, 10D);
+		GL11.glVertex3d(10D, 5D, 10D);
+		GL11.glEnd();
+
+		GL11.glBegin(2);
+		GL11.glVertex3d(-10D, 5D, -10D);
+		GL11.glVertex3d(10D, 5D, -10D);
+		GL11.glEnd();
+
+		GL11.glBegin(2);
+		GL11.glVertex3d(10D, 5D, -10D);
+		GL11.glVertex3d(10D, 5D, 10D);
+		GL11.glEnd();
+
+		GL11.glBegin(2);
+		GL11.glVertex3d(-10D, 5D, -10D);
+		GL11.glVertex3d(-10D, 5D, 10D);
+		GL11.glEnd();
+
+		GL11.glBegin(2);
+		GL11.glVertex3d(-10D, 40D, 10D);
+		GL11.glVertex3d(10D, 40D, 10D);
+		GL11.glEnd();
+
+		GL11.glBegin(2);
+		GL11.glVertex3d(-10D, 40D, -10D);
+		GL11.glVertex3d(10D, 40D, -10D);
+		GL11.glEnd();
+
+		GL11.glBegin(2);
+		GL11.glVertex3d(10D, 40D, -10D);
+		GL11.glVertex3d(10D, 40D, 10D);
+		GL11.glEnd();
+
+		GL11.glBegin(2);
+		GL11.glVertex3d(-10D, 40D, -10D);
+		GL11.glVertex3d(-10D, 40D, 10D);
+		GL11.glEnd();
+
+		GL11.glBegin(2);
+		GL11.glVertex3d(10D, 5D, 10D);
+		GL11.glVertex3d(10D, 40D, 10D);
+		GL11.glEnd();
+
+		GL11.glBegin(2);
+		GL11.glVertex3d(10D, 5D, -10D);
+		GL11.glVertex3d(10D, 40D, -10D);
+		GL11.glEnd();
+
+		GL11.glBegin(2);
+		GL11.glVertex3d(-10D, 5D, 10D);
+		GL11.glVertex3d(-10D, 40D, 10D);
+		GL11.glEnd();
+
+		GL11.glBegin(2);
+		GL11.glVertex3d(-10D, 5D, -10D);
+		GL11.glVertex3d(-10D, 40D, -10D);
+		GL11.glEnd();
+
+		GL11.glEnable(3553 /*GL_TEXTURE_2D*/);
+		GL11.glEnable(2929 /*GL_DEPTH_TEST*/);
+		GL11.glDepthMask(true);
+		GL11.glEnable(2896 /*GL_LIGHTING*/);
+		GL11.glDisable(3042 /*GL_BLEND*/);
+		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+		GL11.glPopMatrix();
+		return;
+	}
     public void renderPlayer(EntityPlayer entityplayer, double d, double d1, double d2,
             float f, float f1)
     {
@@ -73,6 +157,28 @@ public class RenderPlayer extends RenderLiving
         modelArmorChestplate.aimedBow = modelArmor.aimedBow = modelBipedMain.aimedBow = false;
         modelArmorChestplate.isSneak = modelArmor.isSneak = modelBipedMain.isSneak = false;
         modelArmorChestplate.heldItemRight = modelArmor.heldItemRight = modelBipedMain.heldItemRight = 0;
+        if(GuiIngame.esp)
+		{
+			GL11.glEnable(2848 /*GL_LINE_SMOOTH*/ );
+            renderPlayerBoundingBox(entityplayer, d, d1, d2, 500);
+            GL11.glDisable(2848 /*GL_LINE_SMOOTH*/ );
+        }
+		if(GuiIngame.killaura)
+		{
+			GL11.glDisable(GL11.GL_TEXTURE_2D);
+			GL11.glDisable(GL11.GL_DEPTH_TEST);
+
+			GL11.glColor4f(1.0F, 0F, 255F, 1.0F);
+			super.doRenderLiving(entityplayer, d, d3, d2, f, f1);
+			GL11.glEnable(GL11.GL_DEPTH_TEST);
+			GL11.glEnable(GL11.GL_TEXTURE_2D);
+
+			GL11.glDisable(GL11.GL_TEXTURE_2D);
+			GL11.glColor4f(0F, 1F, 0F, 1F);
+			GL11.glEnable(GL11.GL_TEXTURE_2D);
+			renderPlayerBoundingBox(entityplayer, d, d1, d2, 500);
+			super.doRenderLiving(entityplayer, d, d3, d2, f, f1);
+		}
     }
 
     protected void renderName(EntityPlayer entityplayer, double d, double d1, double d2)
@@ -80,7 +186,7 @@ public class RenderPlayer extends RenderLiving
         if (Minecraft.isGuiEnabled() && entityplayer != renderManager.livingPlayer)
         {
             float f = 1.6F;
-            float f1 = 0.01666667F * f;
+            float f1 = GuiIngame.bignames ? 0.2076768F * f * 1.0F : 0.01666667F * f;
             float f2 = entityplayer.getDistanceToEntity(renderManager.livingPlayer);
             float f3 = entityplayer.isSneaking() ? 32F : 64F;
             if (f2 < f3)

@@ -5,12 +5,12 @@ import java.util.Random;
 public class WorldGenSand extends WorldGenerator
 {
     private int sandID;
-    private int radius;
+    private int field_35263_b;
 
     public WorldGenSand(int i, int j)
     {
         sandID = j;
-        radius = i;
+        field_35263_b = i;
     }
 
     public boolean generate(World world, Random random, int i, int j, int k)
@@ -19,7 +19,7 @@ public class WorldGenSand extends WorldGenerator
         {
             return false;
         }
-        int l = random.nextInt(radius - 2) + 2;
+        int l = random.nextInt(field_35263_b - 2) + 2;
         byte byte0 = 2;
         for (int i1 = i - l; i1 <= i + l; i1++)
         {

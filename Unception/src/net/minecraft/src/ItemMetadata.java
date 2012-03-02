@@ -2,19 +2,19 @@ package net.minecraft.src;
 
 public class ItemMetadata extends ItemBlock
 {
-    private Block blockObj;
+    private Block field_35437_a;
 
     public ItemMetadata(int i, Block block)
     {
         super(i);
-        blockObj = block;
+        field_35437_a = block;
         setMaxDamage(0);
         setHasSubtypes(true);
     }
 
     public int getIconFromDamage(int i)
     {
-        return blockObj.getBlockTextureFromSideAndMetadata(2, i);
+        return field_35437_a.getBlockTextureFromSideAndMetadata(2, i);
     }
 
     public int getMetadata(int i)

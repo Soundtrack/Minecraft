@@ -32,7 +32,7 @@ public class WorldProviderHell extends WorldProvider
 
     public IChunkProvider getChunkProvider()
     {
-        return new ChunkProviderHell(worldObj, worldObj.getSeed());
+        return new ChunkProviderHell(worldObj, worldObj.getWorldSeed());
     }
 
     public boolean canCoordinateBeSpawn(int i, int j)

@@ -50,7 +50,7 @@ public class ModelWolf extends ModelBase
     {
         super.render(entity, f, f1, f2, f3, f4, f5);
         setRotationAngles(f, f1, f2, f3, f4, f5);
-        if (isChild)
+        if (field_40301_k)
         {
             float f6 = 2.0F;
             GL11.glPushMatrix();

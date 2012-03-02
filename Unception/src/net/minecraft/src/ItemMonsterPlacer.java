@@ -14,7 +14,7 @@ public class ItemMonsterPlacer extends Item
     public String getItemDisplayName(ItemStack itemstack)
     {
         String s = (new StringBuilder()).append("").append(StatCollector.translateToLocal((new StringBuilder()).append(getItemName()).append(".name").toString())).toString().trim();
-        String s1 = EntityList.getStringFromID(itemstack.getItemDamage());
+        String s1 = EntityList.func_44040_a(itemstack.getItemDamage());
         if (s1 != null)
         {
             s = (new StringBuilder()).append(s).append(" ").append(StatCollector.translateToLocal((new StringBuilder()).append("entity.").append(s1).append(".name").toString())).toString();
@@ -24,16 +24,16 @@ public class ItemMonsterPlacer extends Item
 
     public int getColorFromDamage(int i, int j)
     {
-        EntityEggInfo entityegginfo = (EntityEggInfo)EntityList.entityEggs.get(Integer.valueOf(i));
+        EntityEggInfo entityegginfo = (EntityEggInfo)EntityList.field_44041_a.get(Integer.valueOf(i));
         if (entityegginfo != null)
         {
             if (j == 0)
             {
-                return entityegginfo.primaryColor;
+                return entityegginfo.field_46061_b;
             }
             else
             {
-                return entityegginfo.secondaryColor;
+                return entityegginfo.field_46062_c;
             }
         }
         else
@@ -61,7 +61,7 @@ public class ItemMonsterPlacer extends Item
 
     public boolean onItemUse(ItemStack itemstack, EntityPlayer entityplayer, World world, int i, int j, int k, int l)
     {
-        if (world.isRemote)
+        if (world.multiplayerWorld)
         {
             return true;
         }

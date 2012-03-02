@@ -26,12 +26,12 @@ public class ThreadedFileIOBase
     {
         do
         {
-            processQueue();
+            func_40568_b();
         }
         while (true);
     }
 
-    private void processQueue()
+    private void func_40568_b()
     {
         for (int i = 0; i < threadedIOQueue.size(); i++)
         {

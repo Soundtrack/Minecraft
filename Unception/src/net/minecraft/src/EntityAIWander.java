@@ -4,24 +4,24 @@ import java.util.Random;
 
 public class EntityAIWander extends EntityAIBase
 {
-    private EntityCreature entity;
+    private EntityCreature field_46100_a;
     private double field_46098_b;
     private double field_46099_c;
     private double field_46097_d;
 
     public EntityAIWander(EntityCreature entitycreature)
     {
-        entity = entitycreature;
+        field_46100_a = entitycreature;
         func_46079_a(3);
     }
 
     public boolean func_46082_a()
     {
-        if (entity.getAge() >= 100)
+        if (field_46100_a.func_46011_aM() >= 100)
         {
             return false;
         }
-        if (entity.getRNG().nextInt(120) != 0)
+        if (field_46100_a.func_46004_aK().nextInt(120) != 0)
         {
             return false;
         }
@@ -41,17 +41,17 @@ public class EntityAIWander extends EntityAIBase
 
     public boolean func_46084_g()
     {
-        return !entity.func_46012_aJ().func_46072_b();
+        return !field_46100_a.func_46012_aJ().func_46072_b();
     }
 
     public void func_46080_e()
     {
-        entity.func_46012_aJ().func_46071_a(field_46098_b, field_46099_c, field_46097_d, entity.getMoveSpeed());
+        field_46100_a.func_46012_aJ().func_46071_a(field_46098_b, field_46099_c, field_46097_d, field_46100_a.func_46013_aQ());
     }
 
     private Vec3D func_46096_h()
     {
-        Random random = entity.getRNG();
+        Random random = field_46100_a.func_46004_aK();
         boolean flag = false;
         int i = -1;
         int j = -1;
@@ -59,10 +59,10 @@ public class EntityAIWander extends EntityAIBase
         float f = -99999F;
         for (int l = 0; l < 10; l++)
         {
-            int i1 = MathHelper.floor_double((entity.posX + (double)random.nextInt(13)) - 6D);
-            int j1 = MathHelper.floor_double((entity.posY + (double)random.nextInt(7)) - 3D);
-            int k1 = MathHelper.floor_double((entity.posZ + (double)random.nextInt(13)) - 6D);
-            float f1 = entity.getBlockPathWeight(i1, j1, k1);
+            int i1 = MathHelper.floor_double((field_46100_a.posX + (double)random.nextInt(13)) - 6D);
+            int j1 = MathHelper.floor_double((field_46100_a.posY + (double)random.nextInt(7)) - 3D);
+            int k1 = MathHelper.floor_double((field_46100_a.posZ + (double)random.nextInt(13)) - 6D);
+            float f1 = field_46100_a.getBlockPathWeight(i1, j1, k1);
             if (f1 > f)
             {
                 f = f1;

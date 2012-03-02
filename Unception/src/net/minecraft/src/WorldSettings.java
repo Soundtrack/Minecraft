@@ -6,7 +6,7 @@ public final class WorldSettings
     private final int gameType;
     private final boolean mapFeaturesEnabled;
     private final boolean hardcoreEnabled;
-    private final EnumWorldType terrainType;
+    private final EnumWorldType field_46108_e;
 
     public WorldSettings(long l, int i, boolean flag, boolean flag1, EnumWorldType enumworldtype)
     {
@@ -14,7 +14,7 @@ public final class WorldSettings
         gameType = i;
         mapFeaturesEnabled = flag;
         hardcoreEnabled = flag1;
-        terrainType = enumworldtype;
+        field_46108_e = enumworldtype;
     }
 
     public long getSeed()
@@ -37,8 +37,8 @@ public final class WorldSettings
         return mapFeaturesEnabled;
     }
 
-    public EnumWorldType getTerrainType()
+    public EnumWorldType func_46107_e()
     {
-        return terrainType;
+        return field_46108_e;
     }
 }

@@ -8,7 +8,7 @@ public class WeightedRandom
     {
     }
 
-    public static int getTotalWeight(Collection collection)
+    public static int func_35736_a(Collection collection)
     {
         int i = 0;
         for (Iterator iterator = collection.iterator(); iterator.hasNext();)
@@ -20,7 +20,7 @@ public class WeightedRandom
         return i;
     }
 
-    public static WeightedRandomChoice getRandomItem(Random random, Collection collection, int i)
+    public static WeightedRandomChoice func_35734_a(Random random, Collection collection, int i)
     {
         if (i <= 0)
         {
@@ -40,12 +40,12 @@ public class WeightedRandom
         return null;
     }
 
-    public static WeightedRandomChoice getRandomItem(Random random, Collection collection)
+    public static WeightedRandomChoice func_35733_a(Random random, Collection collection)
     {
-        return getRandomItem(random, collection, getTotalWeight(collection));
+        return func_35734_a(random, collection, func_35736_a(collection));
     }
 
-    public static int getTotalWeight(WeightedRandomChoice aweightedrandomchoice[])
+    public static int sumWeights(WeightedRandomChoice aweightedrandomchoice[])
     {
         int i = 0;
         WeightedRandomChoice aweightedrandomchoice1[] = aweightedrandomchoice;
@@ -59,7 +59,7 @@ public class WeightedRandom
         return i;
     }
 
-    public static WeightedRandomChoice getRandomItem(Random random, WeightedRandomChoice aweightedrandomchoice[], int i)
+    public static WeightedRandomChoice func_35732_a(Random random, WeightedRandomChoice aweightedrandomchoice[], int i)
     {
         if (i <= 0)
         {
@@ -81,8 +81,8 @@ public class WeightedRandom
         return null;
     }
 
-    public static WeightedRandomChoice getRandomItem(Random random, WeightedRandomChoice aweightedrandomchoice[])
+    public static WeightedRandomChoice chooseOne(Random random, WeightedRandomChoice aweightedrandomchoice[])
     {
-        return getRandomItem(random, aweightedrandomchoice, getTotalWeight(aweightedrandomchoice));
+        return func_35732_a(random, aweightedrandomchoice, sumWeights(aweightedrandomchoice));
     }
 }

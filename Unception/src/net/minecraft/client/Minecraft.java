@@ -151,7 +151,7 @@ public abstract class Minecraft
     private int tempDisplayWidth;
     private int tempDisplayHeight;
     public GuiAchievement guiAchievement;
-    public GuiIngame ingameGUI;
+    public static GuiIngame ingameGUI;
     public boolean skipRenderWorld;
     public ModelBiped playerModelBiped;
     public MovingObjectPosition objectMouseOver;
@@ -303,11 +303,11 @@ public abstract class Minecraft
         loadScreen();
         fontRenderer = new FontRenderer(gameSettings, "/font/default.png", renderEngine, false);
         standardGalacticFontRenderer = new FontRenderer(gameSettings, "/font/alternate.png", renderEngine, false);
-        if (gameSettings.language != null)
+        if (gameSettings.field_44018_Q != null)
         {
-            StringTranslate.getInstance().setLanguage(gameSettings.language);
-            fontRenderer.setUnicodeFlag(StringTranslate.getInstance().func_46110_d());
-            fontRenderer.setBidiFlag(StringTranslate.func_46109_d(gameSettings.language));
+            StringTranslate.getInstance().func_44023_a(gameSettings.field_44018_Q);
+            fontRenderer.func_44032_a(StringTranslate.getInstance().func_46110_d());
+            fontRenderer.func_46123_b(StringTranslate.func_46109_d(gameSettings.field_44018_Q));
         }
         ColorizerWater.setWaterBiomeColorizer(renderEngine.getTextureContents("/misc/watercolor.png"));
         ColorizerGrass.setGrassBiomeColorizer(renderEngine.getTextureContents("/misc/grasscolor.png"));
@@ -1284,7 +1284,7 @@ public abstract class Minecraft
         Profiler.endStartSection("centerChunkSource");
         if (thePlayer != null)
         {
-            net.minecraft.src.IChunkProvider ichunkprovider = theWorld.getChunkProvider();
+            net.minecraft.src.IChunkProvider ichunkprovider = theWorld.getIChunkProvider();
             if (ichunkprovider instanceof ChunkProviderLoadOrGenerate)
             {
                 ChunkProviderLoadOrGenerate chunkproviderloadorgenerate = (ChunkProviderLoadOrGenerate)ichunkprovider;
@@ -1310,7 +1310,7 @@ public abstract class Minecraft
             {
                 displayGuiScreen(null);
             }
-            else if (thePlayer.isPlayerSleeping() && theWorld != null && theWorld.isRemote)
+            else if (thePlayer.isPlayerSleeping() && theWorld != null && theWorld.multiplayerWorld)
             {
                 displayGuiScreen(new GuiSleepMP());
             }
@@ -1524,7 +1524,7 @@ public abstract class Minecraft
             {
                 theWorld.difficultySetting = gameSettings.difficulty;
             }
-            if (theWorld.isRemote)
+            if (theWorld.multiplayerWorld)
             {
                 theWorld.difficultySetting = 1;
             }
@@ -1549,7 +1549,7 @@ public abstract class Minecraft
             }
             if (!isGamePaused || isMultiplayerWorld())
             {
-                theWorld.setAllowedSpawnTypes(theWorld.difficultySetting > 0, true);
+                theWorld.setAllowedMobSpawns(theWorld.difficultySetting > 0, true);
                 theWorld.tick();
             }
             Profiler.endStartSection("animateTick");
@@ -1577,7 +1577,7 @@ public abstract class Minecraft
 
     public boolean isMultiplayerWorld()
     {
-        return theWorld != null && theWorld.isRemote;
+        return theWorld != null && theWorld.multiplayerWorld;
     }
 
     public void startWorld(String s, String s1, WorldSettings worldsettings)
@@ -1739,7 +1739,7 @@ public abstract class Minecraft
                     world.spawnEntityInWorld(thePlayer);
                 }
             }
-            if (!world.isRemote)
+            if (!world.multiplayerWorld)
             {
                 preloadWorld(s);
             }
@@ -1762,7 +1762,7 @@ public abstract class Minecraft
             {
                 world.emptyMethod1();
             }
-            net.minecraft.src.IChunkProvider ichunkprovider = world.getChunkProvider();
+            net.minecraft.src.IChunkProvider ichunkprovider = world.getIChunkProvider();
             if (ichunkprovider instanceof ChunkProviderLoadOrGenerate)
             {
                 ChunkProviderLoadOrGenerate chunkproviderloadorgenerate = (ChunkProviderLoadOrGenerate)ichunkprovider;
@@ -1810,7 +1810,7 @@ public abstract class Minecraft
         int i = 0;
         int j = (c * 2) / 16 + 1;
         j *= j;
-        net.minecraft.src.IChunkProvider ichunkprovider = theWorld.getChunkProvider();
+        net.minecraft.src.IChunkProvider ichunkprovider = theWorld.getIChunkProvider();
         ChunkCoordinates chunkcoordinates = theWorld.getSpawnPoint();
         if (thePlayer != null)
         {
@@ -1899,7 +1899,7 @@ public abstract class Minecraft
 
     public void respawn(boolean flag, int i, boolean flag1)
     {
-        if (!theWorld.isRemote && !theWorld.worldProvider.canRespawnHere())
+        if (!theWorld.multiplayerWorld && !theWorld.worldProvider.canRespawnHere())
         {
             usePortal(0);
         }
@@ -1923,7 +1923,7 @@ public abstract class Minecraft
             chunkcoordinates1 = theWorld.getSpawnPoint();
             flag2 = false;
         }
-        net.minecraft.src.IChunkProvider ichunkprovider = theWorld.getChunkProvider();
+        net.minecraft.src.IChunkProvider ichunkprovider = theWorld.getIChunkProvider();
         if (ichunkprovider instanceof ChunkProviderLoadOrGenerate)
         {
             ChunkProviderLoadOrGenerate chunkproviderloadorgenerate = (ChunkProviderLoadOrGenerate)ichunkprovider;
@@ -2085,5 +2085,4 @@ public abstract class Minecraft
             thePlayer.inventory.setCurrentItem(i, j, flag, playerController instanceof PlayerControllerCreative);
         }
     }
-    
 }

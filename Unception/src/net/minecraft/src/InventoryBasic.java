@@ -78,7 +78,7 @@ public class InventoryBasic
         {
             for (int i = 0; i < field_20073_d.size(); i++)
             {
-                ((IInvBasic)field_20073_d.get(i)).onInventoryChanged(this);
+                ((IInvBasic)field_20073_d.get(i)).func_20134_a(this);
             }
         }
     }

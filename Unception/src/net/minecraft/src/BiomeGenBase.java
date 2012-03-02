@@ -23,11 +23,11 @@ public abstract class BiomeGenBase
     public static final BiomeGenBase iceMountains = (new BiomeGenSnow(13)).setColor(0xa0a0a0).setBiomeName("Ice Mountains").setMinMaxHeight(0.2F, 1.2F).setTemperatureRainfall(0.0F, 0.5F);
     public static final BiomeGenBase mushroomIsland = (new BiomeGenMushroomIsland(14)).setColor(0xff00ff).setBiomeName("MushroomIsland").setTemperatureRainfall(0.9F, 1.0F).setMinMaxHeight(0.2F, 1.0F);
     public static final BiomeGenBase mushroomIslandShore = (new BiomeGenMushroomIsland(15)).setColor(0xa000ff).setBiomeName("MushroomIslandShore").setTemperatureRainfall(0.9F, 1.0F).setMinMaxHeight(-1F, 0.1F);
-    public static final BiomeGenBase beach = (new BiomeGenBeach(16)).setColor(0xfade55).setBiomeName("Beach").setTemperatureRainfall(0.8F, 0.4F).setMinMaxHeight(0.0F, 0.1F);
-    public static final BiomeGenBase desertHills = (new BiomeGenDesert(17)).setColor(0xd25f12).setBiomeName("DesertHills").setDisableRain().setTemperatureRainfall(2.0F, 0.0F).setMinMaxHeight(0.2F, 0.7F);
-    public static final BiomeGenBase forestHills = (new BiomeGenForest(18)).setColor(0x22551c).setBiomeName("ForestHills").func_4124_a(0x4eba31).setTemperatureRainfall(0.7F, 0.8F).setMinMaxHeight(0.2F, 0.6F);
-    public static final BiomeGenBase taigaHills = (new BiomeGenTaiga(19)).setColor(0x163933).setBiomeName("TaigaHills").func_4124_a(0x4eba31).setTemperatureRainfall(0.05F, 0.8F).setMinMaxHeight(0.2F, 0.7F);
-    public static final BiomeGenBase extremeHillsEdge = (new BiomeGenHills(20)).setColor(0x72789a).setBiomeName("Extreme Hills Edge").setMinMaxHeight(0.2F, 0.8F).setTemperatureRainfall(0.2F, 0.3F);
+    public static final BiomeGenBase field_46050_r = (new BiomeGenBeach(16)).setColor(0xfade55).setBiomeName("Beach").setTemperatureRainfall(0.8F, 0.4F).setMinMaxHeight(0.0F, 0.1F);
+    public static final BiomeGenBase field_46049_s = (new BiomeGenDesert(17)).setColor(0xd25f12).setBiomeName("DesertHills").setDisableRain().setTemperatureRainfall(2.0F, 0.0F).setMinMaxHeight(0.2F, 0.7F);
+    public static final BiomeGenBase field_46048_t = (new BiomeGenForest(18)).setColor(0x22551c).setBiomeName("ForestHills").func_4124_a(0x4eba31).setTemperatureRainfall(0.7F, 0.8F).setMinMaxHeight(0.2F, 0.6F);
+    public static final BiomeGenBase field_46047_u = (new BiomeGenTaiga(19)).setColor(0x163933).setBiomeName("TaigaHills").func_4124_a(0x4eba31).setTemperatureRainfall(0.05F, 0.8F).setMinMaxHeight(0.2F, 0.7F);
+    public static final BiomeGenBase field_46046_v = (new BiomeGenHills(20)).setColor(0x72789a).setBiomeName("Extreme Hills Edge").setMinMaxHeight(0.2F, 0.8F).setTemperatureRainfall(0.2F, 0.3F);
     public String biomeName;
     public int color;
     public byte topBlock;
@@ -212,7 +212,7 @@ public abstract class BiomeGenBase
         return (int)(temperature * 65536F);
     }
 
-    public void decorate(World world, Random random, int i, int j)
+    public void func_35477_a(World world, Random random, int i, int j)
     {
         biomeDecorator.decorate(world, random, i, j);
     }

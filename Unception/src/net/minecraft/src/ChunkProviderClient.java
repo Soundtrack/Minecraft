@@ -26,7 +26,7 @@ public class ChunkProviderClient
         }
         else
         {
-            return chunkMapping.containsItem(ChunkCoordIntPair.chunkXZ2Int(i, j));
+            return chunkMapping.containsKey(ChunkCoordIntPair.chunkXZ2Int(i, j));
         }
     }
 
@@ -88,12 +88,12 @@ public class ChunkProviderClient
         return (new StringBuilder()).append("MultiplayerChunkCache: ").append(chunkMapping.getNumHashElements()).toString();
     }
 
-    public List getPossibleCreatures(EnumCreatureType enumcreaturetype, int i, int j, int k)
+    public List func_40377_a(EnumCreatureType enumcreaturetype, int i, int j, int k)
     {
         return null;
     }
 
-    public ChunkPosition findClosestStructure(World world, String s, int i, int j, int k)
+    public ChunkPosition func_40376_a(World world, String s, int i, int j, int k)
     {
         return null;
     }

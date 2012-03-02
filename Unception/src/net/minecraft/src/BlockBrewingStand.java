@@ -5,12 +5,12 @@ import java.util.Random;
 
 public class BlockBrewingStand extends BlockContainer
 {
-    private Random rand;
+    private Random field_40214_a;
 
     public BlockBrewingStand(int i)
     {
         super(i, Material.iron);
-        rand = new Random();
+        field_40214_a = new Random();
         blockIndexInTexture = 157;
     }
 
@@ -49,7 +49,7 @@ public class BlockBrewingStand extends BlockContainer
 
     public boolean blockActivated(World world, int i, int j, int k, EntityPlayer entityplayer)
     {
-        if (world.isRemote)
+        if (world.multiplayerWorld)
         {
             return true;
         }
@@ -83,16 +83,16 @@ public class BlockBrewingStand extends BlockContainer
                 {
                     continue;
                 }
-                float f = rand.nextFloat() * 0.8F + 0.1F;
-                float f1 = rand.nextFloat() * 0.8F + 0.1F;
-                float f2 = rand.nextFloat() * 0.8F + 0.1F;
+                float f = field_40214_a.nextFloat() * 0.8F + 0.1F;
+                float f1 = field_40214_a.nextFloat() * 0.8F + 0.1F;
+                float f2 = field_40214_a.nextFloat() * 0.8F + 0.1F;
                 do
                 {
                     if (itemstack.stackSize <= 0)
                     {
                         continue label0;
                     }
-                    int i1 = rand.nextInt(21) + 10;
+                    int i1 = field_40214_a.nextInt(21) + 10;
                     if (i1 > itemstack.stackSize)
                     {
                         i1 = itemstack.stackSize;
@@ -100,9 +100,9 @@ public class BlockBrewingStand extends BlockContainer
                     itemstack.stackSize -= i1;
                     EntityItem entityitem = new EntityItem(world, (float)i + f, (float)j + f1, (float)k + f2, new ItemStack(itemstack.itemID, i1, itemstack.getItemDamage()));
                     float f3 = 0.05F;
-                    entityitem.motionX = (float)rand.nextGaussian() * f3;
-                    entityitem.motionY = (float)rand.nextGaussian() * f3 + 0.2F;
-                    entityitem.motionZ = (float)rand.nextGaussian() * f3;
+                    entityitem.motionX = (float)field_40214_a.nextGaussian() * f3;
+                    entityitem.motionY = (float)field_40214_a.nextGaussian() * f3 + 0.2F;
+                    entityitem.motionZ = (float)field_40214_a.nextGaussian() * f3;
                     world.spawnEntityInWorld(entityitem);
                 }
                 while (true);

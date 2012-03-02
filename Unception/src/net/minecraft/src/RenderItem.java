@@ -227,7 +227,7 @@ public class RenderItem extends Render
             return;
         }
         drawItemIntoGui(fontrenderer, renderengine, itemstack.itemID, itemstack.getItemDamage(), itemstack.getIconIndex(), i, j);
-        if (itemstack != null && itemstack.hasEffect())
+        if (itemstack != null && itemstack.func_40713_r())
         {
             GL11.glDepthFunc(516);
             GL11.glDisable(2896 /*GL_LIGHTING*/);

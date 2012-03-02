@@ -2,7 +2,7 @@ package net.minecraft.src;
 
 public interface IWorldAccess
 {
-    public abstract void markBlockNeedsUpdate(int i, int j, int k);
+    public abstract void markBlockAndNeighborsNeedsUpdate(int i, int j, int k);
 
     public abstract void markBlockRangeNeedsUpdate(int i, int j, int k, int l, int i1, int j1);
 

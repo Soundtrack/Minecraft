@@ -61,7 +61,7 @@ public class BlockPressurePlate extends Block
 
     public void updateTick(World world, int i, int j, int k, Random random)
     {
-        if (world.isRemote)
+        if (world.multiplayerWorld)
         {
             return;
         }
@@ -78,7 +78,7 @@ public class BlockPressurePlate extends Block
 
     public void onEntityCollidedWithBlock(World world, int i, int j, int k, Entity entity)
     {
-        if (world.isRemote)
+        if (world.multiplayerWorld)
         {
             return;
         }

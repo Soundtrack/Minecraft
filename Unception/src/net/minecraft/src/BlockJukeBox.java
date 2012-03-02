@@ -29,7 +29,7 @@ public class BlockJukeBox extends BlockContainer
 
     public void ejectRecord(World world, int i, int j, int k, int l)
     {
-        if (world.isRemote)
+        if (world.multiplayerWorld)
         {
             return;
         }
@@ -49,7 +49,7 @@ public class BlockJukeBox extends BlockContainer
 
     public void insertDisc(World world, int i, int j, int k)
     {
-        if (world.isRemote)
+        if (world.multiplayerWorld)
         {
             return;
         }
@@ -90,7 +90,7 @@ public class BlockJukeBox extends BlockContainer
 
     public void dropBlockAsItemWithChance(World world, int i, int j, int k, int l, float f, int i1)
     {
-        if (world.isRemote)
+        if (world.multiplayerWorld)
         {
             return;
         }

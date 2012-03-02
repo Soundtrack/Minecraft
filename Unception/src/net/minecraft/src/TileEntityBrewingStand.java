@@ -70,7 +70,7 @@ public class TileEntityBrewingStand extends TileEntity
             return false;
         }
         ItemStack itemstack = brewingItemStacks[3];
-        if (!Item.itemsList[itemstack.itemID].isPotionIngredient())
+        if (!Item.itemsList[itemstack.itemID].isValidBrewingIngredient())
         {
             return false;
         }
@@ -88,8 +88,8 @@ public class TileEntityBrewingStand extends TileEntity
                 flag = true;
                 break;
             }
-            java.util.List list = Item.potion.getEffects(j);
-            java.util.List list1 = Item.potion.getEffects(k);
+            java.util.List list = Item.potion.getEffectNamesFromDamage(j);
+            java.util.List list1 = Item.potion.getEffectNamesFromDamage(k);
             if (j > 0 && list == list1 || list != null && (list.equals(list1) || list1 == null) || j == k)
             {
                 continue;
@@ -116,8 +116,8 @@ public class TileEntityBrewingStand extends TileEntity
             }
             int j = brewingItemStacks[i].getItemDamage();
             int k = getPotionResult(j, itemstack);
-            java.util.List list = Item.potion.getEffects(j);
-            java.util.List list1 = Item.potion.getEffects(k);
+            java.util.List list = Item.potion.getEffectNamesFromDamage(j);
+            java.util.List list1 = Item.potion.getEffectNamesFromDamage(k);
             if (j > 0 && list == list1 || list != null && (list.equals(list1) || list1 == null))
             {
                 if (!ItemPotion.isSplash(j) && ItemPotion.isSplash(k))
@@ -152,9 +152,9 @@ public class TileEntityBrewingStand extends TileEntity
         {
             return i;
         }
-        if (Item.itemsList[itemstack.itemID].isPotionIngredient())
+        if (Item.itemsList[itemstack.itemID].isValidBrewingIngredient())
         {
-            return PotionHelper.applyIngredient(i, Item.itemsList[itemstack.itemID].getPotionEffect());
+            return PotionHelper.brewPotionData(i, Item.itemsList[itemstack.itemID].getPotionModifier());
         }
         else
         {

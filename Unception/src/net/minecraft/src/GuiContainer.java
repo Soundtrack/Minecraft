@@ -121,7 +121,7 @@ public abstract class GuiContainer extends GuiScreen
                     String s = (String)list.get(l4);
                     if (l4 == 0)
                     {
-                        s = (new StringBuilder()).append("\247").append(Integer.toHexString(itemstack.getRarity().field_40535_e)).append(s).toString();
+                        s = (new StringBuilder()).append("\247").append(Integer.toHexString(itemstack.func_40707_s().field_40535_e)).append(s).toString();
                     }
                     else
                     {

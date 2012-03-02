@@ -12,7 +12,7 @@ abstract class ComponentVillage extends StructureComponent
         super(i);
     }
 
-    protected StructureComponent getNextComponenetNN(ComponentVillageStartPiece componentvillagestartpiece, List list, Random random, int i, int j)
+    protected StructureComponent func_35077_a(ComponentVillageStartPiece componentvillagestartpiece, List list, Random random, int i, int j)
     {
         switch (coordBaseMode)
         {
@@ -31,7 +31,7 @@ abstract class ComponentVillage extends StructureComponent
         return null;
     }
 
-    protected StructureComponent getNextComponenetPP(ComponentVillageStartPiece componentvillagestartpiece, List list, Random random, int i, int j)
+    protected StructureComponent func_35076_b(ComponentVillageStartPiece componentvillagestartpiece, List list, Random random, int i, int j)
     {
         switch (coordBaseMode)
         {
@@ -60,7 +60,7 @@ abstract class ComponentVillage extends StructureComponent
             {
                 if (structureboundingbox.isVecInside(l, 64, k))
                 {
-                    i += Math.max(world.getTopSolidOrLiquidBlock(l, k), world.worldProvider.getAverageGroundLevel());
+                    i += Math.max(world.getTopSolidOrLiquidBlock(l, k), world.worldProvider.func_46066_g());
                     j++;
                 }
             }

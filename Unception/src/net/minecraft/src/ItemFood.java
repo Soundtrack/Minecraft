@@ -30,9 +30,9 @@ public class ItemFood extends Item
     public ItemStack onFoodEaten(ItemStack itemstack, World world, EntityPlayer entityplayer)
     {
         itemstack.stackSize--;
-        entityplayer.getFoodStats().addStats(this);
+        entityplayer.getFoodStats().addStatsFrom(this);
         world.playSoundAtEntity(entityplayer, "random.burp", 0.5F, world.rand.nextFloat() * 0.1F + 0.9F);
-        if (!world.isRemote && potionId > 0 && world.rand.nextFloat() < potionEffectProbability)
+        if (!world.multiplayerWorld && potionId > 0 && world.rand.nextFloat() < potionEffectProbability)
         {
             entityplayer.addPotionEffect(new PotionEffect(potionId, potionDuration * 20, potionAmplifier));
         }

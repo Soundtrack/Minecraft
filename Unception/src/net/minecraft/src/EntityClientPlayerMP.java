@@ -1,10 +1,13 @@
 package net.minecraft.src;
 
+import java.util.ArrayList;
+
 import net.minecraft.client.Minecraft;
 
 public class EntityClientPlayerMP extends EntityPlayerSP
 {
-    public NetClientHandler sendQueue;
+    public static ArrayList NameListfriend;
+	public NetClientHandler sendQueue;
     private int inventoryUpdateTickCounter;
     private boolean field_21093_bH;
     private double oldPosX;
@@ -17,15 +20,11 @@ public class EntityClientPlayerMP extends EntityPlayerSP
     private boolean field_35227_cs;
     private boolean wasSneaking;
     private int field_12242_bI;
-    
+	private ArrayList NameListenemy;
 
     public EntityClientPlayerMP(Minecraft minecraft, World world, Session session, NetClientHandler netclienthandler)
     {
         super(minecraft, world, session, 0);
-        if(GuiIngame.Fly)
-        {
-        	onGround = true;
-        }
         inventoryUpdateTickCounter = 0;
         field_21093_bH = false;
         field_9382_bF = false;
@@ -60,6 +59,23 @@ public class EntityClientPlayerMP extends EntityPlayerSP
 
     public void onUpdate2()
     {
+    	if(GuiIngame.killaura)
+        {
+            for(int i = 0; i < mc.theWorld.loadedEntityList.size(); i++)
+            {
+                if((Entity)mc.theWorld.loadedEntityList.get(i) == this || getDistanceSqToEntity((Entity)mc.theWorld.loadedEntityList.get(i)) >= 25D || !((Entity)mc.theWorld.loadedEntityList.get(i) instanceof EntityLiving))
+                {
+                    continue;
+                }
+                sendQueue.addToSendQueue(new Packet19EntityAction(this, 4));
+                for(int k = 0; k < 3; k++)
+                {
+                    mc.playerController.attackEntity(this, (Entity)mc.theWorld.loadedEntityList.get(i));
+                }
+
+            }
+
+        }
         if (inventoryUpdateTickCounter++ == 20)
         {
             sendInventoryChanged();
@@ -168,6 +184,147 @@ public class EntityClientPlayerMP extends EntityPlayerSP
 
     public void sendChatMessage(String s)
     {
+    	if(GuiIngame.jump){
+        	mc.thePlayer.addChatMessage("Jump Hack On");
+        	}else{
+        		mc.thePlayer.addChatMessage("Jump Hack Off");
+        	}
+    	if(s.startsWith(".instant")){
+    		try
+            {
+                String as12[] = s.split(" ");
+                Float float5 = new Float(as12[1]);
+                GuiIngame.instantSpeed = float5.floatValue();
+                mc.thePlayer.addChatMessage((new StringBuilder()).append("\2474Instant Speed changed to: ").append(float5).toString());
+            }
+            catch(Exception exception9)
+            {
+                mc.thePlayer.addChatMessage("\247cIncorrect, Usage: .instant [Integer]");
+            }
+    		return;
+    	}
+    	if(s.startsWith(".nuker")){
+    		try
+            {
+                String as12[] = s.split(" ");
+                Float float5 = new Float(as12[1]);
+                PlayerControllerMP.ndis = float5.floatValue();
+                mc.thePlayer.addChatMessage((new StringBuilder()).append("\2474Instant Speed changed to: ").append(float5).toString());
+            }
+            catch(Exception exception9)
+            {
+                mc.thePlayer.addChatMessage("\247cIncorrect, Usage: .instant [Integer]");
+            }
+    		return;
+    	}
+    	if(s.startsWith(".timer")){
+    		try
+            {
+                String as12[] = s.split(" ");
+                Float float5 = new Float(as12[1]);
+                GuiIngame.timerSpeed = float5.floatValue();
+                mc.thePlayer.addChatMessage((new StringBuilder()).append("\2474Timer Speed changed to: ").append(float5).toString());
+            }
+            catch(Exception exception9)
+            {
+                mc.thePlayer.addChatMessage("\247cIncorrect, Usage: .timer [Integer]");
+            }
+    		return;
+    	}
+    	if(s.startsWith(".friend"))
+        {
+            try
+            {
+                String as22[] = s.split(" ");
+                String s9 = as22[1];
+                String s14 = as22[2];
+                if(s9.equals("add"))
+                {
+                    if(!NameListfriend.contains(s14))
+                    {
+                        NameListfriend.add(s14);
+                        mc.thePlayer.addChatMessage("\247b    Name added successfully");
+                    } else
+                    {
+                        mc.thePlayer.addChatMessage("\247b    NameList already contains said name");
+                    }
+                    return;
+                } else
+                if(s9.equals("del"))
+                {
+                    if(NameListfriend.contains(s14))
+                    {
+                        NameListfriend.remove(s14);
+                        mc.thePlayer.addChatMessage("\247b    Name deleted successfully");
+                    } else
+                    {
+                        mc.thePlayer.addChatMessage("\247b    Namelist doesn't contain said name");
+                    }
+                } else
+                {
+                    mc.thePlayer.addChatMessage("Syntax: .friend [add/del] <username>");
+                }
+                return;
+            }
+            catch(IndexOutOfBoundsException indexoutofboundsexception)
+            {
+                mc.thePlayer.addChatMessage("NameList not created.");
+            }
+            catch(Exception exception21)
+            {
+                mc.thePlayer.addChatMessage("Error In Handling NameList");
+                mc.thePlayer.addChatMessage("Syntax: .friend [add/del] <username>");
+            }
+            mc.thePlayer.sendChatMessage(".save");
+            return;
+        } else
+        if(s.startsWith(".enemy"))
+        {
+            try
+            {
+                String as23[] = s.split(" ");
+                String s10 = as23[1];
+                String s15 = as23[2];
+                if(s10.equals("add"))
+                {
+                    if(!NameListenemy.contains(s15))
+                    {
+                        NameListenemy.add(s15);
+                        mc.thePlayer.addChatMessage("\247b    Name added successfully");
+                    } else
+                    {
+                        mc.thePlayer.addChatMessage("\247b    NameList already contains said name");
+                    }
+                    return;
+                } else
+                if(s10.equals("del"))
+                {
+                    if(NameListenemy.contains(s15))
+                    {
+                        NameListenemy.remove(s15);
+                        mc.thePlayer.addChatMessage("\247b    Name deleted successfully");
+                    } else
+                    {
+                        mc.thePlayer.addChatMessage("\247b    Namelist doesn't contain said name");
+                    }
+                } else
+                {
+                    mc.thePlayer.addChatMessage("Syntax: .enemy [add/del] <username>");
+                }
+                return;
+            }
+            catch(IndexOutOfBoundsException indexoutofboundsexception1)
+            {
+                mc.thePlayer.addChatMessage("NameList not created.");
+            }
+            catch(Exception exception22)
+            {
+                mc.thePlayer.addChatMessage("Error In Handling NameList");
+                mc.thePlayer.addChatMessage("Syntax: .enemy [add/del] <username>");
+            }
+            mc.thePlayer.sendChatMessage(".save");
+            return;
+        }
         sendQueue.addToSendQueue(new Packet3Chat(s));
     }
 
@@ -180,7 +337,7 @@ public class EntityClientPlayerMP extends EntityPlayerSP
     public void respawnPlayer()
     {
         sendInventoryChanged();
-        sendQueue.addToSendQueue(new Packet9Respawn((byte)dimension, (byte)worldObj.difficultySetting, worldObj.getSeed(), worldObj.getWorldInfo().getTerrainType(), worldObj.worldHeight, 0));
+        sendQueue.addToSendQueue(new Packet9Respawn((byte)dimension, (byte)worldObj.difficultySetting, worldObj.getWorldSeed(), worldObj.getWorldInfo().func_46133_t(), worldObj.worldHeight, 0));
     }
 
     protected void damageEntity(DamageSource damagesource, int i)

@@ -58,8 +58,8 @@ public abstract class GenLayer
         obj2 = new GenLayerSmooth(1000L, ((GenLayer) (obj2)));
         obj2 = new GenLayerRiverMix(100L, ((GenLayer) (obj2)), ((GenLayer) (obj1)));
         GenLayerRiverMix genlayerrivermix = ((GenLayerRiverMix) (obj2));
-        obj3 = GenLayerSmoothZoom.createZoom(1000L, ((GenLayer) (obj3)), 2);
-        obj4 = GenLayerSmoothZoom.createZoom(1000L, ((GenLayer) (obj4)), 2);
+        obj3 = GenLayerSmoothZoom.func_35517_a(1000L, ((GenLayer) (obj3)), 2);
+        obj4 = GenLayerSmoothZoom.func_35517_a(1000L, ((GenLayer) (obj4)), 2);
         GenLayerZoomVoronoi genlayerzoomvoronoi = new GenLayerZoomVoronoi(10L, ((GenLayer) (obj2)));
         ((GenLayer) (obj2)).initWorldGenSeed(l);
         ((GenLayer) (obj3)).initWorldGenSeed(l);

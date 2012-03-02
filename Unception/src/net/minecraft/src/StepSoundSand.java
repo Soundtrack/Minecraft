@@ -7,7 +7,7 @@ final class StepSoundSand extends StepSound
         super(s, f, f1);
     }
 
-    public String getBreakSound()
+    public String stepSoundDir()
     {
         return "step.gravel";
     }

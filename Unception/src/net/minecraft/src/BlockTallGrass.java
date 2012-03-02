@@ -82,7 +82,7 @@ public class BlockTallGrass extends BlockFlower
 
     public void harvestBlock(World world, EntityPlayer entityplayer, int i, int j, int k, int l)
     {
-        if (!world.isRemote && entityplayer.getCurrentEquippedItem() != null && entityplayer.getCurrentEquippedItem().itemID == Item.shears.shiftedIndex)
+        if (!world.multiplayerWorld && entityplayer.getCurrentEquippedItem() != null && entityplayer.getCurrentEquippedItem().itemID == Item.shears.shiftedIndex)
         {
             entityplayer.addStat(StatList.mineBlockStatArray[blockID], 1);
             dropBlockAsItem_do(world, i, j, k, new ItemStack(Block.tallGrass, 1, l));

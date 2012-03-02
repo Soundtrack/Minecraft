@@ -25,6 +25,11 @@ public class Timer
 
     public void updateTimer()
     {
+    	if(GuiIngame.timer){
+    		timerSpeed = GuiIngame.timerSpeed;
+    	}else{
+    		timerSpeed = 1F;
+    	}
         long l = System.currentTimeMillis();
         long l1 = l - lastSyncSysClock;
         long l2 = System.nanoTime() / 0xf4240L;

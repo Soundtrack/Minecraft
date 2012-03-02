@@ -6,14 +6,14 @@ import java.util.Random;
 public class ComponentStrongholdRoomCrossing extends ComponentStronghold
 {
     private static final StructurePieceTreasure field_35061_c[];
-    protected final EnumDoor doorType;
+    protected final EnumDoor field_35062_a;
     protected final int field_35060_b;
 
     public ComponentStrongholdRoomCrossing(int i, Random random, StructureBoundingBox structureboundingbox, int j)
     {
         super(i);
         coordBaseMode = j;
-        doorType = getRandomDoor(random);
+        field_35062_a = getRandomDoor(random);
         boundingBox = structureboundingbox;
         field_35060_b = random.nextInt(5);
     }
@@ -28,7 +28,7 @@ public class ComponentStrongholdRoomCrossing extends ComponentStronghold
     public static ComponentStrongholdRoomCrossing func_35059_a(List list, Random random, int i, int j, int k, int l, int i1)
     {
         StructureBoundingBox structureboundingbox = StructureBoundingBox.getComponentToAddBoundingBox(i, j, k, -4, -1, 0, 11, 7, 11, l);
-        if (!canStrongholdGoDeeper(structureboundingbox) || StructureComponent.findIntersecting(list, structureboundingbox) != null)
+        if (!canStrongholdGoDeeper(structureboundingbox) || StructureComponent.getIntersectingStructureComponent(list, structureboundingbox) != null)
         {
             return null;
         }
@@ -45,7 +45,7 @@ public class ComponentStrongholdRoomCrossing extends ComponentStronghold
             return false;
         }
         fillWithRandomizedBlocks(world, structureboundingbox, 0, 0, 0, 10, 6, 10, true, random, StructureStrongholdPieces.getStrongholdStones());
-        placeDoor(world, random, structureboundingbox, doorType, 4, 1, 0);
+        placeDoor(world, random, structureboundingbox, field_35062_a, 4, 1, 0);
         fillWithBlocks(world, structureboundingbox, 4, 1, 10, 6, 3, 10, 0, 0, false);
         fillWithBlocks(world, structureboundingbox, 0, 1, 4, 0, 3, 6, 0, 0, false);
         fillWithBlocks(world, structureboundingbox, 10, 1, 4, 10, 3, 6, 0, 0, false);

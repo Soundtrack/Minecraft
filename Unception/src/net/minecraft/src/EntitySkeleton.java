@@ -54,7 +54,7 @@ public class EntitySkeleton extends EntityMob
 
     public void onLivingUpdate()
     {
-        if (worldObj.isDaytime() && !worldObj.isRemote)
+        if (worldObj.isDaytime() && !worldObj.multiplayerWorld)
         {
             float f = getEntityBrightness(1.0F);
             if (f > 0.5F && worldObj.canBlockSeeTheSky(MathHelper.floor_double(posX), MathHelper.floor_double(posY), MathHelper.floor_double(posZ)) && rand.nextFloat() * 30F < (f - 0.4F) * 2.0F)

@@ -172,8 +172,8 @@ public class ChunkProviderEnd
         }
         double d = 684.41200000000003D;
         double d1 = 684.41200000000003D;
-        field_40382_f = field_40388_a.generateNoiseOctaves(field_40382_f, i, k, l, j1, 1.121D, 1.121D, 0.5D);
-        field_40383_g = field_40386_b.generateNoiseOctaves(field_40383_g, i, k, l, j1, 200D, 200D, 0.5D);
+        field_40382_f = field_40388_a.func_4109_a(field_40382_f, i, k, l, j1, 1.121D, 1.121D, 0.5D);
+        field_40383_g = field_40386_b.func_4109_a(field_40383_g, i, k, l, j1, 200D, 200D, 0.5D);
         d *= 2D;
         field_40387_c = field_40391_l.generateNoiseOctaves(field_40387_c, i, j, k, l, i1, j1, d / 80D, d1 / 160D, d / 80D);
         field_40384_d = field_40393_j.generateNoiseOctaves(field_40384_d, i, j, k, l, i1, j1, d, d1, d);
@@ -285,7 +285,7 @@ public class ChunkProviderEnd
         int k = i * 16;
         int l = j * 16;
         BiomeGenBase biomegenbase = endWorld.getWorldChunkManager().getBiomeGenAt(k + 16, l + 16);
-        biomegenbase.decorate(endWorld, endWorld.rand, k, l);
+        biomegenbase.func_35477_a(endWorld, endWorld.rand, k, l);
         BlockSand.fallInstantly = false;
     }
 
@@ -309,7 +309,7 @@ public class ChunkProviderEnd
         return "RandomLevelSource";
     }
 
-    public List getPossibleCreatures(EnumCreatureType enumcreaturetype, int i, int j, int k)
+    public List func_40377_a(EnumCreatureType enumcreaturetype, int i, int j, int k)
     {
         WorldChunkManager worldchunkmanager = endWorld.getWorldChunkManager();
         if (worldchunkmanager == null)
@@ -327,7 +327,7 @@ public class ChunkProviderEnd
         }
     }
 
-    public ChunkPosition findClosestStructure(World world, String s, int i, int j, int k)
+    public ChunkPosition func_40376_a(World world, String s, int i, int j, int k)
     {
         return null;
     }

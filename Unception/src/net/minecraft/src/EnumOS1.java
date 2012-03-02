@@ -8,7 +8,7 @@ enum EnumOS1
     macos("macos", 3),
     unknown("unknown", 4);
 
-    private static final EnumOS1 allOSes[] = (new EnumOS1[] {
+    private static final EnumOS1 field_6525_f[] = (new EnumOS1[] {
         linux, solaris, windows, macos, unknown
     });
 

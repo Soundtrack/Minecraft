@@ -20,7 +20,7 @@ public class ComponentVillagePathGen extends ComponentVillageRoadPiece
         boolean flag = false;
         for (int i = random.nextInt(5); i < averageGroundLevel - 8; i += 2 + random.nextInt(5))
         {
-            StructureComponent structurecomponent1 = getNextComponenetNN((ComponentVillageStartPiece)structurecomponent, list, random, 0, i);
+            StructureComponent structurecomponent1 = func_35077_a((ComponentVillageStartPiece)structurecomponent, list, random, 0, i);
             if (structurecomponent1 != null)
             {
                 i += Math.max(structurecomponent1.boundingBox.getXSize(), structurecomponent1.boundingBox.getZSize());
@@ -30,7 +30,7 @@ public class ComponentVillagePathGen extends ComponentVillageRoadPiece
 
         for (int j = random.nextInt(5); j < averageGroundLevel - 8; j += 2 + random.nextInt(5))
         {
-            StructureComponent structurecomponent2 = getNextComponenetPP((ComponentVillageStartPiece)structurecomponent, list, random, 0, j);
+            StructureComponent structurecomponent2 = func_35076_b((ComponentVillageStartPiece)structurecomponent, list, random, 0, j);
             if (structurecomponent2 != null)
             {
                 j += Math.max(structurecomponent2.boundingBox.getXSize(), structurecomponent2.boundingBox.getZSize());
@@ -87,7 +87,7 @@ public class ComponentVillagePathGen extends ComponentVillageRoadPiece
         for (int i1 = 7 * MathHelper.getRandomIntegerInRange(random, 3, 5); i1 >= 7; i1 -= 7)
         {
             StructureBoundingBox structureboundingbox = StructureBoundingBox.getComponentToAddBoundingBox(i, j, k, 0, 0, 0, 3, 3, i1, l);
-            if (StructureComponent.findIntersecting(list, structureboundingbox) == null)
+            if (StructureComponent.getIntersectingStructureComponent(list, structureboundingbox) == null)
             {
                 return structureboundingbox;
             }

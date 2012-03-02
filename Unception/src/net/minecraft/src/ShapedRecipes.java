@@ -29,11 +29,11 @@ public class ShapedRecipes
         {
             for (int j = 0; j <= 3 - recipeHeight; j++)
             {
-                if (checkMatch(inventorycrafting, i, j, true))
+                if (func_21137_a(inventorycrafting, i, j, true))
                 {
                     return true;
                 }
-                if (checkMatch(inventorycrafting, i, j, false))
+                if (func_21137_a(inventorycrafting, i, j, false))
                 {
                     return true;
                 }
@@ -43,7 +43,7 @@ public class ShapedRecipes
         return false;
     }
 
-    private boolean checkMatch(InventoryCrafting inventorycrafting, int i, int j, boolean flag)
+    private boolean func_21137_a(InventoryCrafting inventorycrafting, int i, int j, boolean flag)
     {
         for (int k = 0; k < 3; k++)
         {

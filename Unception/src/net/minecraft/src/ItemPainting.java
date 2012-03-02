@@ -35,9 +35,9 @@ public class ItemPainting extends Item
             return false;
         }
         EntityPainting entitypainting = new EntityPainting(world, i, j, k, byte0);
-        if (entitypainting.onValidSurface())
+        if (entitypainting.canStay())
         {
-            if (!world.isRemote)
+            if (!world.multiplayerWorld)
             {
                 world.spawnEntityInWorld(entitypainting);
             }

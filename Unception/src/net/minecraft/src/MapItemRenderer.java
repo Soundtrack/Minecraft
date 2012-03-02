@@ -81,8 +81,8 @@ public class MapItemRenderer
         {
             MapCoord mapcoord = (MapCoord)iterator.next();
             GL11.glPushMatrix();
-            GL11.glTranslatef((float)j + (float)mapcoord.centerX / 2.0F + 64F, (float)k + (float)mapcoord.centerZ / 2.0F + 64F, -0.02F);
-            GL11.glRotatef((float)(mapcoord.iconRotation * 360) / 16F, 0.0F, 0.0F, 1.0F);
+            GL11.glTranslatef((float)j + (float)mapcoord.field_28216_b / 2.0F + 64F, (float)k + (float)mapcoord.field_28220_c / 2.0F + 64F, -0.02F);
+            GL11.glRotatef((float)(mapcoord.field_28219_d * 360) / 16F, 0.0F, 0.0F, 1.0F);
             GL11.glScalef(4F, 4F, 3F);
             GL11.glTranslatef(-0.125F, 0.125F, 0.0F);
             float f1 = (float)(mapcoord.field_28217_a % 4 + 0) / 4F;

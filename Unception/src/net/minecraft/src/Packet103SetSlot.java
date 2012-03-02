@@ -22,7 +22,7 @@ public class Packet103SetSlot extends Packet
     {
         windowId = datainputstream.readByte();
         itemSlot = datainputstream.readShort();
-        myItemStack = readItemStack(datainputstream);
+        myItemStack = func_40187_b(datainputstream);
     }
 
     public void writePacketData(DataOutputStream dataoutputstream)

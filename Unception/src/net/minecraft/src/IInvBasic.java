@@ -2,5 +2,5 @@ package net.minecraft.src;
 
 public interface IInvBasic
 {
-    public abstract void onInventoryChanged(InventoryBasic inventorybasic);
+    public abstract void func_20134_a(InventoryBasic inventorybasic);
 }

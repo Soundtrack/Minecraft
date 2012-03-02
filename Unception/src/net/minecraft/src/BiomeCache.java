@@ -5,7 +5,7 @@ import java.util.List;
 
 public class BiomeCache
 {
-    private final WorldChunkManager chunkManager;
+    private final WorldChunkManager chunkmanager;
     private long lastCleanupTime;
     private LongHashMap cacheMap;
     private List cache;
@@ -15,7 +15,7 @@ public class BiomeCache
         lastCleanupTime = 0L;
         cacheMap = new LongHashMap();
         cache = new ArrayList();
-        chunkManager = worldchunkmanager;
+        chunkmanager = worldchunkmanager;
     }
 
     public BiomeCacheBlock getBiomeCacheBlock(int i, int j)
@@ -75,8 +75,8 @@ public class BiomeCache
         return getBiomeCacheBlock(i, j).biomes;
     }
 
-    static WorldChunkManager getChunkManager(BiomeCache biomecache)
+    static WorldChunkManager getWorldChunkManager(BiomeCache biomecache)
     {
-        return biomecache.chunkManager;
+        return biomecache.chunkmanager;
     }
 }

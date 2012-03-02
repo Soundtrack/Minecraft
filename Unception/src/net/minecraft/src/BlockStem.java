@@ -25,7 +25,7 @@ public class BlockStem extends BlockFlower
         super.updateTick(world, i, j, k, random);
         if (world.getBlockLightValue(i, j + 1, k) >= 9)
         {
-            float f = getGrowthModifier(world, i, j, k);
+            float f = func_35295_j(world, i, j, k);
             if (random.nextInt((int)(25F / f) + 1) == 0)
             {
                 int l = world.getBlockMetadata(i, j, k);
@@ -86,7 +86,7 @@ public class BlockStem extends BlockFlower
         world.setBlockMetadataWithNotify(i, j, k, 7);
     }
 
-    private float getGrowthModifier(World world, int i, int j, int k)
+    private float func_35295_j(World world, int i, int j, int k)
     {
         float f = 1.0F;
         int l = world.getBlockId(i, j, k - 1);
@@ -190,7 +190,7 @@ public class BlockStem extends BlockFlower
     public void dropBlockAsItemWithChance(World world, int i, int j, int k, int l, float f, int i1)
     {
         super.dropBlockAsItemWithChance(world, i, j, k, l, f, i1);
-        if (world.isRemote)
+        if (world.multiplayerWorld)
         {
             return;
         }

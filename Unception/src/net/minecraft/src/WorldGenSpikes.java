@@ -4,16 +4,16 @@ import java.util.Random;
 
 public class WorldGenSpikes extends WorldGenerator
 {
-    private int replaceID;
+    private int field_40197_a;
 
     public WorldGenSpikes(int i)
     {
-        replaceID = i;
+        field_40197_a = i;
     }
 
     public boolean generate(World world, Random random, int i, int j, int k)
     {
-        if (!world.isAirBlock(i, j, k) || world.getBlockId(i, j - 1, k) != replaceID)
+        if (!world.isAirBlock(i, j, k) || world.getBlockId(i, j - 1, k) != field_40197_a)
         {
             return false;
         }
@@ -25,7 +25,7 @@ public class WorldGenSpikes extends WorldGenerator
             {
                 int j2 = j1 - i;
                 int l2 = l1 - k;
-                if (j2 * j2 + l2 * l2 <= i1 * i1 + 1 && world.getBlockId(j1, j - 1, l1) != replaceID)
+                if (j2 * j2 + l2 * l2 <= i1 * i1 + 1 && world.getBlockId(j1, j - 1, l1) != field_40197_a)
                 {
                     return false;
                 }

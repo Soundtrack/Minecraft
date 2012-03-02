@@ -10,11 +10,11 @@ public class EntityZombie extends EntityMob
         texture = "/mob/zombie.png";
         moveSpeed = 0.5F;
         attackStrength = 4;
-        tasks.addTask(1, new EntityAISwimming(this));
-        tasks.addTask(2, new EntityAIAttackOnCollide(this, world, 16F));
-        tasks.addTask(3, new EntityAIWander(this));
-        tasks.addTask(4, new EntityAIWatchClosest(this, world, 8F));
-        tasks.addTask(4, new EntityAILookIdle(this));
+        field_46019_bU.func_46118_a(1, new EntityAISwimming(this));
+        field_46019_bU.func_46118_a(2, new EntityAIAttackOnCollide(this, world, 16F));
+        field_46019_bU.func_46118_a(3, new EntityAIWander(this));
+        field_46019_bU.func_46118_a(4, new EntityAIWatchClosest(this, world, 8F));
+        field_46019_bU.func_46118_a(4, new EntityAILookIdle(this));
     }
 
     public int getMaxHealth()
@@ -27,14 +27,14 @@ public class EntityZombie extends EntityMob
         return 2;
     }
 
-    protected boolean isAIEnabled()
+    protected boolean func_46006_aR()
     {
         return false;
     }
 
     public void onLivingUpdate()
     {
-        if (worldObj.isDaytime() && !worldObj.isRemote)
+        if (worldObj.isDaytime() && !worldObj.multiplayerWorld)
         {
             float f = getEntityBrightness(1.0F);
             if (f > 0.5F && worldObj.canBlockSeeTheSky(MathHelper.floor_double(posX), MathHelper.floor_double(posY), MathHelper.floor_double(posZ)) && rand.nextFloat() * 30F < (f - 0.4F) * 2.0F)

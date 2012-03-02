@@ -21,7 +21,7 @@ public class ComponentNetherBridgeNetherStalkRoom extends ComponentNetherBridgeP
     public static ComponentNetherBridgeNetherStalkRoom func_40040_a(List list, Random random, int i, int j, int k, int l, int i1)
     {
         StructureBoundingBox structureboundingbox = StructureBoundingBox.getComponentToAddBoundingBox(i, j, k, -5, -3, 0, 13, 14, 13, l);
-        if (!func_40021_a(structureboundingbox) || StructureComponent.findIntersecting(list, structureboundingbox) != null)
+        if (!func_40021_a(structureboundingbox) || StructureComponent.getIntersectingStructureComponent(list, structureboundingbox) != null)
         {
             return null;
         }

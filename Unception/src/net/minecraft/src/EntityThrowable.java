@@ -11,7 +11,7 @@ public abstract class EntityThrowable extends Entity
     private int inTile;
     protected boolean inGround;
     public int throwableShake;
-    protected EntityLiving thrower;
+    protected EntityLiving throwingEntity;
     private int ticksInGround;
     private int ticksInAir;
 
@@ -49,7 +49,7 @@ public abstract class EntityThrowable extends Entity
         inGround = false;
         throwableShake = 0;
         ticksInAir = 0;
-        thrower = entityliving;
+        throwingEntity = entityliving;
         setSize(0.25F, 0.25F);
         setLocationAndAngles(entityliving.posX, entityliving.posY + (double)entityliving.getEyeHeight(), entityliving.posZ, entityliving.rotationYaw, entityliving.rotationPitch);
         posX -= MathHelper.cos((rotationYaw / 180F) * 3.141593F) * 0.16F;
@@ -170,7 +170,7 @@ public abstract class EntityThrowable extends Entity
         {
             vec3d1 = Vec3D.createVector(movingobjectposition.hitVec.xCoord, movingobjectposition.hitVec.yCoord, movingobjectposition.hitVec.zCoord);
         }
-        if (!worldObj.isRemote)
+        if (!worldObj.multiplayerWorld)
         {
             Entity entity = null;
             List list = worldObj.getEntitiesWithinAABBExcludingEntity(this, boundingBox.addCoord(motionX, motionY, motionZ).expand(1.0D, 1.0D, 1.0D));
@@ -178,7 +178,7 @@ public abstract class EntityThrowable extends Entity
             for (int k = 0; k < list.size(); k++)
             {
                 Entity entity1 = (Entity)list.get(k);
-                if (!entity1.canBeCollidedWith() || entity1 == thrower && ticksInAir < 5)
+                if (!entity1.canBeCollidedWith() || entity1 == throwingEntity && ticksInAir < 5)
                 {
                     continue;
                 }
@@ -204,7 +204,7 @@ public abstract class EntityThrowable extends Entity
         }
         if (movingobjectposition != null)
         {
-            onImpact(movingobjectposition);
+            onThrowableCollision(movingobjectposition);
         }
         posX += motionX;
         posY += motionY;
@@ -241,7 +241,7 @@ public abstract class EntityThrowable extends Entity
         return 0.03F;
     }
 
-    protected abstract void onImpact(MovingObjectPosition movingobjectposition);
+    protected abstract void onThrowableCollision(MovingObjectPosition movingobjectposition);
 
     public void writeEntityToNBT(NBTTagCompound nbttagcompound)
     {

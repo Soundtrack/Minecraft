@@ -161,7 +161,7 @@ public class WorldGenBigTree extends WorldGenerator
                     }
                     else
                     {
-                        setBlockAndMetadata(worldObj, ai1[0], ai1[1], ai1[2], l, 0);
+                        func_41060_a(worldObj, ai1[0], ai1[1], ai1[2], l, 0);
                         l1++;
                     }
                 }
@@ -257,7 +257,7 @@ public class WorldGenBigTree extends WorldGenerator
             ai3[j] = MathHelper.floor_double((double)(ai[j] + k) + 0.5D);
             ai3[byte1] = MathHelper.floor_double((double)ai[byte1] + (double)k * d + 0.5D);
             ai3[byte2] = MathHelper.floor_double((double)ai[byte2] + (double)k * d1 + 0.5D);
-            setBlockAndMetadata(worldObj, ai3[0], ai3[1], ai3[2], i, 0);
+            func_41060_a(worldObj, ai3[0], ai3[1], ai3[2], i, 0);
         }
     }
 
@@ -429,7 +429,7 @@ public class WorldGenBigTree extends WorldGenerator
         }
     }
 
-    public void setScale(double d, double d1, double d2)
+    public void func_517_a(double d, double d1, double d2)
     {
         heightLimitLimit = (int)(d * 12D);
         if (d > 0.5D)

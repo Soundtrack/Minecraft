@@ -6,22 +6,22 @@ import net.minecraft.src.CanvasIsomPreview;
 
 public class IsomPreviewApplet extends Applet
 {
-    private CanvasIsomPreview isomPreview;
+    private CanvasIsomPreview field_30001_a;
 
     public IsomPreviewApplet()
     {
-        isomPreview = new CanvasIsomPreview();
+        field_30001_a = new CanvasIsomPreview();
         setLayout(new BorderLayout());
-        add(isomPreview, "Center");
+        add(field_30001_a, "Center");
     }
 
     public void start()
     {
-        isomPreview.start();
+        field_30001_a.func_1272_b();
     }
 
     public void stop()
     {
-        isomPreview.stop();
+        field_30001_a.func_1273_c();
     }
 }

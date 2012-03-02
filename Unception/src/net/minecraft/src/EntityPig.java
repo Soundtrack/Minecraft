@@ -51,7 +51,7 @@ public class EntityPig extends EntityAnimal
     {
         if (!super.interact(entityplayer))
         {
-            if (getSaddled() && !worldObj.isRemote && (riddenByEntity == null || riddenByEntity == entityplayer))
+            if (getSaddled() && !worldObj.multiplayerWorld && (riddenByEntity == null || riddenByEntity == entityplayer))
             {
                 entityplayer.mountEntity(this);
                 return true;
@@ -98,7 +98,7 @@ public class EntityPig extends EntityAnimal
 
     public void onStruckByLightning(EntityLightningBolt entitylightningbolt)
     {
-        if (worldObj.isRemote)
+        if (worldObj.multiplayerWorld)
         {
             return;
         }

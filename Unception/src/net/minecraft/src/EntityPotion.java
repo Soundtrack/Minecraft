@@ -45,11 +45,11 @@ public class EntityPotion extends EntityThrowable
         return potionDamage;
     }
 
-    protected void onImpact(MovingObjectPosition movingobjectposition)
+    protected void onThrowableCollision(MovingObjectPosition movingobjectposition)
     {
-        if (!worldObj.isRemote)
+        if (!worldObj.multiplayerWorld)
         {
-            List list = Item.potion.getEffects(potionDamage);
+            List list = Item.potion.getEffectNamesFromDamage(potionDamage);
             if (list != null && !list.isEmpty())
             {
                 AxisAlignedBB axisalignedbb = boundingBox.expand(4D, 2D, 4D);
@@ -74,7 +74,7 @@ public class EntityPotion extends EntityThrowable
                                 int i = potioneffect.getPotionID();
                                 if (Potion.potionTypes[i].isInstant())
                                 {
-                                    Potion.potionTypes[i].affectEntity(thrower, (EntityLiving)entity, potioneffect.getAmplifier(), d1);
+                                    Potion.potionTypes[i].affectEntity(throwingEntity, (EntityLiving)entity, potioneffect.getAmplifier(), d1);
                                 }
                                 else
                                 {

@@ -66,7 +66,7 @@ public class EntityFallingSand extends Entity
         {
             worldObj.setBlockWithNotify(i, j, k, 0);
         }
-        else if (!worldObj.isRemote && fallTime == 1)
+        else if (!worldObj.multiplayerWorld && fallTime == 1)
         {
             setEntityDead();
         }
@@ -78,13 +78,13 @@ public class EntityFallingSand extends Entity
             if (worldObj.getBlockId(i, j, k) != Block.pistonMoving.blockID)
             {
                 setEntityDead();
-                if ((!worldObj.canBlockBePlacedAt(blockID, i, j, k, true, 1) || BlockSand.canFallBelow(worldObj, i, j - 1, k) || !worldObj.setBlockWithNotify(i, j, k, blockID)) && !worldObj.isRemote)
+                if ((!worldObj.canBlockBePlacedAt(blockID, i, j, k, true, 1) || BlockSand.canFallBelow(worldObj, i, j - 1, k) || !worldObj.setBlockWithNotify(i, j, k, blockID)) && !worldObj.multiplayerWorld)
                 {
                     dropItem(blockID, 1);
                 }
             }
         }
-        else if (fallTime > 100 && !worldObj.isRemote)
+        else if (fallTime > 100 && !worldObj.multiplayerWorld)
         {
             dropItem(blockID, 1);
             setEntityDead();

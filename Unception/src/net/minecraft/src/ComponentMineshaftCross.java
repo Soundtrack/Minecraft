@@ -49,7 +49,7 @@ public class ComponentMineshaftCross extends StructureComponent
                 structureboundingbox.maxZ = k + 3;
                 break;
         }
-        if (StructureComponent.findIntersecting(list, structureboundingbox) != null)
+        if (StructureComponent.getIntersectingStructureComponent(list, structureboundingbox) != null)
         {
             return null;
         }

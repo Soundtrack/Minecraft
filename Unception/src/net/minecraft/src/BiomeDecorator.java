@@ -132,7 +132,7 @@ public class BiomeDecorator
             int j6 = chunk_X + randomGenerator.nextInt(16) + 8;
             int k10 = chunk_Z + randomGenerator.nextInt(16) + 8;
             WorldGenerator worldgenerator = biome.getRandomWorldGenForTrees(randomGenerator);
-            worldgenerator.setScale(1.0D, 1.0D, 1.0D);
+            worldgenerator.func_517_a(1.0D, 1.0D, 1.0D);
             worldgenerator.generate(currentWorld, randomGenerator, j6, currentWorld.getHeightValue(j6, k10), k10);
         }
 

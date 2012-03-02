@@ -76,7 +76,7 @@ public class BlockPumpkin extends Block
         super.onBlockAdded(world, i, j, k);
         if (world.getBlockId(i, j - 1, k) == Block.blockSnow.blockID && world.getBlockId(i, j - 2, k) == Block.blockSnow.blockID)
         {
-            if (!world.isRemote)
+            if (!world.multiplayerWorld)
             {
                 world.setBlockWithNotify(i, j, k, 0);
                 world.setBlockWithNotify(i, j - 1, k, 0);

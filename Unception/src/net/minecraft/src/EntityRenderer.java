@@ -824,7 +824,7 @@ public class EntityRenderer
         double d1 = entityliving.lastTickPosY + (entityliving.posY - entityliving.lastTickPosY) * (double)f;
         double d2 = entityliving.lastTickPosZ + (entityliving.posZ - entityliving.lastTickPosZ) * (double)f;
         Profiler.endStartSection("center");
-        IChunkProvider ichunkprovider = mc.theWorld.getChunkProvider();
+        IChunkProvider ichunkprovider = mc.theWorld.getIChunkProvider();
         if (ichunkprovider instanceof ChunkProviderLoadOrGenerate)
         {
             ChunkProviderLoadOrGenerate chunkproviderloadorgenerate = (ChunkProviderLoadOrGenerate)ichunkprovider;
@@ -1005,8 +1005,6 @@ public class EntityRenderer
 
     private void addRainParticles()
     {
-    	if(GuiIngame.Weather)
-    		return;
         float f = mc.theWorld.getRainStrength(1.0F);
         if (!mc.gameSettings.fancyGraphics)
         {
@@ -1082,8 +1080,6 @@ public class EntityRenderer
 
     protected void renderRainSnow(float f)
     {
-    	if(GuiIngame.Weather)
-    		return;
         float f1 = mc.theWorld.getRainStrength(f);
         if (f1 <= 0.0F)
         {
@@ -1474,7 +1470,7 @@ public class EntityRenderer
         else
         {
             float f5 = farPlaneDistance;
-            if (mc.theWorld.worldProvider.getWorldHasNoSky() && !flag)
+            if (mc.theWorld.worldProvider.func_46064_i() && !flag)
             {
                 double d = (double)((entityliving.getEntityBrightnessForRender(f) & 0xf00000) >> 20) / 16D + (entityliving.lastTickPosY + (entityliving.posY - entityliving.lastTickPosY) * (double)f + 4D) / 32D;
                 if (d < 1.0D)

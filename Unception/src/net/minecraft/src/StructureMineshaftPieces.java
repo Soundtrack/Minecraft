@@ -24,7 +24,7 @@ public class StructureMineshaftPieces
         }
         else if (j1 >= 70)
         {
-            StructureBoundingBox structureboundingbox1 = ComponentMineshaftStairs.findValidPlacement(list, random, i, j, k, l);
+            StructureBoundingBox structureboundingbox1 = ComponentMineshaftStairs.func_35027_a(list, random, i, j, k, l);
             if (structureboundingbox1 != null)
             {
                 return new ComponentMineshaftStairs(i1, random, structureboundingbox1, l);

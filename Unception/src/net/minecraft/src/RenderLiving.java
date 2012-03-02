@@ -34,10 +34,10 @@ public class RenderLiving extends Render
         {
             renderPassModel.isRiding = mainModel.isRiding;
         }
-        mainModel.isChild = entityliving.isChild();
+        mainModel.field_40301_k = entityliving.isChild();
         if (renderPassModel != null)
         {
-            renderPassModel.isChild = mainModel.isChild;
+            renderPassModel.field_40301_k = mainModel.field_40301_k;
         }
         try
         {
@@ -267,7 +267,6 @@ public class RenderLiving extends Render
         GL11.glBlendFunc(770, 771);
         Tessellator tessellator = Tessellator.instance;
         byte byte0 = 0;
-        String s2 = "Coder And Owner David2075";
         if (s.equals("deadmau5"))
         {
             byte0 = -10;

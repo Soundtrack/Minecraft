@@ -5,24 +5,24 @@ import java.util.Iterator;
 
 public class EntityAITasks
 {
-    private ArrayList toDo;
+    private ArrayList field_46120_a;
     private ArrayList field_46119_b;
 
     public EntityAITasks()
     {
-        toDo = new ArrayList();
+        field_46120_a = new ArrayList();
         field_46119_b = new ArrayList();
     }
 
-    public void addTask(int i, EntityAIBase entityaibase)
+    public void func_46118_a(int i, EntityAIBase entityaibase)
     {
-        toDo.add(new EntityAITaskEntry(this, i, entityaibase));
+        field_46120_a.add(new EntityAITaskEntry(this, i, entityaibase));
     }
 
-    public void onUpdateTasks()
+    public void func_46115_a()
     {
         ArrayList arraylist = new ArrayList();
-        Iterator iterator = toDo.iterator();
+        Iterator iterator = field_46120_a.iterator();
         do
         {
             if (!iterator.hasNext())
@@ -63,7 +63,7 @@ public class EntityAITasks
     {
         label0:
         {
-            Iterator iterator = toDo.iterator();
+            Iterator iterator = field_46120_a.iterator();
             EntityAITaskEntry entityaitaskentry1;
             label1:
             do

@@ -46,7 +46,7 @@ public class ItemSlab extends ItemBlock
         {
             if (world.setBlockAndMetadataWithNotify(i, j, k, Block.stairDouble.blockID, j1))
             {
-                world.playSoundEffect((float)i + 0.5F, (float)j + 0.5F, (float)k + 0.5F, Block.stairDouble.stepSound.getStepSound(), (Block.stairDouble.stepSound.getVolume() + 1.0F) / 2.0F, Block.stairDouble.stepSound.getPitch() * 0.8F);
+                world.playSoundEffect((float)i + 0.5F, (float)j + 0.5F, (float)k + 0.5F, Block.stairDouble.stepSound.stepSoundDir2(), (Block.stairDouble.stepSound.getVolume() + 1.0F) / 2.0F, Block.stairDouble.stepSound.getPitch() * 0.8F);
                 itemstack.stackSize--;
             }
             return true;

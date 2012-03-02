@@ -22,7 +22,7 @@ public class StructureNetherBridgeEnd extends ComponentNetherBridgePiece
     public static StructureNetherBridgeEnd func_40023_a(List list, Random random, int i, int j, int k, int l, int i1)
     {
         StructureBoundingBox structureboundingbox = StructureBoundingBox.getComponentToAddBoundingBox(i, j, k, -1, -3, 0, 5, 10, 8, l);
-        if (!func_40021_a(structureboundingbox) || StructureComponent.findIntersecting(list, structureboundingbox) != null)
+        if (!func_40021_a(structureboundingbox) || StructureComponent.getIntersectingStructureComponent(list, structureboundingbox) != null)
         {
             return null;
         }

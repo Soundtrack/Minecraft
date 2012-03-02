@@ -11,9 +11,9 @@ public class ItemBucketMilk extends Item
     public ItemStack onFoodEaten(ItemStack itemstack, World world, EntityPlayer entityplayer)
     {
         itemstack.stackSize--;
-        if (!world.isRemote)
+        if (!world.multiplayerWorld)
         {
-            entityplayer.clearActivePotions();
+            entityplayer.func_40112_aN();
         }
         if (itemstack.stackSize <= 0)
         {

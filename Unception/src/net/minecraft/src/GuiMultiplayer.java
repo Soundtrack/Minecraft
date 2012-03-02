@@ -93,7 +93,6 @@ public class GuiMultiplayer extends GuiScreen
     public void initGuiControls()
     {
         StringTranslate stringtranslate = StringTranslate.getInstance();
-        controlList.add(new GuiButton(100, width / 100 - -4, height - 324, 124, 20, "\2475NameChanger/Alt Login"));
         controlList.add(buttonEdit = new GuiButton(7, width / 2 - 154, height - 28, 70, 20, stringtranslate.translateKey("selectServer.edit")));
         controlList.add(buttonDelete = new GuiButton(2, width / 2 - 74, height - 28, 70, 20, stringtranslate.translateKey("selectServer.delete")));
         controlList.add(buttonSelect = new GuiButton(1, width / 2 - 154, height - 52, 100, 20, stringtranslate.translateKey("selectServer.select")));
@@ -160,13 +159,10 @@ public class GuiMultiplayer extends GuiScreen
         else if (guibutton.id == 8)
         {
             mc.displayGuiScreen(new GuiMultiplayer(parentScreen));
-        }else
+        }
+        else
         {
             serverSlotContainer.actionPerformed(guibutton);
-        }
-        if(guibutton.id == 100)
-        {
-        	mc.displayGuiScreen(new GuiUsername(this));
         }
     }
 

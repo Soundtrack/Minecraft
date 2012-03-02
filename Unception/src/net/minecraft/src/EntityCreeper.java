@@ -42,7 +42,7 @@ public class EntityCreeper extends EntityMob
 
     protected void attackBlockedEntity(Entity entity, float f)
     {
-        if (worldObj.isRemote)
+        if (worldObj.multiplayerWorld)
         {
             return;
         }
@@ -60,7 +60,7 @@ public class EntityCreeper extends EntityMob
     public void onUpdate()
     {
         lastActiveTime = timeSinceIgnited;
-        if (worldObj.isRemote)
+        if (worldObj.multiplayerWorld)
         {
             int i = getCreeperState();
             if (i > 0 && timeSinceIgnited == 0)
@@ -110,7 +110,7 @@ public class EntityCreeper extends EntityMob
 
     protected void attackEntity(Entity entity, float f)
     {
-        if (worldObj.isRemote)
+        if (worldObj.multiplayerWorld)
         {
             return;
         }

@@ -6,7 +6,7 @@ public class ContainerPlayer extends Container
 {
     public InventoryCrafting craftMatrix;
     public IInventory craftResult;
-    public boolean isLocalWorld;
+    public boolean isSinglePlayer;
 
     public ContainerPlayer(InventoryPlayer inventoryplayer)
     {
@@ -17,8 +17,8 @@ public class ContainerPlayer extends Container
     {
         craftMatrix = new InventoryCrafting(this, 2, 2);
         craftResult = new InventoryCraftResult();
-        isLocalWorld = false;
-        isLocalWorld = flag;
+        isSinglePlayer = false;
+        isSinglePlayer = flag;
         addSlot(new SlotCrafting(inventoryplayer.player, craftMatrix, craftResult, 0, 144, 36));
         for (int i = 0; i < 2; i++)
         {

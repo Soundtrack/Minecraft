@@ -19,7 +19,7 @@ public class Packet104WindowItems extends Packet
         itemStack = new ItemStack[word0];
         for (int i = 0; i < word0; i++)
         {
-            itemStack[i] = readItemStack(datainputstream);
+            itemStack[i] = func_40187_b(datainputstream);
         }
     }
 

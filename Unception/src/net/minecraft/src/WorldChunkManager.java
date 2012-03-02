@@ -20,14 +20,14 @@ public class WorldChunkManager
         biomesToSpawnIn.add(BiomeGenBase.forest);
         biomesToSpawnIn.add(BiomeGenBase.plains);
         biomesToSpawnIn.add(BiomeGenBase.taiga);
-        biomesToSpawnIn.add(BiomeGenBase.taigaHills);
-        biomesToSpawnIn.add(BiomeGenBase.forestHills);
+        biomesToSpawnIn.add(BiomeGenBase.field_46047_u);
+        biomesToSpawnIn.add(BiomeGenBase.field_46048_t);
     }
 
     public WorldChunkManager(World world)
     {
         this();
-        GenLayer agenlayer[] = GenLayer.func_35497_a(world.getSeed());
+        GenLayer agenlayer[] = GenLayer.func_35497_a(world.getWorldSeed());
         field_34903_b = agenlayer[0];
         biomeIndexLayer = agenlayer[1];
         temperatureLayer = agenlayer[2];
@@ -112,7 +112,7 @@ public class WorldChunkManager
         return af;
     }
 
-    public BiomeGenBase[] getBiomes(BiomeGenBase abiomegenbase[], int i, int j, int k, int l)
+    public BiomeGenBase[] func_35557_b(BiomeGenBase abiomegenbase[], int i, int j, int k, int l)
     {
         IntCache.resetIntCache();
         if (abiomegenbase == null || abiomegenbase.length < k * l)
@@ -189,7 +189,7 @@ public class WorldChunkManager
         return true;
     }
 
-    public ChunkPosition findBiomePosition(int i, int j, int k, List list, Random random)
+    public ChunkPosition func_35556_a(int i, int j, int k, List list, Random random)
     {
         int l = i - k >> 2;
         int i1 = j - k >> 2;

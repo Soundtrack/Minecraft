@@ -334,7 +334,7 @@ public class Chunk
         blocks[i << worldObj.xShift | k << worldObj.heightShift | j] = (byte)(byte0 & 0xff);
         if (l1 != 0)
         {
-            if (!worldObj.isRemote)
+            if (!worldObj.multiplayerWorld)
             {
                 Block.blocksList[l1].onBlockRemoval(worldObj, i2, j, j2);
             }
@@ -364,7 +364,7 @@ public class Chunk
         data.setNibble(i, j, k, i1);
         if (l != 0)
         {
-            if (!worldObj.isRemote)
+            if (!worldObj.multiplayerWorld)
             {
                 Block.blocksList[l].onBlockAdded(worldObj, i2, j, j2);
             }
@@ -432,7 +432,7 @@ public class Chunk
         propagateSkylightOcclusion(i, k);
         if (l != 0)
         {
-            if (!worldObj.isRemote)
+            if (!worldObj.multiplayerWorld)
             {
                 Block.blocksList[l].onBlockAdded(worldObj, l1, j, i2);
             }
@@ -677,7 +677,7 @@ public class Chunk
     {
         isChunkLoaded = false;
         TileEntity tileentity;
-        for (Iterator iterator = chunkTileEntityMap.values().iterator(); iterator.hasNext(); worldObj.markTileEntityForDespawn(tileentity))
+        for (Iterator iterator = chunkTileEntityMap.values().iterator(); iterator.hasNext(); worldObj.markEntityForDespawn(tileentity))
         {
             tileentity = (TileEntity)iterator.next();
         }
@@ -846,7 +846,7 @@ public class Chunk
 
     public Random getRandomWithSeed(long l)
     {
-        return new Random(worldObj.getSeed() + (long)(xPosition * xPosition * 0x4c1906) + (long)(xPosition * 0x5ac0db) + (long)(zPosition * zPosition) * 0x4307a7L + (long)(zPosition * 0x5f24f) ^ l);
+        return new Random(worldObj.getWorldSeed() + (long)(xPosition * xPosition * 0x4c1906) + (long)(xPosition * 0x5ac0db) + (long)(zPosition * zPosition) * 0x4307a7L + (long)(zPosition * 0x5f24f) ^ l);
     }
 
     public boolean isEmpty()

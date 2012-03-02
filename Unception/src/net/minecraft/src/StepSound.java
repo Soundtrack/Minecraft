@@ -23,12 +23,12 @@ public class StepSound
         return stepSoundPitch;
     }
 
-    public String getBreakSound()
+    public String stepSoundDir()
     {
         return (new StringBuilder()).append("step.").append(stepSoundName).toString();
     }
 
-    public String getStepSound()
+    public String stepSoundDir2()
     {
         return (new StringBuilder()).append("step.").append(stepSoundName).toString();
     }

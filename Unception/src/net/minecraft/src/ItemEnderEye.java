@@ -15,7 +15,7 @@ public class ItemEnderEye extends Item
         int j1 = world.getBlockMetadata(i, j, k);
         if (entityplayer.canPlayerEdit(i, j, k) && i1 == Block.endPortalFrame.blockID && !BlockEndPortalFrame.isEnderEyeInserted(j1))
         {
-            if (world.isRemote)
+            if (world.multiplayerWorld)
             {
                 return true;
             }
@@ -148,7 +148,7 @@ public class ItemEnderEye extends Item
                 return itemstack;
             }
         }
-        if (!world.isRemote)
+        if (!world.multiplayerWorld)
         {
             ChunkPosition chunkposition = world.func_40477_b("Stronghold", (int)entityplayer.posX, (int)entityplayer.posY, (int)entityplayer.posZ);
             if (chunkposition != null)

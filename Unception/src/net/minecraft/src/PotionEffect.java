@@ -80,7 +80,7 @@ public class PotionEffect
         }
     }
 
-    public String getEffects()
+    public String getEffectName()
     {
         return Potion.potionTypes[potionID].getName();
     }
@@ -95,11 +95,11 @@ public class PotionEffect
         String s = "";
         if (getAmplifier() > 0)
         {
-            s = (new StringBuilder()).append(getEffects()).append(" x ").append(getAmplifier() + 1).append(", Duration: ").append(getDuration()).toString();
+            s = (new StringBuilder()).append(getEffectName()).append(" x ").append(getAmplifier() + 1).append(", Duration: ").append(getDuration()).toString();
         }
         else
         {
-            s = (new StringBuilder()).append(getEffects()).append(", Duration: ").append(getDuration()).toString();
+            s = (new StringBuilder()).append(getEffectName()).append(", Duration: ").append(getDuration()).toString();
         }
         if (Potion.potionTypes[potionID].func_40612_i())
         {
